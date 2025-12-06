@@ -8,12 +8,14 @@ import Privacy from './pages/Privacy'
 import CookiePolicy from './pages/CookiePolicy'
 import CustomCursor from './components/CustomCursor'
 import ScrollToTop from './components/ScrollToTop'
+import ScrollToTopButton from './components/ScrollToTopButton'
 
 function App() {
   return (
     <Router>
       <CustomCursor />
       <ScrollToTop />
+      <ScrollToTopButton />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contatti" element={<Contatti />} />
