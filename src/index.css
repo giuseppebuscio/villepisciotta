@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Questrial', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Animations for CTA decorations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  99% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.fade-in-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Assicura che gli hover funzionino anche dopo la fade-in animation */
+.fade-in:hover,
+.fade-in *:hover {
+  animation-fill-mode: none;
+}
+
+/* Permetti agli hover di sovrascrivere il transform dopo l'animazione */
+a.fade-in:hover,
+img.fade-in:hover,
+div.fade-in:hover,
+section.fade-in:hover {
+  transform: none !important;
+}
+
+/* Fade-in solo opacity per hero (senza transform) */
+@keyframes fadeInHero {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in-hero {
+  animation: fadeInHero 0.6s ease-out forwards;
+}
+
+.fade-in-hero-hidden {
+  opacity: 0;
+}

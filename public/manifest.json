@@ -1,0 +1,25 @@
+{
+  "name": "Ville Pisciotta - Luxury Villas in Sicily",
+  "short_name": "Ville Pisciotta",
+  "description": "Ville e appartamenti di lusso in Sicilia per esperienze indimenticabili",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#CB9537",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/Logo/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/Logo/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
+

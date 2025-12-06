@@ -1,0 +1,972 @@
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+import { useState, useEffect } from 'react'
+import { 
+  Users, 
+  Home as HomeIcon, 
+  Waves, 
+  Wifi, 
+  Car, 
+  Utensils,
+  Bed,
+  Bath,
+  Square,
+  Euro,
+  Star,
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Check,
+  Beef,
+  Layers2,
+  Coffee,
+  Tv,
+  Wind,
+  DoorOpen,
+  ChefHat,
+  Droplets,
+  Shirt,
+  Baby,
+  Zap,
+  Sun,
+  X
+} from 'lucide-react'
+
+const VillaMirascopello = () => {
+  const [currentReview, setCurrentReview] = useState(0)
+  const [selectedImage, setSelectedImage] = useState(null)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [showAllPhotos, setShowAllPhotos] = useState(false)
+
+  const initialGalleryImages = [
+    "/mirascopello/1.jpg",
+    "/mirascopello/2.jpg",
+    "/mirascopello/3.jpg",
+    "/mirascopello/4.jpg",
+    "/mirascopello/5.jpg",
+    "/mirascopello/06aff529.jpg",
+    "/mirascopello/4ee47fdf.jpg",
+    "/mirascopello/760b8e4b.jpg",
+    "/mirascopello/646caed6.jpg"
+  ]
+
+  const allGalleryImages = [
+    "/mirascopello/1.jpg",
+    "/mirascopello/2.jpg",
+    "/mirascopello/3.jpg",
+    "/mirascopello/4.jpg",
+    "/mirascopello/5.jpg",
+    "/mirascopello/06aff529.jpg",
+    "/mirascopello/4ee47fdf.jpg",
+    "/mirascopello/760b8e4b.jpg",
+    "/mirascopello/646caed6.jpg",
+    "/mirascopello/0c99b82f.jpg",
+    "/mirascopello/20e5e2d7.jpg",
+    "/mirascopello/220f10e0.jpg",
+    "/mirascopello/22867ccb.jpg",
+    "/mirascopello/25c1039b.jpg",
+    "/mirascopello/270-0125a0b0.jpg",
+    "/mirascopello/270-0c850c83.jpg",
+    "/mirascopello/270-1403057f.jpg",
+    "/mirascopello/270-1e6763fa.jpg",
+    "/mirascopello/270-34271ed2.jpg",
+    "/mirascopello/270-43df74a9.jpg",
+    "/mirascopello/270-4cb8a5d0.jpg",
+    "/mirascopello/270-4d2ae703.jpg",
+    "/mirascopello/270-72cd0fc8.jpg",
+    "/mirascopello/270-abe264d9.jpg",
+    "/mirascopello/270-b85646c1.jpg",
+    "/mirascopello/270-bfade3e8.jpg",
+    "/mirascopello/270-c769cca0.jpg",
+    "/mirascopello/270-d0a5a231.jpg",
+    "/mirascopello/2b77029a.webp",
+    "/mirascopello/3a5ac408.jpg",
+    "/mirascopello/43027eb4.jpg",
+    "/mirascopello/44720ed9.jpg",
+    "/mirascopello/4fb71491.jpg",
+    "/mirascopello/55f7f55e.jpg",
+    "/mirascopello/6ca5d3e3.jpg",
+    "/mirascopello/6f63e8e1.jpg",
+    "/mirascopello/749507fb.jpg",
+    "/mirascopello/763795c4.webp",
+    "/mirascopello/7d7548df.webp",
+    "/mirascopello/842a7dc8.jpg",
+    "/mirascopello/947ffb36.jpg",
+    "/mirascopello/983d560d.jpg",
+    "/mirascopello/ad4b7e8f.jpg",
+    "/mirascopello/b27144ad.jpg",
+    "/mirascopello/b51e6dd5.webp",
+    "/mirascopello/bd9400bc.jpg",
+    "/mirascopello/c2655129.webp",
+    "/mirascopello/d5dd1e25.jpg",
+    "/mirascopello/d8b6a457.jpg",
+    "/mirascopello/db83f3b5.jpg",
+    "/mirascopello/dbea7607.jpg",
+    "/mirascopello/dcdb1ce2.jpg",
+    "/mirascopello/f55c026c.webp"
+  ]
+
+  const galleryImages = showAllPhotos ? allGalleryImages : initialGalleryImages
+
+  const openLightbox = (index) => {
+    setSelectedImage(index)
+    setLightboxOpen(true)
+    document.body.style.overflow = 'hidden'
+  }
+
+  const closeLightbox = () => {
+    setLightboxOpen(false)
+    setSelectedImage(null)
+    document.body.style.overflow = 'unset'
+  }
+
+  const nextImage = () => {
+    setSelectedImage((prev) => (prev + 1) % allGalleryImages.length)
+  }
+
+  const prevImage = () => {
+    setSelectedImage((prev) => (prev - 1 + allGalleryImages.length) % allGalleryImages.length)
+  }
+
+  const reviews = [
+    {
+      author: "Maria R.",
+      role: "Turista",
+      text: "Villa incredibile con vista mozzafiato sui faraglioni di Scopello. La piscina infinity è spettacolare, soprattutto al tramonto. Ugo e Deborah sono stati gentilissimi, sempre disponibili. Torneremo sicuramente!"
+    },
+    {
+      author: "Giovanni P.",
+      role: "Viaggiatore",
+      text: "Settimana indimenticabile! La villa è ancora più bella delle foto. Spazi ampi, pulizia perfetta, ogni dettaglio curato. La posizione è ideale per visitare Scopello, Castellammare e le riserve naturali. Consigliatissima!"
+    },
+    {
+      author: "Sophie L.",
+      role: "Famiglia",
+      text: "Perfetta per famiglie! I bambini hanno adorato la piscina e il giardino. La cucina è attrezzatissima, abbiamo cucinato ogni sera. La vista dalla terrazza è qualcosa di unico. Servizio impeccabile e accoglienza calorosa."
+    },
+    {
+      author: "Marco T.",
+      role: "Coppia",
+      text: "Villa di lusso in posizione strategica. A pochi minuti dalle migliori spiagge della zona. L'idromassaggio è stato il tocco finale per un soggiorno perfetto. Ugo e Deborah ci hanno dato consigli preziosi sui posti da visitare."
+    },
+    {
+      author: "Anna e Luca B.",
+      role: "Coppia",
+      text: "Vacanza da sogno! La villa è bellissima, curata in ogni dettaglio. La vista sui faraglioni è spettacolare, soprattutto al tramonto. La piscina riscaldata ci ha permesso di nuotare anche la sera. I proprietari sono stati fantastici, sempre pronti ad aiutarci. Ci torniamo sicuramente l'anno prossimo!"
+    }
+  ]
+
+  const getInitials = (name) => {
+    // Rimuove i punti e divide per spazi
+    const cleanName = name.replace(/\./g, '')
+    const parts = cleanName.split(' ').filter(part => part.length > 0 && part !== 'e')
+    
+    if (parts.length >= 2) {
+      // Prende la prima lettera della prima parola e l'ultima lettera dell'ultima parola significativa
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+    }
+    return cleanName.substring(0, 2).toUpperCase()
+  }
+
+  const goToPreviousReview = () => {
+    setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length)
+  }
+
+  const goToNextReview = () => {
+    setCurrentReview((prev) => (prev + 1) % reviews.length)
+  }
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
+  // Gestione chiusura con ESC
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && lightboxOpen) {
+        closeLightbox()
+      }
+    }
+
+    if (lightboxOpen) {
+      document.addEventListener('keydown', handleEscape)
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [lightboxOpen])
+
+  // Gestione fade-in per tutti gli elementi
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target
+            if (el.classList.contains('fade-in-hero-hidden')) {
+              el.classList.add('fade-in-hero')
+              el.classList.remove('fade-in-hero-hidden')
+            } else {
+              el.classList.add('fade-in')
+              el.classList.remove('fade-in-hidden')
+              // Rimuovi la classe fade-in dopo l'animazione per permettere agli hover di funzionare
+              setTimeout(() => {
+                el.classList.remove('fade-in')
+              }, 600)
+            }
+            observer.unobserve(el)
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '50px',
+      }
+    )
+
+    // Seleziona tutti gli elementi testo, button e immagini nella pagina principale
+    const mainContainer = document.querySelector('.min-h-screen')
+    if (!mainContainer) return
+
+    // Identifica la hero section una volta fuori dal loop
+    const navElement = mainContainer.querySelector('nav')
+    let heroSection = null
+    if (navElement && navElement.nextElementSibling) {
+      const nextSibling = navElement.nextElementSibling
+      // Verifica se è la hero section (contiene h1 e ha classe relative)
+      if (nextSibling.classList.contains('relative') && nextSibling.querySelector('h1')) {
+        heroSection = nextSibling
+      }
+    }
+
+    // Elementi normali (con transform fade-in)
+    const elements = mainContainer.querySelectorAll(
+      'h1:not([class*="navbar"]):not([class*="footer"]), ' +
+      'h2:not([class*="navbar"]):not([class*="footer"]), ' +
+      'h3:not([class*="navbar"]):not([class*="footer"]), ' +
+      'p:not([class*="navbar"]):not([class*="footer"]):not([class*="absolute"]), ' +
+      'button:not([class*="navbar"]):not([class*="footer"])'
+    )
+    
+    // Elementi con hover (immagini e link) - solo opacity fade-in (senza transform)
+    const hoverElements = mainContainer.querySelectorAll(
+      'img:not([class*="navbar"]):not([class*="footer"]):not([src*="logo"]), ' +
+      'a:not([class*="navbar"]):not([class*="footer"]):not([href^="#"])'
+    )
+
+    elements.forEach((el, index) => {
+      // Escludi navbar, footer, hero section e lightbox
+      const isInNav = el.closest('nav')
+      const isInFooter = el.closest('footer')
+      const isInLightbox = el.closest('[class*="lightbox"]') || el.closest('[role="dialog"]')
+      const isInHero = heroSection && heroSection.contains(el)
+      
+      // Skip elementi già animati o in componenti specifici
+      if (
+        !isInNav &&
+        !isInFooter &&
+        !isInLightbox &&
+        !isInHero &&
+        el.offsetParent !== null &&
+        !el.classList.contains('fade-in')
+      ) {
+        el.classList.add('fade-in-hidden')
+        // Aggiungi un piccolo delay per creare un effetto a cascata
+        setTimeout(() => {
+          observer.observe(el)
+        }, index * 50)
+      }
+    })
+
+    // Gestisci elementi con hover (solo opacity, no transform)
+    hoverElements.forEach((el, index) => {
+      const isInNav = el.closest('nav')
+      const isInFooter = el.closest('footer')
+      const isInLightbox = el.closest('[class*="lightbox"]') || el.closest('[role="dialog"]')
+      const isInHero = heroSection && heroSection.contains(el)
+      
+      if (
+        !isInNav &&
+        !isInFooter &&
+        !isInLightbox &&
+        !isInHero &&
+        el.offsetParent !== null &&
+        !el.classList.contains('fade-in-hero') &&
+        !el.classList.contains('fade-in-hero-hidden')
+      ) {
+        el.classList.add('fade-in-hero-hidden')
+        setTimeout(() => {
+          observer.observe(el)
+        }, index * 50)
+      }
+    })
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
+  return (
+    <div className="min-h-screen">
+      <Navbar />
+      
+      {/* Hero Image */}
+      <div className="relative h-[50vh] w-full">
+        <img
+          src="/mirascopello/760b8e4b.jpg"
+          alt="Villa Mirascopello"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <h1 className="text-5xl md:text-6xl font-playfair font-bold text-white text-center px-4">
+            Villa Mirascopello
+          </h1>
+        </div>
+      </div>
+
+      {/* Navigation Links */}
+      <div className="bg-accent py-6">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+            <button
+              onClick={() => scrollToSection('descrizione')}
+              className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
+            >
+              Descrizione
+            </button>
+            <button
+              onClick={() => scrollToSection('da-sapere')}
+              className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
+            >
+              Da sapere
+            </button>
+            <button
+              onClick={() => scrollToSection('servizi')}
+              className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
+            >
+              Servizi
+            </button>
+            <button
+              onClick={() => scrollToSection('foto')}
+              className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
+            >
+              Foto
+            </button>
+            <button
+              onClick={() => scrollToSection('prezzi')}
+              className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
+            >
+              Prezzi
+            </button>
+            <button
+              onClick={() => scrollToSection('recensioni')}
+              className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
+            >
+              Recensioni
+            </button>
+            <button
+              onClick={() => scrollToSection('contatti')}
+              className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
+            >
+              Contatti
+            </button>
+            <button
+              onClick={() => scrollToSection('posizione')}
+              className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
+            >
+              Posizione
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 py-20">
+        {/* Descrizione */}
+        <div id="descrizione" className="mb-16 scroll-mt-20">
+          <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-primary mb-6 text-center">
+            Descrizione
+          </h2>
+          <div className="space-y-4 text-base font-questrial text-gray-700 text-justify">
+            <p>
+              In una posizione dominante, su una pittoresca collinetta, chiamata Castellaccio, tra Castellammare del Golfo e Scopello, con una veduta mozzafiato proprio sui meravigliosi faraglioni di Scopello e sul mare circostante, sorge una grande e splendida villa: Villa MiraScopello. Isolata e tranquilla ma nello stesso tempo vicina ad altre abitazioni e a tutto ciò di cui si può avere necessità, Villa MiraScopello rappresenta il luogo ideale per trascorre una vacanza rilassante ed indimenticabile.
+            </p>
+            
+            <p>
+              La zona in cui sorge è una delle zone più belle di Castellammare del Golfo apprezzata molto sia dai turisti che dai residenti. La villa si trova a 8 minuti dal famoso borgo di Scopello a 3 dalla splendida baia di Guidaloca e a 5 minuti dal bellissimo paesino di Castellammare Del Golfo.
+            </p>
+            <p>
+              La villa è gestita dagli stessi proprietari, Ugo e Deborah, disponibili ed esperti nel settore turistico e pronti a cercare di risolvere qualsiasi problema si possa verificare.
+            </p>
+            <p>
+              La villa si sviluppa su due livelli: al piano terra si viene accolti da un grande salone, affiancato da una spaziosa cucina con soggiorno. La zona notte comprende tre camere da letto, tutte ben illuminate, servite complessivamente da quattro bagni, che garantiscono il massimo comfort e funzionalità. Completa il piano una comoda lavanderia, pratica e discreta.
+            </p>
+            <p>
+              Il piano primo è dedicato a un'ulteriore zona notte, composta da tre camere da letto e da tre bagni, offrendo spazi ideali per la famiglia o per eventuali ospiti, con un'ottima distribuzione tra privacy e comodità.
+            </p>
+          </div>
+        </div>
+
+        {/* Specchietto Dati */}
+        <div className="mb-16 bg-gray-50 p-8 rounded-lg">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            <div className="text-center">
+              <Bed className="text-accent mx-auto mb-2" size={32} />
+              <div className="text-2xl font-playfair font-bold text-primary mb-1">6</div>
+              <div className="text-sm font-questrial text-gray-600">Camere da letto<br />matrimoniali/doppie</div>
+            </div>
+            <div className="text-center">
+              <Bath className="text-accent mx-auto mb-2" size={32} />
+              <div className="text-2xl font-playfair font-bold text-primary mb-1">7</div>
+              <div className="text-sm font-questrial text-gray-600">Bagni</div>
+            </div>
+            <div className="text-center">
+              <Users className="text-accent mx-auto mb-2" size={32} />
+              <div className="text-2xl font-playfair font-bold text-primary mb-1">12</div>
+              <div className="text-sm font-questrial text-gray-600">Ospiti</div>
+            </div>
+            <div className="text-center">
+              <Waves className="text-accent mx-auto mb-2" size={32} />
+              <div className="text-lg font-playfair font-bold text-primary mb-1">Piscina</div>
+              <div className="text-sm font-questrial text-gray-600">Infinity 5x12<br />riscaldata + idromassaggio</div>
+            </div>
+            <div className="text-center">
+              <Square className="text-accent mx-auto mb-2" size={32} />
+              <div className="text-2xl font-playfair font-bold text-primary mb-1">320mq</div>
+              <div className="text-sm font-questrial text-gray-600">Dimensioni totali</div>
+            </div>
+            
+            
+          </div>
+        </div>
+
+
+        {/* Sezione Da Sapere */}
+        <section id="da-sapere" className="scroll-mt-20">
+          <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-primary mb-8 text-center">
+            Da sapere
+          </h2>
+          <div className="bg-gray-50 p-8 rounded-lg">
+            <ul className="space-y-3 text-base font-questrial text-gray-700">
+              <li className="flex items-start">
+                <ArrowRight className="text-accent mr-3 mt-1 flex-shrink-0" size={20} />
+                <span>Le feste e gli eventi di gruppo sono vietati.</span>
+              </li>
+              <li className="flex items-start">
+                <ArrowRight className="text-accent mr-3 mt-1 flex-shrink-0" size={20} />
+                <span>Rilevatore di monossido di carbonio e gas.</span>
+              </li>
+              <li className="flex items-start">
+                <ArrowRight className="text-accent mr-3 mt-1 flex-shrink-0" size={20} />
+                <span>Estintore antincendio.</span>
+              </li>
+              <li className="flex items-start">
+                <ArrowRight className="text-accent mr-3 mt-1 flex-shrink-0" size={20} />
+                <span>La temperatura dell'acqua della piscina è di circa 25 gradi.</span>
+              </li>
+              <li className="flex items-start">
+                <ArrowRight className="text-accent mr-3 mt-1 flex-shrink-0" size={20} />
+                <span>Tutti gli ospiti, minorenni inclusi, dovranno essere presenti al momento del check-in e mostrare il passaporto o un documento d'identità rilasciato dal proprio governo.</span>
+              </li>
+              <li className="flex items-start">
+                <ArrowRight className="text-accent mr-3 mt-1 flex-shrink-0" size={20} />
+                <span>Lenzuola e asciugamani da bagno per l'intera settimana, cambio completo per prenotazioni superiori ad una settimana.</span>
+              </li>
+              <li className="flex items-start">
+                <ArrowRight className="text-accent mr-3 mt-1 flex-shrink-0" size={20} />
+                <span>Numero di registrazione della struttura (CIN): IT081005C2USCYFWIQ</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      {/* Sezione Servizi */}
+      <section id="servizi" className="scroll-mt-20 bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 py-20">
+          <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-white mb-8 text-center">
+            Servizi
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="flex items-center space-x-3">
+              <Waves className="text-accent" size={20} />
+              <span className="font-questrial text-white">Vista mare panoramica</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Wind className="text-accent" size={20} />
+              <span className="font-questrial text-white">Aria condizionata in tutte le camere</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Check className="text-accent" size={20} />
+              <span className="font-questrial text-white">Arredi da esterno</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Beef className="text-accent" size={20} />
+              <span className="font-questrial text-white">Barbecue coperto (carbone fornito)</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <DoorOpen className="text-accent" size={20} />
+              <span className="font-questrial text-white">Cancello automatico</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Bath className="text-accent" size={20} />
+              <span className="font-questrial text-white">Doccia esterna</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Layers2 className="text-accent" size={20} />
+              <span className="font-questrial text-white">Asciugamani da piscina</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <ChefHat className="text-accent" size={20} />
+              <span className="font-questrial text-white">Forno elettrico</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <ChefHat className="text-accent" size={20} />
+              <span className="font-questrial text-white">Forno microonde</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Shirt className="text-accent" size={20} />
+              <span className="font-questrial text-white">Lavastoviglie</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Droplets className="text-accent" size={20} />
+              <span className="font-questrial text-white">Lavatrice</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Wind className="text-accent" size={20} />
+              <span className="font-questrial text-white">Asciugacapelli</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Zap className="text-accent" size={20} />
+              <span className="font-questrial text-white">Ferro da stiro</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Zap className="text-accent" size={20} />
+              <span className="font-questrial text-white">Asse da stiro</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Car className="text-accent" size={20} />
+              <span className="font-questrial text-white">Parcheggio privato</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <HomeIcon className="text-accent" size={20} />
+              <span className="font-questrial text-white">Terrazza</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <HomeIcon className="text-accent" size={20} />
+              <span className="font-questrial text-white">Veranda</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Utensils className="text-accent" size={20} />
+              <span className="font-questrial text-white">Tostapane</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Coffee className="text-accent" size={20} />
+              <span className="font-questrial text-white">Macchina da caffè a capsules</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Coffee className="text-accent" size={20} />
+              <span className="font-questrial text-white">Macchina da caffè americano</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Coffee className="text-accent" size={20} />
+              <span className="font-questrial text-white">Moka</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Check className="text-accent" size={20} />
+              <span className="font-questrial text-white">Bollitore</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Baby className="text-accent" size={20} />
+              <span className="font-questrial text-white">Culla</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Baby className="text-accent" size={20} />
+              <span className="font-questrial text-white">Seggiolone</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Tv className="text-accent" size={20} />
+              <span className="font-questrial text-white">TV-SAT</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Wifi className="text-accent" size={20} />
+              <span className="font-questrial text-white">WI-FI internet</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Sun className="text-accent" size={20} />
+              <span className="font-questrial text-white">Solarium attrezzato (mq 120)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-4 py-20">
+
+        {/* Sezione Foto */}
+        <section id="foto" className="mb-16 scroll-mt-20">
+          <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-primary mb-8 text-center">
+            Foto
+          </h2>
+          <div className="grid md:grid-cols-3 gap-4">
+            {initialGalleryImages.map((imageSrc, index) => (
+              <img
+                key={index}
+                src={imageSrc}
+                alt={`Villa Mirascopello - Foto ${index + 1}`}
+                onClick={() => {
+                  setSelectedImage(index)
+                  setLightboxOpen(true)
+                  document.body.style.overflow = 'hidden'
+                }}
+                className="w-full h-64 object-cover rounded-lg hover:scale-95 transition-transform duration-300 cursor-pointer"
+              />
+            ))}
+            
+            {!showAllPhotos && (
+              <div className="md:col-start-2 flex items-center justify-center">
+                <button
+                  onClick={() => setShowAllPhotos(true)}
+                  className="text-primary font-questrial transition-all duration-300 pb-1 border-b border-transparent hover:border-primary"
+                >
+                  Mostra tutte
+                </button>
+              </div>
+            )}
+            
+            {showAllPhotos && allGalleryImages.slice(initialGalleryImages.length).map((imageSrc, index) => {
+              const actualIndex = initialGalleryImages.length + index
+              return (
+                <img
+                  key={actualIndex}
+                  src={imageSrc}
+                  alt={`Villa Mirascopello - Foto ${actualIndex + 1}`}
+                  onClick={() => {
+                    setSelectedImage(actualIndex)
+                    setLightboxOpen(true)
+                    document.body.style.overflow = 'hidden'
+                  }}
+                  className="w-full h-64 object-cover rounded-lg hover:scale-95 transition-transform duration-300 cursor-pointer"
+                />
+              )
+            })}
+          </div>
+        </section>
+
+        {/* Sezione Prezzi */}
+        <section id="prezzi" className="mb-16 scroll-mt-20">
+          <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-primary mb-8 text-center">
+            Prezzi
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="border border-gray-300 px-6 py-4 text-left font-playfair font-semibold text-primary">Dal</th>
+                  <th className="border border-gray-300 px-6 py-4 text-left font-playfair font-semibold text-primary">Al</th>
+                  <th className="border border-gray-300 px-6 py-4 text-left font-playfair font-semibold text-primary">Prezzo settimanale</th>
+                </tr>
+              </thead>
+              <tbody className="font-questrial">
+                <tr>
+                  <td className="border border-gray-300 px-6 py-4">28/03/2026</td>
+                  <td className="border border-gray-300 px-6 py-4">26/06/2026</td>
+                  <td className="border border-gray-300 px-6 py-4 font-semibold">€ 3.100</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="border border-gray-300 px-6 py-4">27/06/2026</td>
+                  <td className="border border-gray-300 px-6 py-4">24/07/2026</td>
+                  <td className="border border-gray-300 px-6 py-4 font-semibold">€ 4.300</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 px-6 py-4">25/07/2026</td>
+                  <td className="border border-gray-300 px-6 py-4">07/08/2026</td>
+                  <td className="border border-gray-300 px-6 py-4 font-semibold">€ 5.000</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="border border-gray-300 px-6 py-4">08/08/2026</td>
+                  <td className="border border-gray-300 px-6 py-4">21/08/2026</td>
+                  <td className="border border-gray-300 px-6 py-4 font-semibold">€ 5.700</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 px-6 py-4">22/08/2026</td>
+                  <td className="border border-gray-300 px-6 py-4">04/09/2026</td>
+                  <td className="border border-gray-300 px-6 py-4 font-semibold">€ 5.000</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="border border-gray-300 px-6 py-4">05/09/2026</td>
+                  <td className="border border-gray-300 px-6 py-4">25/09/2026</td>
+                  <td className="border border-gray-300 px-6 py-4 font-semibold">€ 4.300</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 px-6 py-4">26/09/2026</td>
+                  <td className="border border-gray-300 px-6 py-4">06/11/2026</td>
+                  <td className="border border-gray-300 px-6 py-4 font-semibold">€ 3.300</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div className="mt-8 bg-amber-50 p-6 rounded-lg">
+            <h3 className="text-xl font-playfair font-bold text-primary mb-4">
+              Non incluso
+            </h3>
+            <ul className="space-y-2 text-base font-questrial text-gray-700">
+              <li className="flex items-start">
+                <X className="text-red-500 mr-2 mt-1" size={18} />
+                <span>Deposito cauzionale rimborsabile: € 300.</span>
+              </li>
+              <li className="flex items-start">
+                <X className="text-red-500 mr-2 mt-1" size={18} />
+                <span>Tassa di soggiorno: € 1,50/persona.</span>
+              </li>
+              <li className="flex items-start">
+                <X className="text-red-500 mr-2 mt-1" size={18} />
+                <span>Pulizia finale: € 150</span>
+              </li>
+              <li className="flex items-start">
+                <X className="text-red-500 mr-2 mt-1" size={18} />
+                <span>Riscaldamento: € 3/ora</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        {/* Sezione Recensioni */}
+        <section id="recensioni" className="mb-16 scroll-mt-20">
+          <div className="relative mb-12">
+            <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-primary text-center">
+              Recensioni
+            </h2>
+            {/* Navigation Buttons - Top Right */}
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 flex gap-2">
+              <button
+                onClick={goToPreviousReview}
+                className="border-2 border-accent/30 text-accent p-2 rounded-full transition-all duration-300 hover:border-accent"
+                aria-label="Recensione precedente"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                onClick={goToNextReview}
+                className="border-2 border-accent/30 text-accent p-2 rounded-full transition-all duration-300 hover:border-accent"
+                aria-label="Recensione successiva"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+          </div>
+          <div className="relative max-w-7xl mx-auto px-4">
+            <div className="flex items-center justify-center gap-4 md:gap-6 overflow-hidden py-8">
+              {/* Card Precedente */}
+              <div className="flex-shrink-0 w-1/4 md:w-1/5 scale-90 opacity-60 transition-all duration-500">
+                <div className="bg-white rounded-lg shadow-lg p-4 md:p-6 h-full">
+                  <div className="text-center">
+                    <div className="flex justify-center mb-3">
+                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-accent/20 flex items-center justify-center">
+                        <span className="text-accent font-playfair font-semibold text-lg md:text-xl">
+                          {getInitials(reviews[(currentReview - 1 + reviews.length) % reviews.length].author)}
+                        </span>
+                      </div>
+                    </div>
+                    <h3 className="text-base md:text-lg font-playfair font-semibold text-primary mb-1">
+                      {reviews[(currentReview - 1 + reviews.length) % reviews.length].author}
+                    </h3>
+                    <p className="text-xs md:text-sm font-questrial text-gray-500 mb-3">
+                      {reviews[(currentReview - 1 + reviews.length) % reviews.length].role}
+                    </p>
+                    <p className="text-xs md:text-sm font-questrial text-gray-600 leading-relaxed line-clamp-4">
+                      &ldquo;{reviews[(currentReview - 1 + reviews.length) % reviews.length].text}&rdquo;
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card Attiva */}
+              <div className="flex-shrink-0 w-1/2 md:w-2/5 scale-100 opacity-100 z-10 transition-all duration-500">
+                <div className="bg-white rounded-lg shadow-xl p-6 md:p-8 h-full">
+                  <div className="text-center">
+                    <div className="flex justify-center mb-4">
+                      <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-accent/20 flex items-center justify-center border-4 border-accent/30">
+                        <span className="text-accent font-playfair font-semibold text-2xl md:text-3xl">
+                          {getInitials(reviews[currentReview].author)}
+                        </span>
+                      </div>
+                    </div>
+                    <h3 className="text-lg md:text-xl font-playfair font-semibold text-primary mb-1">
+                      {reviews[currentReview].author}
+                    </h3>
+                    <p className="text-sm md:text-base font-questrial text-gray-500 mb-4">
+                      {reviews[currentReview].role}
+                    </p>
+                    <p className="text-sm md:text-base font-questrial text-gray-700 leading-relaxed">
+                      &ldquo;{reviews[currentReview].text}&rdquo;
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card Successiva */}
+              <div className="flex-shrink-0 w-1/4 md:w-1/5 scale-90 opacity-60 transition-all duration-500">
+                <div className="bg-white rounded-lg shadow-lg p-4 md:p-6 h-full">
+                  <div className="text-center">
+                    <div className="flex justify-center mb-3">
+                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-accent/20 flex items-center justify-center">
+                        <span className="text-accent font-playfair font-semibold text-lg md:text-xl">
+                          {getInitials(reviews[(currentReview + 1) % reviews.length].author)}
+                        </span>
+                      </div>
+                    </div>
+                    <h3 className="text-base md:text-lg font-playfair font-semibold text-primary mb-1">
+                      {reviews[(currentReview + 1) % reviews.length].author}
+                    </h3>
+                    <p className="text-xs md:text-sm font-questrial text-gray-500 mb-3">
+                      {reviews[(currentReview + 1) % reviews.length].role}
+                    </p>
+                    <p className="text-xs md:text-sm font-questrial text-gray-600 leading-relaxed line-clamp-4">
+                      &ldquo;{reviews[(currentReview + 1) % reviews.length].text}&rdquo;
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Dots Indicator */}
+            <div className="flex justify-center mt-8 gap-2">
+              {reviews.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentReview(index)}
+                  className={`h-2 rounded-full transition-all ${
+                    index === currentReview
+                      ? 'bg-accent w-8'
+                      : 'bg-gray-300 w-2 hover:bg-gray-400'
+                  }`}
+                  aria-label={`Vai alla recensione ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      {/* Sezione CTA - Full Width */}
+      <section 
+        id="contatti" 
+        className="relative py-20 px-4 text-white overflow-hidden bg-fixed bg-cover bg-center bg-no-repeat scroll-mt-20"
+        style={{
+          backgroundImage: `url('/mirascopello/6f63e8e1.jpg')`,
+        }}
+      >
+        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="relative max-w-7xl mx-auto text-center z-10">
+          <div className="mb-12">
+            <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-white mb-4 text-center">
+              Prenota la tua vacanza
+            </h2>
+            <p className="text-base text-white/90 font-questrial max-w-2xl mx-auto">
+              Contattaci per maggiori informazioni e disponibilità
+            </p>
+          </div>
+          
+          <div className="flex flex-wrap justify-center items-center gap-4">
+            <a
+              href="tel:+393384394380"
+              className="inline-block bg-accent/80 border border-accent hover:bg-[rgb(170,120,40)]/80 text-white px-8 py-3 rounded-none font-questrial transition-all duration-300"
+            >
+              Chiama ora
+            </a>
+            <a
+              href="/contatti"
+              className="inline-block border border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-none font-questrial transition-all duration-300"
+            >
+              Contatti
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Sezione Posizione - Full Width */}
+      <section id="posizione" className="w-full scroll-mt-20">
+        <div className="w-full">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3142.3929139279635!2d12.850023077543886!3d38.037930196954896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x131983d2c38dd7e7%3A0x732b1726381b61fe!2sVilla%20Mirascopello!5e0!3m2!1sit!2sit!4v1764980643346!5m2!1sit!2sit"
+            width="100%"
+            height="450"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="w-full"
+          ></iframe>
+        </div>
+      </section>
+
+      {/* Lightbox Modal */}
+      {lightboxOpen && selectedImage !== null && (
+        <div
+          className="fixed inset-0 bg-black/90 z-[9998] flex items-center justify-center p-4"
+          onClick={closeLightbox}
+        >
+          <div className="relative max-w-7xl max-h-full">
+            {/* Close Button */}
+            <button
+              onClick={closeLightbox}
+              className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors z-10"
+              aria-label="Chiudi"
+            >
+              <X size={32} />
+            </button>
+
+            {/* Image Container */}
+            <div
+              className="relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={allGalleryImages[selectedImage]}
+                alt={`Villa Mirascopello - Foto ${selectedImage + 1}`}
+                className="max-w-full max-h-[90vh] object-contain rounded-lg"
+              />
+
+              {/* Navigation Buttons */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  prevImage()
+                }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300"
+                aria-label="Immagine precedente"
+              >
+                <ChevronLeft size={24} />
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  nextImage()
+                }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300"
+                aria-label="Immagine successiva"
+              >
+                <ChevronRight size={24} />
+              </button>
+            </div>
+
+            {/* Image Counter */}
+            <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 text-white text-sm font-questrial">
+              {selectedImage + 1} / {allGalleryImages.length}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <Footer />
+    </div>
+  )
+}
+
+export default VillaMirascopello
