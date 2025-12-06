@@ -3,6 +3,43 @@ import Footer from '../components/Footer'
 import { useEffect } from 'react'
 
 const Privacy = () => {
+  // Imposta il titolo della pagina
+  useEffect(() => {
+    document.title = 'Privacy Policy - Ville Pisciotta | Trattamento Dati Personali'
+  }, [])
+
+  // Animazione fade-in per il titolo hero
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target
+            if (el.classList.contains('fade-in-hero-hidden')) {
+              el.classList.add('fade-in-hero')
+              el.classList.remove('fade-in-hero-hidden')
+              observer.unobserve(el)
+            }
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '50px',
+      }
+    )
+
+    // Trova tutti gli elementi con fade-in-hero-hidden
+    const elements = document.querySelectorAll('.fade-in-hero-hidden')
+    elements.forEach((el) => {
+      observer.observe(el)
+    })
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
   // Gestione fade-in per tutti gli elementi
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -73,12 +110,12 @@ const Privacy = () => {
       <div className="relative h-[50vh] w-full">
         <img
           src="/mirascopello/1.jpg"
-          alt="Privacy Policy"
+          alt="Interno della villa MiraScopello"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-5xl md:text-6xl font-playfair font-bold text-white text-center px-4">
+          <h1 className="text-5xl md:text-6xl font-playfair font-bold text-white text-center px-4 fade-in-hero-hidden">
             Privacy Policy
           </h1>
         </div>

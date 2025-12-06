@@ -33,6 +33,43 @@ import {
 } from 'lucide-react'
 
 const VillaMirascopello = () => {
+  // Imposta il titolo della pagina
+  useEffect(() => {
+    document.title = 'Villa MiraScopello - Villa a Scopello, Sicilia | Ville Pisciotta'
+  }, [])
+
+  // Animazione fade-in per il titolo hero
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target
+            if (el.classList.contains('fade-in-hero-hidden')) {
+              el.classList.add('fade-in-hero')
+              el.classList.remove('fade-in-hero-hidden')
+              observer.unobserve(el)
+            }
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '50px',
+      }
+    )
+
+    // Trova tutti gli elementi con fade-in-hero-hidden
+    const elements = document.querySelectorAll('.fade-in-hero-hidden')
+    elements.forEach((el) => {
+      observer.observe(el)
+    })
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
   const [currentReview, setCurrentReview] = useState(0)
   const [selectedImage, setSelectedImage] = useState(null)
   const [lightboxOpen, setLightboxOpen] = useState(false)
@@ -49,6 +86,63 @@ const VillaMirascopello = () => {
     "/mirascopello/760b8e4b.jpg",
     "/mirascopello/646caed6.jpg"
   ]
+
+  // Mappa degli alt text per le immagini
+  const imageAltTexts = {
+    "/mirascopello/1.jpg": "Interno della villa MiraScopello",
+    "/mirascopello/2.jpg": "Esterno della villa MiraScopello",
+    "/mirascopello/3.jpg": "Salotto della villa MiraScopello",
+    "/mirascopello/4.jpg": "Vetrata che mostra piscina della villa MiraScopello",
+    "/mirascopello/5.jpg": "Solarium della villa MiraScopello",
+    "/mirascopello/06aff529.jpg": "Cucina villa MiraScopello",
+    "/mirascopello/4ee47fdf.jpg": "Camera da letto villa MiraScopello",
+    "/mirascopello/760b8e4b.jpg": "Esterno della villa MiraScopello",
+    "/mirascopello/646caed6.jpg": "Panorama della villa MiraScopello",
+    "/mirascopello/0c99b82f.jpg": "Piscina di notte villa MiraScopello",
+    "/mirascopello/20e5e2d7.jpg": "Solarium della villa MiraScopello",
+    "/mirascopello/220f10e0.jpg": "Camera da letto villa MiraScopello",
+    "/mirascopello/22867ccb.jpg": "Camera da letto villa MiraScopello",
+    "/mirascopello/25c1039b.jpg": "Bagno villa MiraScopello",
+    "/mirascopello/270-0125a0b0.jpg": "Piscina villa MiraScopello",
+    "/mirascopello/270-0c850c83.jpg": "Barbecue villa MiraScopello",
+    "/mirascopello/270-1403057f.jpg": "Sedia esterna villa MiraScopello",
+    "/mirascopello/270-1e6763fa.jpg": "Esterno di notte villa MiraScopello",
+    "/mirascopello/270-34271ed2.jpg": "Barbecue villa MiraScopello",
+    "/mirascopello/270-43df74a9.jpg": "Laghetto villa MiraScopello",
+    "/mirascopello/270-4cb8a5d0.jpg": "Piscina villa MiraScopello",
+    "/mirascopello/270-4d2ae703.jpg": "Laghetto villa MiraScopello",
+    "/mirascopello/270-72cd0fc8.jpg": "Esterno della villa MiraScopello",
+    "/mirascopello/270-abe264d9.jpg": "Piscina di notte villa MiraScopello",
+    "/mirascopello/270-b85646c1.jpg": "Piscina di notte villa MiraScopello",
+    "/mirascopello/270-bfade3e8.jpg": "Piscina di notte villa MiraScopello",
+    "/mirascopello/270-c769cca0.jpg": "Barbecue di notte villa MiraScopello",
+    "/mirascopello/270-d0a5a231.jpg": "Doccia esterna villa MiraScopello",
+    "/mirascopello/2b77029a.webp": "Terrazza villa MiraScopello",
+    "/mirascopello/3a5ac408.jpg": "Esterno villa MiraScopello",
+    "/mirascopello/43027eb4.jpg": "Bagno villa MiraScopello",
+    "/mirascopello/44720ed9.jpg": "Esterno di notte villa MiraScopello",
+    "/mirascopello/4fb71491.jpg": "Camera da letto villa MiraScopello",
+    "/mirascopello/55f7f55e.jpg": "Esterno villa MiraScopello",
+    "/mirascopello/6ca5d3e3.jpg": "Piscina villa MiraScopello",
+    "/mirascopello/6f63e8e1.jpg": "Piscina villa MiraScopello",
+    "/mirascopello/749507fb.jpg": "Esterno di notte villa MiraScopello",
+    "/mirascopello/763795c4.webp": "Camera da letto villa MiraScopello",
+    "/mirascopello/7d7548df.webp": "Bagno villa MiraScopello",
+    "/mirascopello/842a7dc8.jpg": "Bagno villa MiraScopello",
+    "/mirascopello/947ffb36.jpg": "Esterno di notte villa MiraScopello",
+    "/mirascopello/983d560d.jpg": "Bagno villa MiraScopello",
+    "/mirascopello/ad4b7e8f.jpg": "Camera da letto villa MiraScopello",
+    "/mirascopello/b27144ad.jpg": "Esterno di notte villa MiraScopello",
+    "/mirascopello/b51e6dd5.webp": "Interno della villa MiraScopello",
+    "/mirascopello/bd9400bc.jpg": "Esterno di notte villa MiraScopello",
+    "/mirascopello/c2655129.webp": "Bagno villa MiraScopello",
+    "/mirascopello/d5dd1e25.jpg": "Piscina villa MiraScopello",
+    "/mirascopello/d8b6a457.jpg": "Esterno villa MiraScopello",
+    "/mirascopello/db83f3b5.jpg": "Esterno villa MiraScopello",
+    "/mirascopello/dbea7607.jpg": "Esterno villa MiraScopello",
+    "/mirascopello/dcdb1ce2.jpg": "Esterno di notte villa MiraScopello",
+    "/mirascopello/f55c026c.webp": "Bagno villa MiraScopello"
+  }
 
   const allGalleryImages = [
     "/mirascopello/1.jpg",
@@ -318,12 +412,12 @@ const VillaMirascopello = () => {
       <div className="relative h-[50vh] w-full">
         <img
           src="/mirascopello/760b8e4b.jpg"
-          alt="Villa Mirascopello"
+          alt="Esterno della villa MiraScopello"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-5xl md:text-6xl font-playfair font-bold text-white text-center px-4">
+          <h1 className="text-5xl md:text-6xl font-playfair font-bold text-white text-center px-4 fade-in-hero-hidden">
             Villa Mirascopello
           </h1>
         </div>
@@ -616,7 +710,7 @@ const VillaMirascopello = () => {
               <img
                 key={index}
                 src={imageSrc}
-                alt={`Villa Mirascopello - Foto ${index + 1}`}
+                alt={imageAltTexts[imageSrc] || `Villa Mirascopello - Foto ${index + 1}`}
                 onClick={() => {
                   setSelectedImage(index)
                   setLightboxOpen(true)
@@ -643,7 +737,7 @@ const VillaMirascopello = () => {
                 <img
                   key={actualIndex}
                   src={imageSrc}
-                  alt={`Villa Mirascopello - Foto ${actualIndex + 1}`}
+                  alt={imageAltTexts[imageSrc] || `Villa Mirascopello - Foto ${actualIndex + 1}`}
                   onClick={() => {
                     setSelectedImage(actualIndex)
                     setLightboxOpen(true)
@@ -661,50 +755,50 @@ const VillaMirascopello = () => {
           <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-primary mb-8 text-center">
             Prezzi
           </h2>
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
+          <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
+            <table className="w-full border-collapse text-sm md:text-base">
               <thead>
                 <tr className="bg-gray-100">
-                  <th className="border border-gray-300 px-6 py-4 text-left font-playfair font-semibold text-primary">Dal</th>
-                  <th className="border border-gray-300 px-6 py-4 text-left font-playfair font-semibold text-primary">Al</th>
-                  <th className="border border-gray-300 px-6 py-4 text-left font-playfair font-semibold text-primary">Prezzo settimanale</th>
+                  <th className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-left font-playfair font-semibold text-primary text-xs md:text-base">Dal</th>
+                  <th className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-left font-playfair font-semibold text-primary text-xs md:text-base">Al</th>
+                  <th className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-left font-playfair font-semibold text-primary text-xs md:text-base">Prezzo settimanale</th>
                 </tr>
               </thead>
               <tbody className="font-questrial">
                 <tr>
-                  <td className="border border-gray-300 px-6 py-4">28/03/2026</td>
-                  <td className="border border-gray-300 px-6 py-4">26/06/2026</td>
-                  <td className="border border-gray-300 px-6 py-4 font-semibold">€ 3.100</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-xs md:text-base">28/03/2026</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-xs md:text-base">26/06/2026</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 font-semibold text-xs md:text-base">€ 3.100</td>
                 </tr>
                 <tr className="bg-gray-50">
-                  <td className="border border-gray-300 px-6 py-4">27/06/2026</td>
-                  <td className="border border-gray-300 px-6 py-4">24/07/2026</td>
-                  <td className="border border-gray-300 px-6 py-4 font-semibold">€ 4.300</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-xs md:text-base">27/06/2026</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-xs md:text-base">24/07/2026</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 font-semibold text-xs md:text-base">€ 4.300</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 px-6 py-4">25/07/2026</td>
-                  <td className="border border-gray-300 px-6 py-4">07/08/2026</td>
-                  <td className="border border-gray-300 px-6 py-4 font-semibold">€ 5.000</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-xs md:text-base">25/07/2026</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-xs md:text-base">07/08/2026</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 font-semibold text-xs md:text-base">€ 5.000</td>
                 </tr>
                 <tr className="bg-gray-50">
-                  <td className="border border-gray-300 px-6 py-4">08/08/2026</td>
-                  <td className="border border-gray-300 px-6 py-4">21/08/2026</td>
-                  <td className="border border-gray-300 px-6 py-4 font-semibold">€ 5.700</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-xs md:text-base">08/08/2026</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-xs md:text-base">21/08/2026</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 font-semibold text-xs md:text-base">€ 5.700</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 px-6 py-4">22/08/2026</td>
-                  <td className="border border-gray-300 px-6 py-4">04/09/2026</td>
-                  <td className="border border-gray-300 px-6 py-4 font-semibold">€ 5.000</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-xs md:text-base">22/08/2026</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-xs md:text-base">04/09/2026</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 font-semibold text-xs md:text-base">€ 5.000</td>
                 </tr>
                 <tr className="bg-gray-50">
-                  <td className="border border-gray-300 px-6 py-4">05/09/2026</td>
-                  <td className="border border-gray-300 px-6 py-4">25/09/2026</td>
-                  <td className="border border-gray-300 px-6 py-4 font-semibold">€ 4.300</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-xs md:text-base">05/09/2026</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-xs md:text-base">25/09/2026</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 font-semibold text-xs md:text-base">€ 4.300</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 px-6 py-4">26/09/2026</td>
-                  <td className="border border-gray-300 px-6 py-4">06/11/2026</td>
-                  <td className="border border-gray-300 px-6 py-4 font-semibold">€ 3.300</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-xs md:text-base">26/09/2026</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-xs md:text-base">06/11/2026</td>
+                  <td className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 font-semibold text-xs md:text-base">€ 3.300</td>
                 </tr>
               </tbody>
             </table>
@@ -761,32 +855,32 @@ const VillaMirascopello = () => {
           </div>
           <div className="relative max-w-7xl mx-auto px-4">
             <div className="flex items-center justify-center gap-4 md:gap-6 overflow-hidden py-8">
-              {/* Card Precedente */}
-              <div className="flex-shrink-0 w-1/4 md:w-1/5 scale-90 opacity-60 transition-all duration-500">
-                <div className="bg-white rounded-lg shadow-lg p-4 md:p-6 h-full">
+              {/* Card Precedente - Nascosta su mobile, visibile su desktop */}
+              <div className="hidden md:flex flex-shrink-0 w-1/5 scale-90 opacity-60 transition-all duration-500">
+                <div className="bg-white rounded-lg shadow-lg p-6 h-full">
                   <div className="text-center">
                     <div className="flex justify-center mb-3">
-                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-accent/20 flex items-center justify-center">
-                        <span className="text-accent font-playfair font-semibold text-lg md:text-xl">
+                      <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center">
+                        <span className="text-accent font-playfair font-semibold text-lg">
                           {getInitials(reviews[(currentReview - 1 + reviews.length) % reviews.length].author)}
                         </span>
                       </div>
                     </div>
-                    <h3 className="text-base md:text-lg font-playfair font-semibold text-primary mb-1">
+                    <h3 className="text-lg font-playfair font-semibold text-primary mb-1">
                       {reviews[(currentReview - 1 + reviews.length) % reviews.length].author}
                     </h3>
-                    <p className="text-xs md:text-sm font-questrial text-gray-500 mb-3">
+                    <p className="text-sm font-questrial text-gray-500 mb-3">
                       {reviews[(currentReview - 1 + reviews.length) % reviews.length].role}
                     </p>
-                    <p className="text-xs md:text-sm font-questrial text-gray-600 leading-relaxed line-clamp-4">
+                    <p className="text-sm font-questrial text-gray-600 leading-relaxed line-clamp-4">
                       &ldquo;{reviews[(currentReview - 1 + reviews.length) % reviews.length].text}&rdquo;
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Card Attiva */}
-              <div className="flex-shrink-0 w-1/2 md:w-2/5 scale-100 opacity-100 z-10 transition-all duration-500">
+              {/* Card Attiva - Full width su mobile, 2/5 su desktop */}
+              <div className="flex-shrink-0 w-full md:w-2/5 scale-100 opacity-100 z-10 transition-all duration-500">
                 <div className="bg-white rounded-lg shadow-xl p-6 md:p-8 h-full">
                   <div className="text-center">
                     <div className="flex justify-center mb-4">
@@ -809,24 +903,24 @@ const VillaMirascopello = () => {
                 </div>
               </div>
 
-              {/* Card Successiva */}
-              <div className="flex-shrink-0 w-1/4 md:w-1/5 scale-90 opacity-60 transition-all duration-500">
-                <div className="bg-white rounded-lg shadow-lg p-4 md:p-6 h-full">
+              {/* Card Successiva - Nascosta su mobile, visibile su desktop */}
+              <div className="hidden md:flex flex-shrink-0 w-1/5 scale-90 opacity-60 transition-all duration-500">
+                <div className="bg-white rounded-lg shadow-lg p-6 h-full">
                   <div className="text-center">
                     <div className="flex justify-center mb-3">
-                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-accent/20 flex items-center justify-center">
-                        <span className="text-accent font-playfair font-semibold text-lg md:text-xl">
+                      <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center">
+                        <span className="text-accent font-playfair font-semibold text-lg">
                           {getInitials(reviews[(currentReview + 1) % reviews.length].author)}
                         </span>
                       </div>
                     </div>
-                    <h3 className="text-base md:text-lg font-playfair font-semibold text-primary mb-1">
+                    <h3 className="text-lg font-playfair font-semibold text-primary mb-1">
                       {reviews[(currentReview + 1) % reviews.length].author}
                     </h3>
-                    <p className="text-xs md:text-sm font-questrial text-gray-500 mb-3">
+                    <p className="text-sm font-questrial text-gray-500 mb-3">
                       {reviews[(currentReview + 1) % reviews.length].role}
                     </p>
-                    <p className="text-xs md:text-sm font-questrial text-gray-600 leading-relaxed line-clamp-4">
+                    <p className="text-sm font-questrial text-gray-600 leading-relaxed line-clamp-4">
                       &ldquo;{reviews[(currentReview + 1) % reviews.length].text}&rdquo;
                     </p>
                   </div>
@@ -929,7 +1023,7 @@ const VillaMirascopello = () => {
             >
               <img
                 src={allGalleryImages[selectedImage]}
-                alt={`Villa Mirascopello - Foto ${selectedImage + 1}`}
+                alt={imageAltTexts[allGalleryImages[selectedImage]] || `Villa Mirascopello - Immagine ${selectedImage + 1}`}
                 className="max-w-full max-h-[90vh] object-contain rounded-lg"
               />
 

@@ -9,6 +9,7 @@ import CookiePolicy from './pages/CookiePolicy'
 import CustomCursor from './components/CustomCursor'
 import ScrollToTop from './components/ScrollToTop'
 import ScrollToTopButton from './components/ScrollToTopButton'
+import CookieBanner from './components/CookieBanner'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <CustomCursor />
       <ScrollToTop />
       <ScrollToTopButton />
+      <CookieBanner />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contatti" element={<Contatti />} />

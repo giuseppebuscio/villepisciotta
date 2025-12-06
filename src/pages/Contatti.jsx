@@ -1,8 +1,88 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { Mail, Phone, MessageCircle } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import emailjs from '@emailjs/browser'
 
 const Contatti = () => {
+  // Imposta il titolo della pagina
+  useEffect(() => {
+    document.title = 'Contatti - Ville Pisciotta | Prenota la Tua Vacanza in Sicilia'
+  }, [])
+
+  // Configurazione EmailJS
+  const EMAILJS_PUBLIC_KEY = 'BavXkDkgbZrizWYmm'
+  const EMAILJS_SERVICE_ID = 'service_aruba_VP'
+  const EMAILJS_TEMPLATE_ID = 'template_m68tdem'
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState(null) // 'success', 'error', null
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+    // Reset status quando l'utente modifica il form
+    if (submitStatus) {
+      setSubmitStatus(null)
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus(null)
+
+    try {
+      // Inizializza EmailJS
+      emailjs.init(EMAILJS_PUBLIC_KEY)
+
+      // Prepara i parametri per il template
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        // Per inviare a due caselle email, nel template EmailJS usa:
+        // To Email: info@villepisciotta.com,seconda@email.com
+        // Oppure configura due servizi separati e invia due email
+      }
+
+      // Invia l'email
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams
+      )
+
+      // OPZIONE: Se vuoi inviare a due caselle email separate, decommenta questo codice:
+      // await emailjs.send(
+      //   EMAILJS_SERVICE_ID_2, // Secondo Service ID
+      //   EMAILJS_TEMPLATE_ID,
+      //   templateParams
+      // )
+
+      // Successo
+      setSubmitStatus('success')
+      setFormData({ name: '', email: '', message: '' })
+      
+      // Reset del messaggio di successo dopo 5 secondi
+      setTimeout(() => {
+        setSubmitStatus(null)
+      }, 5000)
+    } catch (error) {
+      console.error('Errore invio email:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -11,7 +91,7 @@ const Contatti = () => {
       <div className="relative h-[50vh] w-full">
         <img
           src="/mirascopello/3.jpg"
-          alt="Contatti"
+          alt="Salotto della villa MiraScopello"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40"></div>
@@ -104,7 +184,7 @@ const Contatti = () => {
               <h2 className="text-3xl font-playfair font-semibold mb-6 text-primary">
                 Invia un Messaggio
               </h2>
-              <form className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label htmlFor="name" className="block font-questrial text-gray-700 mb-2">
                     Nome
@@ -113,8 +193,11 @@ const Contatti = () => {
                     type="text"
                     id="name"
                     name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     className="w-full px-4 py-2 border border-gray-300 rounded-none focus:outline-none focus:ring-2 focus:ring-accent font-questrial"
                     required
+                    disabled={isSubmitting}
                   />
                 </div>
                 <div>
@@ -125,8 +208,11 @@ const Contatti = () => {
                     type="email"
                     id="email"
                     name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     className="w-full px-4 py-2 border border-gray-300 rounded-none focus:outline-none focus:ring-2 focus:ring-accent font-questrial"
                     required
+                    disabled={isSubmitting}
                   />
                 </div>
                 <div>
@@ -137,15 +223,32 @@ const Contatti = () => {
                     id="message"
                     name="message"
                     rows="6"
+                    value={formData.message}
+                    onChange={handleChange}
                     className="w-full px-4 py-2 border border-gray-300 rounded-none focus:outline-none focus:ring-2 focus:ring-accent font-questrial"
                     required
+                    disabled={isSubmitting}
                   ></textarea>
                 </div>
+                
+                {/* Messaggi di stato */}
+                {submitStatus === 'success' && (
+                  <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-none font-questrial">
+                    ✓ Messaggio inviato con successo! Ti risponderemo al più presto.
+                  </div>
+                )}
+                {submitStatus === 'error' && (
+                  <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-none font-questrial">
+                    ✗ Errore nell'invio del messaggio. Riprova più tardi o contattaci direttamente via email/telefono.
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full bg-accent hover:bg-[rgb(170,120,40)] text-white px-6 py-3 rounded-none font-questrial font-semibold transition-all duration-300"
+                  disabled={isSubmitting}
+                  className="w-full bg-accent hover:bg-[rgb(170,120,40)] disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-6 py-3 rounded-none font-questrial font-semibold transition-all duration-300"
                 >
-                  Invia Messaggio
+                  {isSubmitting ? 'Invio in corso...' : 'Invia Messaggio'}
                 </button>
               </form>
             </div>

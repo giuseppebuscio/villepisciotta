@@ -26,9 +26,86 @@ import {
 } from 'lucide-react'
 
 const VillaGelvi = () => {
+  // Imposta il titolo della pagina
+  useEffect(() => {
+    document.title = 'Villa Gelvi - Appartamenti in Sicilia | Ville Pisciotta'
+  }, [])
+
+  // Animazione fade-in per il titolo hero
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target
+            if (el.classList.contains('fade-in-hero-hidden')) {
+              el.classList.add('fade-in-hero')
+              el.classList.remove('fade-in-hero-hidden')
+              observer.unobserve(el)
+            }
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '50px',
+      }
+    )
+
+    // Trova tutti gli elementi con fade-in-hero-hidden
+    const elements = document.querySelectorAll('.fade-in-hero-hidden')
+    elements.forEach((el) => {
+      observer.observe(el)
+    })
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
   const [currentReview, setCurrentReview] = useState(0)
   const [selectedApartment, setSelectedApartment] = useState(null)
   const [apartmentImageIndex, setApartmentImageIndex] = useState(0)
+
+  // Mappa degli alt text per le immagini degli appartamenti
+  const apartmentImageAltTexts = {
+    '/gelvi/A erice/270-a1044ded.webp': 'Interno appartamento Erice Villa Gelvi',
+    '/gelvi/A erice/307a22b3.jpg': 'Camera appartamento Erice Villa Gelvi',
+    '/gelvi/A erice/5244ac9f.jpg': 'Camera appartamento Erice Villa Gelvi',
+    '/gelvi/A erice/7149db8d.jpg': 'Camera appartamento Erice Villa Gelvi',
+    '/gelvi/A erice/bd2158ca.jpg': 'Camera appartamento Erice Villa Gelvi',
+    '/gelvi/A erice/d4516c1b.jpg': 'Interno appartamento Erice Villa Gelvi',
+    '/gelvi/A erice/d6901348.jpg': 'Interno appartamento Erice Villa Gelvi',
+    '/gelvi/A erice/dd6475df.webp': 'Interno appartamento Erice Villa Gelvi',
+    '/gelvi/A erice/ed4f034f.webp': 'Bagno appartamento Erice Villa Gelvi',
+    '/gelvi/B scopello/1dcbd96f.jpg': 'Interno appartamento Scopello Villa Gelvi',
+    '/gelvi/B scopello/25568e96.jpg': 'Bagno appartamento Scopello Villa Gelvi',
+    '/gelvi/B scopello/3f83c9d0.jpg': 'Camera appartamento Scopello Villa Gelvi',
+    '/gelvi/B scopello/50bcf81a.jpg': 'Interno appartamento Scopello Villa Gelvi',
+    '/gelvi/B scopello/5a09e5da.jpg': 'Camera appartamento Scopello Villa Gelvi',
+    '/gelvi/B scopello/5acb42b2.jpg': 'Interno appartamento Scopello Villa Gelvi',
+    '/gelvi/B scopello/8bac6b9c.webp': 'Interno appartamento Scopello Villa Gelvi',
+    '/gelvi/B scopello/cd27522f.jpg': 'Interno appartamento Scopello Villa Gelvi',
+    '/gelvi/B scopello/f024bb8a.jpg': 'Camera appartamento Scopello Villa Gelvi',
+    '/gelvi/B scopello/faef9686.webp': 'Camera appartamento Scopello Villa Gelvi',
+    '/gelvi/D zingaro/1cc79d3c.jpg': 'Interno appartamento Zingaro Villa Gelvi',
+    '/gelvi/D zingaro/2e0cb1b5.jpg': 'Bagno appartamento Zingaro Villa Gelvi',
+    '/gelvi/D zingaro/64835aba.webp': 'Bagno appartamento Zingaro Villa Gelvi',
+    '/gelvi/D zingaro/69c7d9e0.jpg': 'Camera appartamento Zingaro Villa Gelvi',
+    '/gelvi/D zingaro/6fd0d87e.jpg': 'Camera appartamento Zingaro Villa Gelvi',
+    '/gelvi/D zingaro/b1e9b11f.jpg': 'Interno appartamento Zingaro Villa Gelvi',
+    '/gelvi/D zingaro/bd39bb7e.jpg': 'Camera appartamento Zingaro Villa Gelvi',
+    '/gelvi/D zingaro/ec9dd78e.jpg': 'Interno appartamento Zingaro Villa Gelvi',
+    '/gelvi/C segesta/07991ae6.webp': 'Interno appartamento Segesta Villa Gelvi',
+    '/gelvi/C segesta/2.jpg': 'Interno appartamento Segesta Villa Gelvi',
+    '/gelvi/C segesta/2c922174.webp': 'Interno appartamento Segesta Villa Gelvi',
+    '/gelvi/C segesta/44fd025f.jpg': 'Interno appartamento Segesta Villa Gelvi',
+    '/gelvi/C segesta/66f8d8ba.webp': 'Interno appartamento Segesta Villa Gelvi',
+    '/gelvi/C segesta/6c75cf6d.jpg': 'Camera da letto appartamento Segesta Villa Gelvi',
+    '/gelvi/C segesta/b643225b.jpg': 'Interno appartamento Segesta Villa Gelvi',
+    '/gelvi/C segesta/c324472c.jpg': 'Camera da letto appartamento Segesta Villa Gelvi',
+    '/gelvi/C segesta/d7375b86.jpg': 'Bagno appartamento Segesta Villa Gelvi'
+  }
 
   const apartments = [
     {
@@ -469,12 +546,12 @@ const VillaGelvi = () => {
       <div className="relative h-[50vh] w-full">
         <img
           src="/gelvi/C segesta/2.jpg"
-          alt="Villa Gelvi"
+          alt="Villa Gelvi - Vista esterna degli appartamenti a Erice, Sicilia"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-5xl md:text-6xl font-playfair font-bold text-white text-center px-4">
+          <h1 className="text-5xl md:text-6xl font-playfair font-bold text-white text-center px-4 fade-in-hero-hidden">
             Villa Gelvi
           </h1>
         </div>
@@ -579,7 +656,7 @@ const VillaGelvi = () => {
                 <div className="relative h-64 bg-gray-200">
                   <img
                     src={apartment.images[0]}
-                    alt={apartment.name}
+                    alt={apartmentImageAltTexts[apartment.images[0]] || apartment.name}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute top-4 right-4 flex gap-2">
@@ -647,32 +724,32 @@ const VillaGelvi = () => {
           </div>
           <div className="relative max-w-7xl mx-auto px-4">
             <div className="flex items-center justify-center gap-4 md:gap-6 overflow-hidden py-8">
-              {/* Card Precedente */}
-              <div className="flex-shrink-0 w-1/4 md:w-1/5 scale-90 opacity-60 transition-all duration-500">
-                <div className="bg-white rounded-lg shadow-lg p-4 md:p-6 h-full">
+              {/* Card Precedente - Nascosta su mobile, visibile su desktop */}
+              <div className="hidden md:flex flex-shrink-0 w-1/5 scale-90 opacity-60 transition-all duration-500">
+                <div className="bg-white rounded-lg shadow-lg p-6 h-full">
                   <div className="text-center">
                     <div className="flex justify-center mb-3">
-                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-accent/20 flex items-center justify-center">
-                        <span className="text-accent font-playfair font-semibold text-lg md:text-xl">
+                      <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center">
+                        <span className="text-accent font-playfair font-semibold text-lg">
                           {getInitials(reviews[(currentReview - 1 + reviews.length) % reviews.length].author)}
                         </span>
                       </div>
                     </div>
-                    <h3 className="text-base md:text-lg font-playfair font-semibold text-primary mb-1">
+                    <h3 className="text-lg font-playfair font-semibold text-primary mb-1">
                       {reviews[(currentReview - 1 + reviews.length) % reviews.length].author}
                     </h3>
-                    <p className="text-xs md:text-sm font-questrial text-gray-500 mb-3">
+                    <p className="text-sm font-questrial text-gray-500 mb-3">
                       {reviews[(currentReview - 1 + reviews.length) % reviews.length].role}
                     </p>
-                    <p className="text-xs md:text-sm font-questrial text-gray-600 leading-relaxed line-clamp-4">
+                    <p className="text-sm font-questrial text-gray-600 leading-relaxed line-clamp-4">
                       &ldquo;{reviews[(currentReview - 1 + reviews.length) % reviews.length].text}&rdquo;
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Card Attiva */}
-              <div className="flex-shrink-0 w-1/2 md:w-2/5 scale-100 opacity-100 z-10 transition-all duration-500">
+              {/* Card Attiva - Full width su mobile, 2/5 su desktop */}
+              <div className="flex-shrink-0 w-full md:w-2/5 scale-100 opacity-100 z-10 transition-all duration-500">
                 <div className="bg-white rounded-lg shadow-xl p-6 md:p-8 h-full">
                   <div className="text-center">
                     <div className="flex justify-center mb-4">
@@ -695,24 +772,24 @@ const VillaGelvi = () => {
                 </div>
               </div>
 
-              {/* Card Successiva */}
-              <div className="flex-shrink-0 w-1/4 md:w-1/5 scale-90 opacity-60 transition-all duration-500">
-                <div className="bg-white rounded-lg shadow-lg p-4 md:p-6 h-full">
+              {/* Card Successiva - Nascosta su mobile, visibile su desktop */}
+              <div className="hidden md:flex flex-shrink-0 w-1/5 scale-90 opacity-60 transition-all duration-500">
+                <div className="bg-white rounded-lg shadow-lg p-6 h-full">
                   <div className="text-center">
                     <div className="flex justify-center mb-3">
-                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-accent/20 flex items-center justify-center">
-                        <span className="text-accent font-playfair font-semibold text-lg md:text-xl">
+                      <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center">
+                        <span className="text-accent font-playfair font-semibold text-lg">
                           {getInitials(reviews[(currentReview + 1) % reviews.length].author)}
                         </span>
                       </div>
                     </div>
-                    <h3 className="text-base md:text-lg font-playfair font-semibold text-primary mb-1">
+                    <h3 className="text-lg font-playfair font-semibold text-primary mb-1">
                       {reviews[(currentReview + 1) % reviews.length].author}
                     </h3>
-                    <p className="text-xs md:text-sm font-questrial text-gray-500 mb-3">
+                    <p className="text-sm font-questrial text-gray-500 mb-3">
                       {reviews[(currentReview + 1) % reviews.length].role}
                     </p>
-                    <p className="text-xs md:text-sm font-questrial text-gray-600 leading-relaxed line-clamp-4">
+                    <p className="text-sm font-questrial text-gray-600 leading-relaxed line-clamp-4">
                       &ldquo;{reviews[(currentReview + 1) % reviews.length].text}&rdquo;
                     </p>
                   </div>
@@ -814,7 +891,7 @@ const VillaGelvi = () => {
                 <div className="relative h-96 md:h-[500px] bg-gray-200 rounded-lg overflow-hidden">
                   <img
                     src={selectedApartment.images[apartmentImageIndex]}
-                    alt={`${selectedApartment.name} - Foto ${apartmentImageIndex + 1}`}
+                    alt={apartmentImageAltTexts[selectedApartment.images[apartmentImageIndex]] || `${selectedApartment.name} - Foto ${apartmentImageIndex + 1}`}
                     className="w-full h-full object-cover"
                   />
                   
@@ -860,7 +937,7 @@ const VillaGelvi = () => {
                           idx === apartmentImageIndex ? 'border-accent' : 'border-transparent opacity-60 hover:opacity-100'
                         }`}
                       >
-                        <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
+                        <img src={img} alt={apartmentImageAltTexts[img] || `${selectedApartment.name} - Anteprima immagine ${idx + 1}`} className="w-full h-full object-cover" />
                       </button>
                     ))}
                   </div>

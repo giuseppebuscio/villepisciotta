@@ -45,7 +45,14 @@ const Hero = () => {
           >
             <img
               src={image}
-              alt={`Villa ${index + 1}`}
+              alt={
+                image === '/mirascopello/1.jpg' ? 'Interno della villa MiraScopello' :
+                image === '/mirascopello/2.jpg' ? 'Esterno della villa MiraScopello' :
+                image === '/mirascopello/3.jpg' ? 'Salotto della villa MiraScopello' :
+                image === '/mirascopello/4.jpg' ? 'Vetrata che mostra piscina della villa MiraScopello' :
+                image === '/mirascopello/5.jpg' ? 'Solarium della villa MiraScopello' :
+                `Ville Pisciotta - Vista panoramica sulla Sicilia ${index + 1}`
+              }
               className="w-full h-full object-cover transform transition-transform duration-[3000ms] ease-in-out"
               style={{
                 transform: index === currentIndex ? 'scale(1.1)' : 'scale(1)',

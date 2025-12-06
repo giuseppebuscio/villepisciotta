@@ -23,7 +23,7 @@ const VillaSelection = () => {
             <div className="aspect-[4/3] overflow-hidden">
               <img
                 src="/mirascopello/2.jpg"
-                alt="Villa MiraScopello"
+                alt="Esterno della villa MiraScopello"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
@@ -50,7 +50,7 @@ const VillaSelection = () => {
             <div className="aspect-[4/3] overflow-hidden">
               <img
                 src="/gelvi/C segesta/2.jpg"
-                alt="Villa Gelvi"
+                alt="Interno appartamento Segesta Villa Gelvi"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>

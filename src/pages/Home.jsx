@@ -6,6 +6,11 @@ import { MapPin, Users, Home as HomeIcon, Waves } from 'lucide-react'
 import { useEffect } from 'react'
 
 const Home = () => {
+  // Imposta il titolo della pagina
+  useEffect(() => {
+    document.title = 'Ville Pisciotta - Ville e Appartamenti in Sicilia | Castellammare del Golfo e Scopello'
+  }, [])
+
   // Gestione fade-in per tutti gli elementi
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -65,9 +70,10 @@ const Home = () => {
     )
     
     // Elementi con hover (immagini e link) - solo opacity fade-in (senza transform)
+    // Include anche i link della hero (anche quelli con href che inizia con #)
     const hoverElements = mainContainer.querySelectorAll(
       'img:not([class*="navbar"]):not([class*="footer"]):not([src*="logo"]), ' +
-      'a:not([class*="navbar"]):not([class*="footer"]):not([href^="#"])'
+      'a:not([class*="navbar"]):not([class*="footer"])'
     )
 
     elements.forEach((el, index) => {
@@ -114,6 +120,9 @@ const Home = () => {
       const isInLightbox = el.closest('[class*="lightbox"]') || el.closest('[role="dialog"]')
       const isHeroBackgroundImage = heroImagesContainer && heroImagesContainer.contains(el) && el.tagName === 'IMG'
       
+      // Verifica se l'elemento è nella hero section (per i link/pulsanti della hero)
+      const isInHeroContent = heroSection && heroSection.contains(el) && !isHeroBackgroundImage
+      
       if (
         !isInNav &&
         !isInFooter &&
@@ -123,10 +132,18 @@ const Home = () => {
         !el.classList.contains('fade-in-hero') &&
         !el.classList.contains('fade-in-hero-hidden')
       ) {
-        el.classList.add('fade-in-hero-hidden')
-        setTimeout(() => {
-          observer.observe(el)
-        }, index * 50)
+        // Usa animazione fade-in-hero per elementi nella hero (link, pulsanti)
+        if (isInHeroContent) {
+          el.classList.add('fade-in-hero-hidden')
+          setTimeout(() => {
+            observer.observe(el)
+          }, index * 50)
+        } else {
+          el.classList.add('fade-in-hero-hidden')
+          setTimeout(() => {
+            observer.observe(el)
+          }, index * 50)
+        }
       }
     })
 
@@ -213,42 +230,42 @@ const Home = () => {
             <div className="overflow-hidden rounded-lg shadow-lg">
               <img
                 src="/mirascopello/b51e6dd5.webp"
-                alt="Interno villa MiraScopello"
+                alt="Interno della villa MiraScopello"
                 className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
               />
             </div>
             <div className="overflow-hidden rounded-lg shadow-lg">
               <img
                 src="/mirascopello/4ee47fdf.jpg"
-                alt="Interno villa MiraScopello"
+                alt="Camera da letto villa MiraScopello"
                 className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
               />
             </div>
             <div className="overflow-hidden rounded-lg shadow-lg">
               <img
                 src="/gelvi/A erice/7149db8d.jpg"
-                alt="Interno villa Gelvi"
+                alt="Camera da letto appartamento Erice Villa Gelvi"
                 className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
               />
             </div>
             <div className="overflow-hidden rounded-lg shadow-lg">
               <img
                 src="/gelvi/C segesta/07991ae6.webp"
-                alt="Interno villa Gelvi"
+                alt="Open Space appartamento Segesta"
                 className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
               />
             </div>
             <div className="overflow-hidden rounded-lg shadow-lg">
               <img
                 src="/mirascopello/06aff529.jpg"
-                alt="Interno villa MiraScopello"
+                alt="Cucina villa MiraScopello"
                 className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
               />
             </div>
             <div className="overflow-hidden rounded-lg shadow-lg">
               <img
                 src="/mirascopello/763795c4.webp"
-                alt="Interno villa MiraScopello"
+                alt="Camera da letto villa MiraScopello"
                 className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
               />
             </div>
