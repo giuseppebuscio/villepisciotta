@@ -1,10 +1,30 @@
 import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const Navbar = () => {
+  const { language, changeLanguage } = useLanguage()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
+
+  const translations = {
+    it: {
+      home: 'Home',
+      contatti: 'Contatti',
+      villaMirascopello: 'Villa MiraScopello',
+      villaGelvi: 'Villa Gelvi'
+    },
+    en: {
+      home: 'Home',
+      contatti: 'Contact',
+      villaMirascopello: 'Villa MiraScopello',
+      villaGelvi: 'Villa Gelvi'
+    }
+  }
+
+  const t = translations[language]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,10 +43,10 @@ const Navbar = () => {
           {/* Left Menu */}
           <div className="hidden lg:flex items-center space-x-8">
             <Link to="/" className="text-white hover:text-accent transition-colors font-questrial">
-              Home
+              {t.home}
             </Link>
             <Link to="/contatti" className="text-white hover:text-accent transition-colors font-questrial">
-              Contatti
+              {t.contatti}
             </Link>
           </div>
 
@@ -55,14 +75,58 @@ const Navbar = () => {
               to="/villa-mirascopello" 
               className="text-white hover:text-accent transition-colors font-questrial"
             >
-              Villa MiraScopello
+              {t.villaMirascopello}
             </Link>
             <Link 
               to="/villa-gelvi" 
               className="text-white hover:text-accent transition-colors font-questrial"
             >
-              Villa Gelvi
+              {t.villaGelvi}
             </Link>
+            
+            {/* Language Selector */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setIsLanguageMenuOpen(true)}
+              onMouseLeave={() => setIsLanguageMenuOpen(false)}
+            >
+              <button className="flex items-center space-x-1 text-white hover:text-accent transition-colors">
+                <span className="text-xl">
+                  {language === 'it' ? '🇮🇹' : '🇬🇧'}
+                </span>
+              </button>
+              
+              {isLanguageMenuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl overflow-hidden z-50">
+                  <button
+                    onClick={() => {
+                      changeLanguage('it')
+                      setIsLanguageMenuOpen(false)
+                    }}
+                    className={`w-full px-4 py-3 flex items-center space-x-3 hover:bg-gray-100 transition-colors ${
+                      language === 'it' ? 'bg-accent/10' : ''
+                    }`}
+                  >
+                    <span className="text-xl">🇮🇹</span>
+                    <span className="font-questrial text-gray-700">Italiano</span>
+                    {language === 'it' && <span className="ml-auto text-accent">✓</span>}
+                  </button>
+                  <button
+                    onClick={() => {
+                      changeLanguage('en')
+                      setIsLanguageMenuOpen(false)
+                    }}
+                    className={`w-full px-4 py-3 flex items-center space-x-3 hover:bg-gray-100 transition-colors ${
+                      language === 'en' ? 'bg-accent/10' : ''
+                    }`}
+                  >
+                    <span className="text-xl">🇬🇧</span>
+                    <span className="font-questrial text-gray-700">English</span>
+                    {language === 'en' && <span className="ml-auto text-accent">✓</span>}
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Placeholder for mobile to balance layout */}
@@ -79,7 +143,7 @@ const Navbar = () => {
               className="block py-2 text-white hover:text-amber-300 transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
-              Home
+              {t.home}
             </Link>
             
             <Link 
@@ -87,22 +151,52 @@ const Navbar = () => {
               className="block py-2 text-white hover:text-amber-300 transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
-              Contatti
+              {t.contatti}
             </Link>
             <Link 
               to="/villa-mirascopello" 
               className="block py-2 text-white hover:text-amber-300 transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
-              Villa Mirascopello
+              {t.villaMirascopello}
             </Link>
             <Link 
               to="/villa-gelvi" 
               className="block py-2 text-white hover:text-amber-300 transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
-              Villa Gelvi
+              {t.villaGelvi}
             </Link>
+            
+            {/* Mobile Language Selector */}
+            <div className="pt-4 border-t border-white/20 mt-2">
+              <div className="flex items-center space-x-4">
+                <button
+                  onClick={() => {
+                    changeLanguage('it')
+                    setIsMenuOpen(false)
+                  }}
+                  className={`flex items-center space-x-2 py-2 px-3 rounded ${
+                    language === 'it' ? 'bg-accent/20 text-accent' : 'text-white'
+                  }`}
+                >
+                  <span className="text-xl">🇮🇹</span>
+                  <span className="font-questrial">Italiano</span>
+                </button>
+                <button
+                  onClick={() => {
+                    changeLanguage('en')
+                    setIsMenuOpen(false)
+                  }}
+                  className={`flex items-center space-x-2 py-2 px-3 rounded ${
+                    language === 'en' ? 'bg-accent/20 text-accent' : 'text-white'
+                  }`}
+                >
+                  <span className="text-xl">🇬🇧</span>
+                  <span className="font-questrial">English</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}

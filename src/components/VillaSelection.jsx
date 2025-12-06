@@ -1,16 +1,38 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const VillaSelection = () => {
+  const { language } = useLanguage()
+
+  const translations = {
+    it: {
+      chooseVilla: 'Scegli la tua villa',
+      subtitle: 'Due esperienze uniche per vivere la Sicilia nel lusso e nel comfort',
+      mirascopelloDesc: "Un'oasi di eleganza con vista panoramica sul mare",
+      gelviDesc: 'Raffinatezza e comfort in un ambiente esclusivo',
+      discoverMore: 'Scopri di più'
+    },
+    en: {
+      chooseVilla: 'Choose your villa',
+      subtitle: 'Two unique experiences to live Sicily in luxury and comfort',
+      mirascopelloDesc: 'An oasis of elegance with panoramic sea view',
+      gelviDesc: 'Refinement and comfort in an exclusive environment',
+      discoverMore: 'Discover more'
+    }
+  }
+
+  const t = translations[language]
+
   return (
     <section id="villas" className="py-20 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-playfair font-bold text-primary mb-4">
-            Scegli la tua villa
+            {t.chooseVilla}
           </h2>
           <p className="text-lg text-gray-600 font-questrial max-w-2xl mx-auto">
-            Due esperienze uniche per vivere la Sicilia nel lusso e nel comfort
+            {t.subtitle}
           </p>
         </div>
 
@@ -33,10 +55,10 @@ const VillaSelection = () => {
                 Villa Mirascopello
               </h3>
               <p className="font-questrial mb-4 opacity-90">
-                Un'oasi di eleganza con vista panoramica sul mare
+                {t.mirascopelloDesc}
               </p>
               <div className="flex items-center text-accent group-hover:text-[rgb(170,120,40)] transition-colors">
-                <span className="font-questrial mr-2">Scopri di più</span>
+                <span className="font-questrial mr-2">{t.discoverMore}</span>
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
@@ -60,10 +82,10 @@ const VillaSelection = () => {
                 Villa Gelvi
               </h3>
               <p className="font-questrial mb-4 opacity-90">
-                Raffinatezza e comfort in un ambiente esclusivo
+                {t.gelviDesc}
               </p>
               <div className="flex items-center text-accent group-hover:text-[rgb(170,120,40)] transition-colors">
-                <span className="font-questrial mr-2">Scopri di più</span>
+                <span className="font-questrial mr-2">{t.discoverMore}</span>
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </div>
             </div>

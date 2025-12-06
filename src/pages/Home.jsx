@@ -4,12 +4,54 @@ import VillaSelection from '../components/VillaSelection'
 import Footer from '../components/Footer'
 import { MapPin, Users, Home as HomeIcon, Waves } from 'lucide-react'
 import { useEffect } from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const Home = () => {
+  const { language } = useLanguage()
+
+  const translations = {
+    it: {
+      title: 'Ville Pisciotta - Ville e Appartamenti in Sicilia | Castellammare del Golfo e Scopello',
+      whyChoose: 'Perché scegliere le nostre ville',
+      whyChooseDesc: 'Esperienze uniche che combinano lusso, comfort e autenticità siciliana',
+      comfort: 'Comfort e design',
+      comfortDesc: 'Spazi ampi e arredati con cura per il massimo comfort',
+      location: 'Posizioni strategiche',
+      locationDesc: 'Vicino a spiagge, borghi storici e attrazioni turistiche',
+      view: 'Vista panoramica',
+      viewDesc: 'Viste mozzafiato sul mare e sul paesaggio siciliano',
+      ourSpaces: 'I nostri ambienti',
+      ourSpacesDesc: 'Scopri gli spazi e gli ambienti delle nostre ville di lusso',
+      bookVacation: 'Prenota la tua vacanza',
+      bookVacationDesc: 'Contattaci per maggiori informazioni e disponibilità',
+      callNow: 'Chiama ora',
+      contact: 'Contatti'
+    },
+    en: {
+      title: 'Ville Pisciotta - Villas and Apartments in Sicily | Castellammare del Golfo and Scopello',
+      whyChoose: 'Why choose our villas',
+      whyChooseDesc: 'Unique experiences combining luxury, comfort and Sicilian authenticity',
+      comfort: 'Comfort and design',
+      comfortDesc: 'Spacious spaces carefully furnished for maximum comfort',
+      location: 'Strategic locations',
+      locationDesc: 'Close to beaches, historic villages and tourist attractions',
+      view: 'Panoramic view',
+      viewDesc: 'Breathtaking views of the sea and Sicilian landscape',
+      ourSpaces: 'Our spaces',
+      ourSpacesDesc: 'Discover the spaces and environments of our luxury villas',
+      bookVacation: 'Book your vacation',
+      bookVacationDesc: 'Contact us for more information and availability',
+      callNow: 'Call now',
+      contact: 'Contact'
+    }
+  }
+
+  const t = translations[language]
+
   // Imposta il titolo della pagina
   useEffect(() => {
-    document.title = 'Ville Pisciotta - Ville e Appartamenti in Sicilia | Castellammare del Golfo e Scopello'
-  }, [])
+    document.title = t.title
+  }, [language, t.title])
 
   // Gestione fade-in per tutti gli elementi
   useEffect(() => {
@@ -173,10 +215,10 @@ const Home = () => {
         <div className="relative max-w-7xl mx-auto z-10">
           <div className="text-center mb-12">
             <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-white mb-4">
-              Perché scegliere le nostre ville
+              {t.whyChoose}
             </h2>
             <p className="text-lg text-white/90 font-questrial max-w-2xl mx-auto">
-              Esperienze uniche che combinano lusso, comfort e autenticità siciliana
+              {t.whyChooseDesc}
             </p>
           </div>
 
@@ -185,9 +227,9 @@ const Home = () => {
               <div className="bg-white/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
                 <HomeIcon className="text-white" size={32} />
               </div>
-              <h3 className="text-xl font-playfair font-semibold mb-2 text-white">Comfort e design</h3>
+              <h3 className="text-xl font-playfair font-semibold mb-2 text-white">{t.comfort}</h3>
               <p className="font-questrial text-white/90">
-                Spazi ampi e arredati con cura per il massimo comfort
+                {t.comfortDesc}
               </p>
             </div>
 
@@ -195,9 +237,9 @@ const Home = () => {
               <div className="bg-white/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
                 <MapPin className="text-white" size={32} />
               </div>
-              <h3 className="text-xl font-playfair font-semibold mb-2 text-white">Posizioni strategiche</h3>
+              <h3 className="text-xl font-playfair font-semibold mb-2 text-white">{t.location}</h3>
               <p className="font-questrial text-white/90">
-                Vicino a spiagge, borghi storici e attrazioni turistiche
+                {t.locationDesc}
               </p>
             </div>
 
@@ -205,9 +247,9 @@ const Home = () => {
               <div className="bg-white/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
                 <Waves className="text-white" size={32} />
               </div>
-              <h3 className="text-xl font-playfair font-semibold mb-2 text-white">Vista panoramica</h3>
+              <h3 className="text-xl font-playfair font-semibold mb-2 text-white">{t.view}</h3>
               <p className="font-questrial text-white/90">
-                Viste mozzafiato sul mare e sul paesaggio siciliano
+                {t.viewDesc}
               </p>
             </div>
           </div>
@@ -219,10 +261,10 @@ const Home = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-primary mb-4">
-              I nostri ambienti
+              {t.ourSpaces}
             </h2>
             <p className="text-lg text-gray-600 font-questrial max-w-2xl mx-auto">
-              Scopri gli spazi e gli ambienti delle nostre ville di lusso
+              {t.ourSpacesDesc}
             </p>
           </div>
 
@@ -287,10 +329,10 @@ const Home = () => {
         <div className="relative max-w-7xl mx-auto text-center z-10">
           <div className="mb-12">
             <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-white mb-4">
-              Prenota la tua vacanza
+              {t.bookVacation}
             </h2>
             <p className="text-lg text-white/90 font-questrial max-w-2xl mx-auto">
-              Contattaci per maggiori informazioni e disponibilità
+              {t.bookVacationDesc}
             </p>
           </div>
           
@@ -299,13 +341,13 @@ const Home = () => {
               href="tel:+393384394380"
               className="inline-block bg-accent/80 border border-accent hover:bg-[rgb(170,120,40)]/80 text-white px-8 py-3 rounded-none font-questrial transition-all duration-300"
             >
-              Chiama ora
+              {t.callNow}
             </a>
             <a
-              href="/contact"
+              href="/contatti"
               className="inline-block border border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-none font-questrial transition-all duration-300"
             >
-              Contatti
+              {t.contact}
             </a>
           </div>
         </div>

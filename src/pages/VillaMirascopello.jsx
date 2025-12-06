@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useState, useEffect } from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 import { 
   Users, 
   Home as HomeIcon, 
@@ -33,10 +34,176 @@ import {
 } from 'lucide-react'
 
 const VillaMirascopello = () => {
+  const { language } = useLanguage()
+
+  const translations = {
+    it: {
+      title: 'Villa MiraScopello - Villa a Scopello, Sicilia | Ville Pisciotta',
+      descrizione: 'Descrizione',
+      daSapere: 'Da sapere',
+      servizi: 'Servizi',
+      foto: 'Foto',
+      prezzi: 'Prezzi',
+      recensioni: 'Recensioni',
+      contatti: 'Contatti',
+      posizione: 'Posizione',
+      camere: 'Camere da letto\nmatrimoniali/doppie',
+      bagni: 'Bagni',
+      ospiti: 'Ospiti',
+      piscina: 'Piscina',
+      piscinaDesc: 'Infinity 5x12\nriscaldata + idromassaggio',
+      dimensioni: 'Dimensioni totali',
+      mostraTutte: 'Mostra tutte',
+      nonIncluso: 'Non incluso',
+      dal: 'Dal',
+      al: 'Al',
+      prezzoSettimanale: 'Prezzo settimanale',
+      recensionePrecedente: 'Recensione precedente',
+      recensioneSuccessiva: 'Recensione successiva',
+      // Descrizione
+      descrizioneText1: 'In una posizione dominante, su una pittoresca collinetta, chiamata Castellaccio, tra Castellammare del Golfo e Scopello, con una veduta mozzafiato proprio sui meravigliosi faraglioni di Scopello e sul mare circostante, sorge una grande e splendida villa: Villa MiraScopello. Isolata e tranquilla ma nello stesso tempo vicina ad altre abitazioni e a tutto ciò di cui si può avere necessità, Villa MiraScopello rappresenta il luogo ideale per trascorre una vacanza rilassante ed indimenticabile.',
+      descrizioneText2: 'La zona in cui sorge è una delle zone più belle di Castellammare del Golfo apprezzata molto sia dai turisti che dai residenti. La villa si trova a 8 minuti dal famoso borgo di Scopello a 3 dalla splendida baia di Guidaloca e a 5 minuti dal bellissimo paesino di Castellammare Del Golfo.',
+      descrizioneText3: 'La villa è gestita dagli stessi proprietari, Ugo e Deborah, disponibili ed esperti nel settore turistico e pronti a cercare di risolvere qualsiasi problema si possa verificare.',
+      descrizioneText4: 'La villa si sviluppa su due livelli: al piano terra si viene accolti da un grande salone, affiancato da una spaziosa cucina con soggiorno. La zona notte comprende tre camere da letto, tutte ben illuminate, servite complessivamente da quattro bagni, che garantiscono il massimo comfort e funzionalità. Completa il piano una comoda lavanderia, pratica e discreta.',
+      descrizioneText5: 'Il piano primo è dedicato a un\'ulteriore zona notte, composta da tre camere da letto e da tre bagni, offrendo spazi ideali per la famiglia o per eventuali ospiti, con un\'ottima distribuzione tra privacy e comodità.',
+      // Da sapere
+      daSapere1: 'Le feste e gli eventi di gruppo sono vietati.',
+      daSapere2: 'Rilevatore di monossido di carbonio e gas.',
+      daSapere3: 'Estintore antincendio.',
+      daSapere4: 'La temperatura dell\'acqua della piscina è di circa 25 gradi.',
+      daSapere5: 'Tutti gli ospiti, minorenni inclusi, dovranno essere presenti al momento del check-in e mostrare il passaporto o un documento d\'identità rilasciato dal proprio governo.',
+      daSapere6: 'Lenzuola e asciugamani da bagno per l\'intera settimana, cambio completo per prenotazioni superiori ad una settimana.',
+      daSapere7: 'Numero di registrazione della struttura (CIN): IT081005C2USCYFWIQ',
+      // Servizi
+      vistaMare: 'Vista mare panoramica',
+      ariaCondizionata: 'Aria condizionata in tutte le camere',
+      arrediEsterno: 'Arredi da esterno',
+      barbecue: 'Barbecue coperto (carbone fornito)',
+      cancello: 'Cancello automatico',
+      docciaEsterna: 'Doccia esterna',
+      asciugamaniPiscina: 'Asciugamani da piscina',
+      fornoElettrico: 'Forno elettrico',
+      fornoMicroonde: 'Forno microonde',
+      lavastoviglie: 'Lavastoviglie',
+      lavatrice: 'Lavatrice',
+      asciugacapelli: 'Asciugacapelli',
+      ferroStiro: 'Ferro da stiro',
+      asseStiro: 'Asse da stiro',
+      parcheggio: 'Parcheggio privato',
+      terrazza: 'Terrazza',
+      veranda: 'Veranda',
+      tostapane: 'Tostapane',
+      macchinaCapsule: 'Macchina da caffè a capsules',
+      macchinaAmericano: 'Macchina da caffè americano',
+      moka: 'Moka',
+      bollitore: 'Bollitore',
+      culla: 'Culla',
+      seggiolone: 'Seggiolone',
+      tvSat: 'TV-SAT',
+      wifi: 'WI-FI internet',
+      solarium: 'Solarium attrezzato (mq 120)',
+      // Non incluso
+      deposito: 'Deposito cauzionale rimborsabile: € 300.',
+      tassaSoggiorno: 'Tassa di soggiorno: € 1,50/persona.',
+      pulizia: 'Pulizia finale: € 150',
+      riscaldamento: 'Riscaldamento: € 3/ora',
+      // Recensioni
+      turista: 'Turista',
+      viaggiatore: 'Viaggiatore',
+      famiglia: 'Famiglia',
+      coppia: 'Coppia'
+    },
+    en: {
+      title: 'Villa MiraScopello - Villa in Scopello, Sicily | Ville Pisciotta',
+      descrizione: 'Description',
+      daSapere: 'Things to know',
+      servizi: 'Services',
+      foto: 'Photos',
+      prezzi: 'Prices',
+      recensioni: 'Reviews',
+      contatti: 'Contact',
+      posizione: 'Location',
+      camere: 'Bedrooms\n(double/twin)',
+      bagni: 'Bathrooms',
+      ospiti: 'Guests',
+      piscina: 'Pool',
+      piscinaDesc: 'Infinity 5x12\nheated + jacuzzi',
+      dimensioni: 'Total size',
+      mostraTutte: 'Show all',
+      nonIncluso: 'Not included',
+      dal: 'From',
+      al: 'To',
+      prezzoSettimanale: 'Weekly price',
+      recensionePrecedente: 'Previous review',
+      recensioneSuccessiva: 'Next review',
+      // Descrizione
+      descrizioneText1: 'In a dominant position, on a picturesque hill called Castellaccio, between Castellammare del Golfo and Scopello, with a breathtaking view of the wonderful faraglioni of Scopello and the surrounding sea, stands a large and splendid villa: Villa MiraScopello. Isolated and quiet but at the same time close to other houses and everything you may need, Villa MiraScopello represents the ideal place to spend a relaxing and unforgettable vacation.',
+      descrizioneText2: 'The area where it stands is one of the most beautiful areas of Castellammare del Golfo, much appreciated by both tourists and residents. The villa is located 8 minutes from the famous village of Scopello, 3 minutes from the splendid bay of Guidaloca and 5 minutes from the beautiful village of Castellammare Del Golfo.',
+      descrizioneText3: 'The villa is managed by the owners themselves, Ugo and Deborah, available and experienced in the tourism sector and ready to try to solve any problem that may arise.',
+      descrizioneText4: 'The villa develops on two levels: on the ground floor you are welcomed by a large living room, flanked by a spacious kitchen with living area. The night area includes three bedrooms, all well lit, served by four bathrooms in total, which guarantee maximum comfort and functionality. A comfortable laundry room, practical and discreet, completes the floor.',
+      descrizioneText5: 'The first floor is dedicated to a further night area, consisting of three bedrooms and three bathrooms, offering ideal spaces for the family or for any guests, with an excellent distribution between privacy and comfort.',
+      // Da sapere
+      daSapere1: 'Parties and group events are prohibited.',
+      daSapere2: 'Carbon monoxide and gas detector.',
+      daSapere3: 'Fire extinguisher.',
+      daSapere4: 'The pool water temperature is approximately 25 degrees.',
+      daSapere5: 'All guests, including minors, must be present at check-in and show a passport or identity document issued by their government.',
+      daSapere6: 'Bed sheets and bath towels for the entire week, complete change for bookings longer than one week.',
+      daSapere7: 'Structure registration number (CIN): IT081005C2USCYFWIQ',
+      // Servizi
+      vistaMare: 'Panoramic sea view',
+      ariaCondizionata: 'Air conditioning in all rooms',
+      arrediEsterno: 'Outdoor furniture',
+      barbecue: 'Covered barbecue (charcoal provided)',
+      cancello: 'Automatic gate',
+      docciaEsterna: 'Outdoor shower',
+      asciugamaniPiscina: 'Pool towels',
+      fornoElettrico: 'Electric oven',
+      fornoMicroonde: 'Microwave oven',
+      lavastoviglie: 'Dishwasher',
+      lavatrice: 'Washing machine',
+      asciugacapelli: 'Hair dryer',
+      ferroStiro: 'Iron',
+      asseStiro: 'Ironing board',
+      parcheggio: 'Private parking',
+      terrazza: 'Terrace',
+      veranda: 'Veranda',
+      tostapane: 'Toaster',
+      macchinaCapsule: 'Capsule coffee machine',
+      macchinaAmericano: 'American coffee machine',
+      moka: 'Moka',
+      bollitore: 'Kettle',
+      culla: 'Crib',
+      seggiolone: 'High chair',
+      tvSat: 'TV-SAT',
+      wifi: 'WI-FI internet',
+      solarium: 'Equipped solarium (120 sqm)',
+      // Non incluso
+      deposito: 'Refundable security deposit: € 300.',
+      tassaSoggiorno: 'Tourist tax: € 1.50/person.',
+      pulizia: 'Final cleaning: € 150',
+      riscaldamento: 'Heating: € 3/hour',
+      // Recensioni
+      turista: 'Tourist',
+      viaggiatore: 'Traveler',
+      famiglia: 'Family',
+      coppia: 'Couple',
+      // CTA
+      prenotaVacanza: 'Book your vacation',
+      prenotaVacanzaDesc: 'Contact us for more information and availability',
+      chiamaOra: 'Call now',
+      contattiLink: 'Contact',
+      // Posizione
+      posizioneTitle: 'Location'
+    }
+  }
+
+  const t = translations[language]
+
   // Imposta il titolo della pagina
   useEffect(() => {
-    document.title = 'Villa MiraScopello - Villa a Scopello, Sicilia | Ville Pisciotta'
-  }, [])
+    document.title = t.title
+  }, [language, t.title])
 
   // Animazione fade-in per il titolo hero
   useEffect(() => {
@@ -222,33 +389,64 @@ const VillaMirascopello = () => {
     setSelectedImage((prev) => (prev - 1 + allGalleryImages.length) % allGalleryImages.length)
   }
 
-  const reviews = [
-    {
-      author: "Maria R.",
-      role: "Turista",
-      text: "Villa incredibile con vista mozzafiato sui faraglioni di Scopello. La piscina infinity è spettacolare, soprattutto al tramonto. Ugo e Deborah sono stati gentilissimi, sempre disponibili. Torneremo sicuramente!"
-    },
-    {
-      author: "Giovanni P.",
-      role: "Viaggiatore",
-      text: "Settimana indimenticabile! La villa è ancora più bella delle foto. Spazi ampi, pulizia perfetta, ogni dettaglio curato. La posizione è ideale per visitare Scopello, Castellammare e le riserve naturali. Consigliatissima!"
-    },
-    {
-      author: "Sophie L.",
-      role: "Famiglia",
-      text: "Perfetta per famiglie! I bambini hanno adorato la piscina e il giardino. La cucina è attrezzatissima, abbiamo cucinato ogni sera. La vista dalla terrazza è qualcosa di unico. Servizio impeccabile e accoglienza calorosa."
-    },
-    {
-      author: "Marco T.",
-      role: "Coppia",
-      text: "Villa di lusso in posizione strategica. A pochi minuti dalle migliori spiagge della zona. L'idromassaggio è stato il tocco finale per un soggiorno perfetto. Ugo e Deborah ci hanno dato consigli preziosi sui posti da visitare."
-    },
-    {
-      author: "Anna e Luca B.",
-      role: "Coppia",
-      text: "Vacanza da sogno! La villa è bellissima, curata in ogni dettaglio. La vista sui faraglioni è spettacolare, soprattutto al tramonto. La piscina riscaldata ci ha permesso di nuotare anche la sera. I proprietari sono stati fantastici, sempre pronti ad aiutarci. Ci torniamo sicuramente l'anno prossimo!"
-    }
-  ]
+  const reviews = {
+    it: [
+      {
+        author: "Maria R.",
+        role: "Turista",
+        text: "Villa incredibile con vista mozzafiato sui faraglioni di Scopello. La piscina infinity è spettacolare, soprattutto al tramonto. Ugo e Deborah sono stati gentilissimi, sempre disponibili. Torneremo sicuramente!"
+      },
+      {
+        author: "Giovanni P.",
+        role: "Viaggiatore",
+        text: "Settimana indimenticabile! La villa è ancora più bella delle foto. Spazi ampi, pulizia perfetta, ogni dettaglio curato. La posizione è ideale per visitare Scopello, Castellammare e le riserve naturali. Consigliatissima!"
+      },
+      {
+        author: "Sophie L.",
+        role: "Famiglia",
+        text: "Perfetta per famiglie! I bambini hanno adorato la piscina e il giardino. La cucina è attrezzatissima, abbiamo cucinato ogni sera. La vista dalla terrazza è qualcosa di unico. Servizio impeccabile e accoglienza calorosa."
+      },
+      {
+        author: "Marco T.",
+        role: "Coppia",
+        text: "Villa di lusso in posizione strategica. A pochi minuti dalle migliori spiagge della zona. L'idromassaggio è stato il tocco finale per un soggiorno perfetto. Ugo e Deborah ci hanno dato consigli preziosi sui posti da visitare."
+      },
+      {
+        author: "Anna e Luca B.",
+        role: "Coppia",
+        text: "Vacanza da sogno! La villa è bellissima, curata in ogni dettaglio. La vista sui faraglioni è spettacolare, soprattutto al tramonto. La piscina riscaldata ci ha permesso di nuotare anche la sera. I proprietari sono stati fantastici, sempre pronti ad aiutarci. Ci torniamo sicuramente l'anno prossimo!"
+      }
+    ],
+    en: [
+      {
+        author: "Maria R.",
+        role: "Tourist",
+        text: "Incredible villa with breathtaking views of the faraglioni of Scopello. The infinity pool is spectacular, especially at sunset. Ugo and Deborah were very kind, always available. We will definitely return!"
+      },
+      {
+        author: "Giovanni P.",
+        role: "Traveler",
+        text: "Unforgettable week! The villa is even more beautiful than the photos. Spacious spaces, perfect cleanliness, every detail cared for. The location is ideal for visiting Scopello, Castellammare and the nature reserves. Highly recommended!"
+      },
+      {
+        author: "Sophie L.",
+        role: "Family",
+        text: "Perfect for families! The children loved the pool and garden. The kitchen is very well equipped, we cooked every evening. The view from the terrace is something unique. Impeccable service and warm welcome."
+      },
+      {
+        author: "Marco T.",
+        role: "Couple",
+        text: "Luxury villa in a strategic location. A few minutes from the best beaches in the area. The jacuzzi was the finishing touch for a perfect stay. Ugo and Deborah gave us valuable advice on places to visit."
+      },
+      {
+        author: "Anna and Luca B.",
+        role: "Couple",
+        text: "Dream vacation! The villa is beautiful, cared for in every detail. The view of the faraglioni is spectacular, especially at sunset. The heated pool allowed us to swim even in the evening. The owners were fantastic, always ready to help us. We will definitely return next year!"
+      }
+    ]
+  }
+
+  const currentReviews = reviews[language]
 
   const getInitials = (name) => {
     // Rimuove i punti e divide per spazi
@@ -263,11 +461,11 @@ const VillaMirascopello = () => {
   }
 
   const goToPreviousReview = () => {
-    setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length)
+    setCurrentReview((prev) => (prev - 1 + currentReviews.length) % currentReviews.length)
   }
 
   const goToNextReview = () => {
-    setCurrentReview((prev) => (prev + 1) % reviews.length)
+    setCurrentReview((prev) => (prev + 1) % currentReviews.length)
   }
 
   const scrollToSection = (id) => {
@@ -431,49 +629,49 @@ const VillaMirascopello = () => {
               onClick={() => scrollToSection('descrizione')}
               className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
             >
-              Descrizione
+              {t.descrizione}
             </button>
             <button
               onClick={() => scrollToSection('da-sapere')}
               className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
             >
-              Da sapere
+              {t.daSapere}
             </button>
             <button
               onClick={() => scrollToSection('servizi')}
               className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
             >
-              Servizi
+              {t.servizi}
             </button>
             <button
               onClick={() => scrollToSection('foto')}
               className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
             >
-              Foto
+              {t.foto}
             </button>
             <button
               onClick={() => scrollToSection('prezzi')}
               className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
             >
-              Prezzi
+              {t.prezzi}
             </button>
             <button
               onClick={() => scrollToSection('recensioni')}
               className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
             >
-              Recensioni
+              {t.recensioni}
             </button>
             <button
               onClick={() => scrollToSection('contatti')}
               className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
             >
-              Contatti
+              {t.contatti}
             </button>
             <button
               onClick={() => scrollToSection('posizione')}
               className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
             >
-              Posizione
+              {t.posizione}
             </button>
           </div>
         </div>
@@ -483,24 +681,24 @@ const VillaMirascopello = () => {
         {/* Descrizione */}
         <div id="descrizione" className="mb-16 scroll-mt-20">
           <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-primary mb-6 text-center">
-            Descrizione
+            {t.descrizione}
           </h2>
           <div className="space-y-4 text-base font-questrial text-gray-700 text-justify">
             <p>
-              In una posizione dominante, su una pittoresca collinetta, chiamata Castellaccio, tra Castellammare del Golfo e Scopello, con una veduta mozzafiato proprio sui meravigliosi faraglioni di Scopello e sul mare circostante, sorge una grande e splendida villa: Villa MiraScopello. Isolata e tranquilla ma nello stesso tempo vicina ad altre abitazioni e a tutto ciò di cui si può avere necessità, Villa MiraScopello rappresenta il luogo ideale per trascorre una vacanza rilassante ed indimenticabile.
+              {t.descrizioneText1}
             </p>
             
             <p>
-              La zona in cui sorge è una delle zone più belle di Castellammare del Golfo apprezzata molto sia dai turisti che dai residenti. La villa si trova a 8 minuti dal famoso borgo di Scopello a 3 dalla splendida baia di Guidaloca e a 5 minuti dal bellissimo paesino di Castellammare Del Golfo.
+              {t.descrizioneText2}
             </p>
             <p>
-              La villa è gestita dagli stessi proprietari, Ugo e Deborah, disponibili ed esperti nel settore turistico e pronti a cercare di risolvere qualsiasi problema si possa verificare.
+              {t.descrizioneText3}
             </p>
             <p>
-              La villa si sviluppa su due livelli: al piano terra si viene accolti da un grande salone, affiancato da una spaziosa cucina con soggiorno. La zona notte comprende tre camere da letto, tutte ben illuminate, servite complessivamente da quattro bagni, che garantiscono il massimo comfort e funzionalità. Completa il piano una comoda lavanderia, pratica e discreta.
+              {t.descrizioneText4}
             </p>
             <p>
-              Il piano primo è dedicato a un'ulteriore zona notte, composta da tre camere da letto e da tre bagni, offrendo spazi ideali per la famiglia o per eventuali ospiti, con un'ottima distribuzione tra privacy e comodità.
+              {t.descrizioneText5}
             </p>
           </div>
         </div>
@@ -511,27 +709,27 @@ const VillaMirascopello = () => {
             <div className="text-center">
               <Bed className="text-accent mx-auto mb-2" size={32} />
               <div className="text-2xl font-playfair font-bold text-primary mb-1">6</div>
-              <div className="text-sm font-questrial text-gray-600">Camere da letto<br />matrimoniali/doppie</div>
+              <div className="text-sm font-questrial text-gray-600">{t.camere}</div>
             </div>
             <div className="text-center">
               <Bath className="text-accent mx-auto mb-2" size={32} />
               <div className="text-2xl font-playfair font-bold text-primary mb-1">7</div>
-              <div className="text-sm font-questrial text-gray-600">Bagni</div>
+              <div className="text-sm font-questrial text-gray-600">{t.bagni}</div>
             </div>
             <div className="text-center">
               <Users className="text-accent mx-auto mb-2" size={32} />
               <div className="text-2xl font-playfair font-bold text-primary mb-1">12</div>
-              <div className="text-sm font-questrial text-gray-600">Ospiti</div>
+              <div className="text-sm font-questrial text-gray-600">{t.ospiti}</div>
             </div>
             <div className="text-center">
               <Waves className="text-accent mx-auto mb-2" size={32} />
-              <div className="text-lg font-playfair font-bold text-primary mb-1">Piscina</div>
-              <div className="text-sm font-questrial text-gray-600">Infinity 5x12<br />riscaldata + idromassaggio</div>
+              <div className="text-lg font-playfair font-bold text-primary mb-1">{t.piscina}</div>
+              <div className="text-sm font-questrial text-gray-600">{t.piscinaDesc}</div>
             </div>
             <div className="text-center">
               <Square className="text-accent mx-auto mb-2" size={32} />
               <div className="text-2xl font-playfair font-bold text-primary mb-1">320mq</div>
-              <div className="text-sm font-questrial text-gray-600">Dimensioni totali</div>
+              <div className="text-sm font-questrial text-gray-600">{t.dimensioni}</div>
             </div>
             
             
@@ -542,37 +740,37 @@ const VillaMirascopello = () => {
         {/* Sezione Da Sapere */}
         <section id="da-sapere" className="scroll-mt-20">
           <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-primary mb-8 text-center">
-            Da sapere
+            {t.daSapere}
           </h2>
           <div className="bg-gray-50 p-8 rounded-lg">
             <ul className="space-y-3 text-base font-questrial text-gray-700">
               <li className="flex items-start">
                 <ArrowRight className="text-accent mr-3 mt-1 flex-shrink-0" size={20} />
-                <span>Le feste e gli eventi di gruppo sono vietati.</span>
+                <span>{t.daSapere1}</span>
               </li>
               <li className="flex items-start">
                 <ArrowRight className="text-accent mr-3 mt-1 flex-shrink-0" size={20} />
-                <span>Rilevatore di monossido di carbonio e gas.</span>
+                <span>{t.daSapere2}</span>
               </li>
               <li className="flex items-start">
                 <ArrowRight className="text-accent mr-3 mt-1 flex-shrink-0" size={20} />
-                <span>Estintore antincendio.</span>
+                <span>{t.daSapere3}</span>
               </li>
               <li className="flex items-start">
                 <ArrowRight className="text-accent mr-3 mt-1 flex-shrink-0" size={20} />
-                <span>La temperatura dell'acqua della piscina è di circa 25 gradi.</span>
+                <span>{t.daSapere4}</span>
               </li>
               <li className="flex items-start">
                 <ArrowRight className="text-accent mr-3 mt-1 flex-shrink-0" size={20} />
-                <span>Tutti gli ospiti, minorenni inclusi, dovranno essere presenti al momento del check-in e mostrare il passaporto o un documento d'identità rilasciato dal proprio governo.</span>
+                <span>{t.daSapere5}</span>
               </li>
               <li className="flex items-start">
                 <ArrowRight className="text-accent mr-3 mt-1 flex-shrink-0" size={20} />
-                <span>Lenzuola e asciugamani da bagno per l'intera settimana, cambio completo per prenotazioni superiori ad una settimana.</span>
+                <span>{t.daSapere6}</span>
               </li>
               <li className="flex items-start">
                 <ArrowRight className="text-accent mr-3 mt-1 flex-shrink-0" size={20} />
-                <span>Numero di registrazione della struttura (CIN): IT081005C2USCYFWIQ</span>
+                <span>{t.daSapere7}</span>
               </li>
             </ul>
           </div>
@@ -583,116 +781,116 @@ const VillaMirascopello = () => {
       <section id="servizi" className="scroll-mt-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 py-20">
           <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-white mb-8 text-center">
-            Servizi
+            {t.servizi}
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="flex items-center space-x-3">
               <Waves className="text-accent" size={20} />
-              <span className="font-questrial text-white">Vista mare panoramica</span>
+              <span className="font-questrial text-white">{t.vistaMare}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Wind className="text-accent" size={20} />
-              <span className="font-questrial text-white">Aria condizionata in tutte le camere</span>
+              <span className="font-questrial text-white">{t.ariaCondizionata}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Check className="text-accent" size={20} />
-              <span className="font-questrial text-white">Arredi da esterno</span>
+              <span className="font-questrial text-white">{t.arrediEsterno}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Beef className="text-accent" size={20} />
-              <span className="font-questrial text-white">Barbecue coperto (carbone fornito)</span>
+              <span className="font-questrial text-white">{t.barbecue}</span>
             </div>
             <div className="flex items-center space-x-3">
               <DoorOpen className="text-accent" size={20} />
-              <span className="font-questrial text-white">Cancello automatico</span>
+              <span className="font-questrial text-white">{t.cancello}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Bath className="text-accent" size={20} />
-              <span className="font-questrial text-white">Doccia esterna</span>
+              <span className="font-questrial text-white">{t.docciaEsterna}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Layers2 className="text-accent" size={20} />
-              <span className="font-questrial text-white">Asciugamani da piscina</span>
+              <span className="font-questrial text-white">{t.asciugamaniPiscina}</span>
             </div>
             <div className="flex items-center space-x-3">
               <ChefHat className="text-accent" size={20} />
-              <span className="font-questrial text-white">Forno elettrico</span>
+              <span className="font-questrial text-white">{t.fornoElettrico}</span>
             </div>
             <div className="flex items-center space-x-3">
               <ChefHat className="text-accent" size={20} />
-              <span className="font-questrial text-white">Forno microonde</span>
+              <span className="font-questrial text-white">{t.fornoMicroonde}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Shirt className="text-accent" size={20} />
-              <span className="font-questrial text-white">Lavastoviglie</span>
+              <span className="font-questrial text-white">{t.lavastoviglie}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Droplets className="text-accent" size={20} />
-              <span className="font-questrial text-white">Lavatrice</span>
+              <span className="font-questrial text-white">{t.lavatrice}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Wind className="text-accent" size={20} />
-              <span className="font-questrial text-white">Asciugacapelli</span>
+              <span className="font-questrial text-white">{t.asciugacapelli}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Zap className="text-accent" size={20} />
-              <span className="font-questrial text-white">Ferro da stiro</span>
+              <span className="font-questrial text-white">{t.ferroStiro}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Zap className="text-accent" size={20} />
-              <span className="font-questrial text-white">Asse da stiro</span>
+              <span className="font-questrial text-white">{t.asseStiro}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Car className="text-accent" size={20} />
-              <span className="font-questrial text-white">Parcheggio privato</span>
+              <span className="font-questrial text-white">{t.parcheggio}</span>
             </div>
             <div className="flex items-center space-x-3">
               <HomeIcon className="text-accent" size={20} />
-              <span className="font-questrial text-white">Terrazza</span>
+              <span className="font-questrial text-white">{t.terrazza}</span>
             </div>
             <div className="flex items-center space-x-3">
               <HomeIcon className="text-accent" size={20} />
-              <span className="font-questrial text-white">Veranda</span>
+              <span className="font-questrial text-white">{t.veranda}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Utensils className="text-accent" size={20} />
-              <span className="font-questrial text-white">Tostapane</span>
+              <span className="font-questrial text-white">{t.tostapane}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Coffee className="text-accent" size={20} />
-              <span className="font-questrial text-white">Macchina da caffè a capsules</span>
+              <span className="font-questrial text-white">{t.macchinaCapsule}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Coffee className="text-accent" size={20} />
-              <span className="font-questrial text-white">Macchina da caffè americano</span>
+              <span className="font-questrial text-white">{t.macchinaAmericano}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Coffee className="text-accent" size={20} />
-              <span className="font-questrial text-white">Moka</span>
+              <span className="font-questrial text-white">{t.moka}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Check className="text-accent" size={20} />
-              <span className="font-questrial text-white">Bollitore</span>
+              <span className="font-questrial text-white">{t.bollitore}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Baby className="text-accent" size={20} />
-              <span className="font-questrial text-white">Culla</span>
+              <span className="font-questrial text-white">{t.culla}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Baby className="text-accent" size={20} />
-              <span className="font-questrial text-white">Seggiolone</span>
+              <span className="font-questrial text-white">{t.seggiolone}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Tv className="text-accent" size={20} />
-              <span className="font-questrial text-white">TV-SAT</span>
+              <span className="font-questrial text-white">{t.tvSat}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Wifi className="text-accent" size={20} />
-              <span className="font-questrial text-white">WI-FI internet</span>
+              <span className="font-questrial text-white">{t.wifi}</span>
             </div>
             <div className="flex items-center space-x-3">
               <Sun className="text-accent" size={20} />
-              <span className="font-questrial text-white">Solarium attrezzato (mq 120)</span>
+              <span className="font-questrial text-white">{t.solarium}</span>
             </div>
           </div>
         </div>
@@ -703,7 +901,7 @@ const VillaMirascopello = () => {
         {/* Sezione Foto */}
         <section id="foto" className="mb-16 scroll-mt-20">
           <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-primary mb-8 text-center">
-            Foto
+            {t.foto}
           </h2>
           <div className="grid md:grid-cols-3 gap-4">
             {initialGalleryImages.map((imageSrc, index) => (
@@ -726,7 +924,7 @@ const VillaMirascopello = () => {
                   onClick={() => setShowAllPhotos(true)}
                   className="text-primary font-questrial transition-all duration-300 pb-1 border-b border-transparent hover:border-primary"
                 >
-                  Mostra tutte
+                  {t.mostraTutte}
                 </button>
               </div>
             )}
@@ -753,15 +951,15 @@ const VillaMirascopello = () => {
         {/* Sezione Prezzi */}
         <section id="prezzi" className="mb-16 scroll-mt-20">
           <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-primary mb-8 text-center">
-            Prezzi
+            {t.prezzi}
           </h2>
           <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
             <table className="w-full border-collapse text-sm md:text-base">
               <thead>
                 <tr className="bg-gray-100">
-                  <th className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-left font-playfair font-semibold text-primary text-xs md:text-base">Dal</th>
-                  <th className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-left font-playfair font-semibold text-primary text-xs md:text-base">Al</th>
-                  <th className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-left font-playfair font-semibold text-primary text-xs md:text-base">Prezzo settimanale</th>
+                  <th className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-left font-playfair font-semibold text-primary text-xs md:text-base">{t.dal}</th>
+                  <th className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-left font-playfair font-semibold text-primary text-xs md:text-base">{t.al}</th>
+                  <th className="border border-gray-300 px-2 py-2 md:px-6 md:py-4 text-left font-playfair font-semibold text-primary text-xs md:text-base">{t.prezzoSettimanale}</th>
                 </tr>
               </thead>
               <tbody className="font-questrial">
@@ -806,24 +1004,24 @@ const VillaMirascopello = () => {
           
           <div className="mt-8 bg-amber-50 p-6 rounded-lg">
             <h3 className="text-xl font-playfair font-bold text-primary mb-4">
-              Non incluso
+              {t.nonIncluso}
             </h3>
             <ul className="space-y-2 text-base font-questrial text-gray-700">
               <li className="flex items-start">
                 <X className="text-red-500 mr-2 mt-1" size={18} />
-                <span>Deposito cauzionale rimborsabile: € 300.</span>
+                <span>{t.deposito}</span>
               </li>
               <li className="flex items-start">
                 <X className="text-red-500 mr-2 mt-1" size={18} />
-                <span>Tassa di soggiorno: € 1,50/persona.</span>
+                <span>{t.tassaSoggiorno}</span>
               </li>
               <li className="flex items-start">
                 <X className="text-red-500 mr-2 mt-1" size={18} />
-                <span>Pulizia finale: € 150</span>
+                <span>{t.pulizia}</span>
               </li>
               <li className="flex items-start">
                 <X className="text-red-500 mr-2 mt-1" size={18} />
-                <span>Riscaldamento: € 3/ora</span>
+                <span>{t.riscaldamento}</span>
               </li>
             </ul>
           </div>
@@ -833,21 +1031,21 @@ const VillaMirascopello = () => {
         <section id="recensioni" className="mb-16 scroll-mt-20">
           <div className="relative mb-12">
             <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-primary text-center">
-              Recensioni
+              {t.recensioni}
             </h2>
             {/* Navigation Buttons - Top Right */}
             <div className="absolute right-0 top-1/2 -translate-y-1/2 flex gap-2">
               <button
                 onClick={goToPreviousReview}
                 className="border-2 border-accent/30 text-accent p-2 rounded-full transition-all duration-300 hover:border-accent"
-                aria-label="Recensione precedente"
+                aria-label={t.recensionePrecedente}
               >
                 <ChevronLeft size={20} />
               </button>
               <button
                 onClick={goToNextReview}
                 className="border-2 border-accent/30 text-accent p-2 rounded-full transition-all duration-300 hover:border-accent"
-                aria-label="Recensione successiva"
+                aria-label={t.recensioneSuccessiva}
               >
                 <ChevronRight size={20} />
               </button>
@@ -862,18 +1060,18 @@ const VillaMirascopello = () => {
                     <div className="flex justify-center mb-3">
                       <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center">
                         <span className="text-accent font-playfair font-semibold text-lg">
-                          {getInitials(reviews[(currentReview - 1 + reviews.length) % reviews.length].author)}
+                          {getInitials(currentReviews[(currentReview - 1 + currentReviews.length) % currentReviews.length].author)}
                         </span>
                       </div>
                     </div>
                     <h3 className="text-lg font-playfair font-semibold text-primary mb-1">
-                      {reviews[(currentReview - 1 + reviews.length) % reviews.length].author}
+                      {currentReviews[(currentReview - 1 + currentReviews.length) % currentReviews.length].author}
                     </h3>
                     <p className="text-sm font-questrial text-gray-500 mb-3">
-                      {reviews[(currentReview - 1 + reviews.length) % reviews.length].role}
+                      {currentReviews[(currentReview - 1 + currentReviews.length) % currentReviews.length].role}
                     </p>
                     <p className="text-sm font-questrial text-gray-600 leading-relaxed line-clamp-4">
-                      &ldquo;{reviews[(currentReview - 1 + reviews.length) % reviews.length].text}&rdquo;
+                      &ldquo;{currentReviews[(currentReview - 1 + currentReviews.length) % currentReviews.length].text}&rdquo;
                     </p>
                   </div>
                 </div>
@@ -886,18 +1084,18 @@ const VillaMirascopello = () => {
                     <div className="flex justify-center mb-4">
                       <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-accent/20 flex items-center justify-center border-4 border-accent/30">
                         <span className="text-accent font-playfair font-semibold text-2xl md:text-3xl">
-                          {getInitials(reviews[currentReview].author)}
+                          {getInitials(currentReviews[currentReview].author)}
                         </span>
                       </div>
                     </div>
                     <h3 className="text-lg md:text-xl font-playfair font-semibold text-primary mb-1">
-                      {reviews[currentReview].author}
+                      {currentReviews[currentReview].author}
                     </h3>
                     <p className="text-sm md:text-base font-questrial text-gray-500 mb-4">
-                      {reviews[currentReview].role}
+                      {currentReviews[currentReview].role}
                     </p>
                     <p className="text-sm md:text-base font-questrial text-gray-700 leading-relaxed">
-                      &ldquo;{reviews[currentReview].text}&rdquo;
+                      &ldquo;{currentReviews[currentReview].text}&rdquo;
                     </p>
                   </div>
                 </div>
@@ -910,18 +1108,18 @@ const VillaMirascopello = () => {
                     <div className="flex justify-center mb-3">
                       <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center">
                         <span className="text-accent font-playfair font-semibold text-lg">
-                          {getInitials(reviews[(currentReview + 1) % reviews.length].author)}
+                          {getInitials(currentReviews[(currentReview + 1) % currentReviews.length].author)}
                         </span>
                       </div>
                     </div>
                     <h3 className="text-lg font-playfair font-semibold text-primary mb-1">
-                      {reviews[(currentReview + 1) % reviews.length].author}
+                      {currentReviews[(currentReview + 1) % currentReviews.length].author}
                     </h3>
                     <p className="text-sm font-questrial text-gray-500 mb-3">
-                      {reviews[(currentReview + 1) % reviews.length].role}
+                      {currentReviews[(currentReview + 1) % currentReviews.length].role}
                     </p>
                     <p className="text-sm font-questrial text-gray-600 leading-relaxed line-clamp-4">
-                      &ldquo;{reviews[(currentReview + 1) % reviews.length].text}&rdquo;
+                      &ldquo;{currentReviews[(currentReview + 1) % currentReviews.length].text}&rdquo;
                     </p>
                   </div>
                 </div>
@@ -930,7 +1128,7 @@ const VillaMirascopello = () => {
 
             {/* Dots Indicator */}
             <div className="flex justify-center mt-8 gap-2">
-              {reviews.map((_, index) => (
+              {currentReviews.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentReview(index)}
@@ -939,7 +1137,7 @@ const VillaMirascopello = () => {
                       ? 'bg-accent w-8'
                       : 'bg-gray-300 w-2 hover:bg-gray-400'
                   }`}
-                  aria-label={`Vai alla recensione ${index + 1}`}
+                  aria-label={language === 'it' ? `Vai alla recensione ${index + 1}` : `Go to review ${index + 1}`}
                 />
               ))}
             </div>
@@ -960,10 +1158,10 @@ const VillaMirascopello = () => {
         <div className="relative max-w-7xl mx-auto text-center z-10">
           <div className="mb-12">
             <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-white mb-4 text-center">
-              Prenota la tua vacanza
+              {t.prenotaVacanza}
             </h2>
             <p className="text-base text-white/90 font-questrial max-w-2xl mx-auto">
-              Contattaci per maggiori informazioni e disponibilità
+              {t.prenotaVacanzaDesc}
             </p>
           </div>
           
@@ -972,13 +1170,13 @@ const VillaMirascopello = () => {
               href="tel:+393384394380"
               className="inline-block bg-accent/80 border border-accent hover:bg-[rgb(170,120,40)]/80 text-white px-8 py-3 rounded-none font-questrial transition-all duration-300"
             >
-              Chiama ora
+              {t.chiamaOra}
             </a>
             <a
               href="/contatti"
               className="inline-block border border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-none font-questrial transition-all duration-300"
             >
-              Contatti
+              {t.contattiLink}
             </a>
           </div>
         </div>

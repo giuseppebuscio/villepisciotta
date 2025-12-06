@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { LanguageProvider } from './contexts/LanguageContext'
 import Home from './pages/Home'
 import Contatti from './pages/Contatti'
 import VillaMirascopello from './pages/VillaMirascopello'
@@ -13,21 +14,23 @@ import CookieBanner from './components/CookieBanner'
 
 function App() {
   return (
-    <Router>
-      <CustomCursor />
-      <ScrollToTop />
-      <ScrollToTopButton />
-      <CookieBanner />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/contatti" element={<Contatti />} />
-        <Route path="/villa-mirascopello" element={<VillaMirascopello />} />
-        <Route path="/villa-gelvi" element={<VillaGelvi />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/cookie" element={<CookiePolicy />} />
-      </Routes>
-    </Router>
+    <LanguageProvider>
+      <Router>
+        <CustomCursor />
+        <ScrollToTop />
+        <ScrollToTopButton />
+        <CookieBanner />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contatti" element={<Contatti />} />
+          <Route path="/villa-mirascopello" element={<VillaMirascopello />} />
+          <Route path="/villa-gelvi" element={<VillaGelvi />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/cookie" element={<CookiePolicy />} />
+        </Routes>
+      </Router>
+    </LanguageProvider>
   )
 }
 

@@ -1,7 +1,45 @@
 import { Link } from 'react-router-dom'
 import { Facebook, Instagram, Mail, Phone } from 'lucide-react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const Footer = () => {
+  const { language } = useLanguage()
+
+  const translations = {
+    it: {
+      description: 'Ville e appartamenti in Sicilia per esperienze indimenticabili',
+      navigation: 'Navigazione',
+      home: 'Home',
+      contact: 'Contatti',
+      villaMirascopello: 'Villa Mirascopello',
+      villaGelvi: 'Villa Gelvi',
+      usefulLinks: 'Link Utili',
+      terms: 'Termini e Condizioni',
+      privacy: 'Privacy Policy',
+      cookie: 'Cookie Policy',
+      sitemap: 'Mappa del sito',
+      contacts: 'Contatti',
+      copyright: `© ${new Date().getFullYear()} Ville Pisciotta. Tutti i diritti riservati.`
+    },
+    en: {
+      description: 'Villas and apartments in Sicily for unforgettable experiences',
+      navigation: 'Navigation',
+      home: 'Home',
+      contact: 'Contact',
+      villaMirascopello: 'Villa Mirascopello',
+      villaGelvi: 'Villa Gelvi',
+      usefulLinks: 'Useful Links',
+      terms: 'Terms and Conditions',
+      privacy: 'Privacy Policy',
+      cookie: 'Cookie Policy',
+      sitemap: 'Sitemap',
+      contacts: 'Contact',
+      copyright: `© ${new Date().getFullYear()} Ville Pisciotta. All rights reserved.`
+    }
+  }
+
+  const t = translations[language]
+
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -12,7 +50,7 @@ const Footer = () => {
               Ville Pisciotta
             </h3>
             <p className="font-questrial text-sm mb-4">
-              Ville e appartamenti in Sicilia per esperienze indimenticabili
+              {t.description}
             </p>
             {/* Social Icons */}
             <div className="flex space-x-4">
@@ -39,26 +77,26 @@ const Footer = () => {
 
           {/* Navigation Menu */}
           <div>
-            <h4 className="text-white font-playfair font-semibold mb-4">Navigazione</h4>
+            <h4 className="text-white font-playfair font-semibold mb-4">{t.navigation}</h4>
             <ul className="space-y-2 font-questrial">
               <li>
                 <Link to="/" className="hover:text-accent transition-colors">
-                  Home
+                  {t.home}
                 </Link>
               </li>
               <li>
                 <Link to="/contatti" className="hover:text-accent transition-colors">
-                  Contatti
+                  {t.contact}
                 </Link>
               </li>
               <li>
                 <Link to="/villa-mirascopello" className="hover:text-accent transition-colors">
-                  Villa Mirascopello
+                  {t.villaMirascopello}
                 </Link>
               </li>
               <li>
                 <Link to="/villa-gelvi" className="hover:text-accent transition-colors">
-                  Villa Gelvi
+                  {t.villaGelvi}
                 </Link>
               </li>
             </ul>
@@ -66,26 +104,26 @@ const Footer = () => {
 
           {/* Useful Links */}
           <div>
-            <h4 className="text-white font-playfair font-semibold mb-4">Link Utili</h4>
+            <h4 className="text-white font-playfair font-semibold mb-4">{t.usefulLinks}</h4>
             <ul className="space-y-2 font-questrial">
               <li>
                 <Link to="/terms" className="hover:text-accent transition-colors">
-                  Termini e Condizioni
+                  {t.terms}
                 </Link>
               </li>
               <li>
                 <Link to="/privacy" className="hover:text-accent transition-colors">
-                  Privacy Policy
+                  {t.privacy}
                 </Link>
               </li>
               <li>
                 <Link to="/cookie" className="hover:text-accent transition-colors">
-                  Cookie Policy
+                  {t.cookie}
                 </Link>
               </li>
               <li>
                 <a href="/sitemap.xml" className="hover:text-accent transition-colors">
-                  Mappa del sito
+                  {t.sitemap}
                 </a>
               </li>
             </ul>
@@ -93,7 +131,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-white font-playfair font-semibold mb-4">Contatti</h4>
+            <h4 className="text-white font-playfair font-semibold mb-4">{t.contacts}</h4>
             <ul className="space-y-3 font-questrial text-sm">
               <li className="flex items-center">
                 <Mail size={18} className="mr-2 text-accent" />
@@ -114,7 +152,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="font-questrial text-sm text-gray-400">
-            © {new Date().getFullYear()} Ville Pisciotta. Tutti i diritti riservati.
+            {t.copyright}
           </p>
         </div>
       </div>

@@ -1,9 +1,38 @@
 import { useState, useEffect } from 'react'
 import { X, Cookie, Settings } from 'lucide-react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const CookieBanner = () => {
+  const { language } = useLanguage()
   const [showBanner, setShowBanner] = useState(false)
   const [consent, setConsent] = useState(null) // null, 'accepted', 'rejected'
+
+  const translations = {
+    it: {
+      title: 'Gestione Cookie',
+      description: 'Questo sito utilizza cookie tecnici necessari per il funzionamento. Non utilizziamo cookie di profilazione o marketing. Puoi gestire le tue preferenze in qualsiasi momento.',
+      accetta: 'Accetta',
+      rifiuta: 'Rifiuta',
+      maggioriInfo: 'Maggiori informazioni',
+      chiudi: 'Chiudi banner',
+      gestisci: 'Gestisci preferenze cookie',
+      accettati: 'Cookie accettati',
+      rifiutati: 'Cookie rifiutati'
+    },
+    en: {
+      title: 'Cookie Management',
+      description: 'This site uses technical cookies necessary for operation. We do not use profiling or marketing cookies. You can manage your preferences at any time.',
+      accetta: 'Accept',
+      rifiuta: 'Reject',
+      maggioriInfo: 'More information',
+      chiudi: 'Close banner',
+      gestisci: 'Manage cookie preferences',
+      accettati: 'Cookies accepted',
+      rifiutati: 'Cookies rejected'
+    }
+  }
+
+  const t = translations[language]
 
   useEffect(() => {
     // Controlla se c'è già un consenso salvato
@@ -47,13 +76,13 @@ const CookieBanner = () => {
             <div className="flex items-center gap-3">
               <Cookie className="text-accent" size={24} />
               <h3 className="text-lg font-playfair font-bold text-gray-900">
-                Gestione Cookie
+                {t.title}
               </h3>
             </div>
             <button
               onClick={handleCloseBanner}
               className="text-gray-400 hover:text-gray-600 transition-colors"
-              aria-label="Chiudi banner"
+              aria-label={t.chiudi}
             >
               <X size={20} />
             </button>
@@ -61,9 +90,7 @@ const CookieBanner = () => {
 
           {/* Content */}
           <p className="text-sm font-questrial text-gray-700 mb-6">
-            Questo sito utilizza cookie tecnici necessari per il funzionamento. 
-            Non utilizziamo cookie di profilazione o marketing. 
-            Puoi gestire le tue preferenze in qualsiasi momento.
+            {t.description}
           </p>
 
           {/* Buttons */}
@@ -72,13 +99,13 @@ const CookieBanner = () => {
               onClick={handleAccept}
               className="flex-1 bg-accent hover:bg-[rgb(170,120,40)] text-white px-6 py-3 rounded-none font-questrial font-semibold transition-all duration-300"
             >
-              Accetta
+              {t.accetta}
             </button>
             <button
               onClick={handleReject}
               className="flex-1 border border-gray-300 hover:border-gray-400 text-gray-700 hover:bg-gray-50 px-6 py-3 rounded-none font-questrial font-semibold transition-all duration-300"
             >
-              Rifiuta
+              {t.rifiuta}
             </button>
           </div>
 
@@ -88,7 +115,7 @@ const CookieBanner = () => {
               href="/cookie"
               className="text-xs text-gray-500 hover:text-accent transition-colors font-questrial underline"
             >
-              Maggiori informazioni
+              {t.maggioriInfo}
             </a>
           </div>
         </div>
@@ -102,11 +129,11 @@ const CookieBanner = () => {
       <button
         onClick={handleOpenBanner}
         className="fixed bottom-4 left-4 z-50 bg-white border border-gray-200 shadow-lg rounded-lg px-4 py-2 flex items-center gap-2 hover:shadow-xl transition-all duration-300 group"
-        aria-label="Gestisci preferenze cookie"
+        aria-label={t.gestisci}
       >
         <Settings size={16} className="text-accent group-hover:rotate-90 transition-transform duration-300" />
         <span className="text-xs font-questrial text-gray-700">
-          {consent === 'accepted' ? 'Cookie accettati' : 'Cookie rifiutati'}
+          {consent === 'accepted' ? t.accettati : t.rifiutati}
         </span>
       </button>
     )

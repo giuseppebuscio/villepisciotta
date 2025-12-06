@@ -3,12 +3,52 @@ import Footer from '../components/Footer'
 import { Mail, Phone, MessageCircle } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import emailjs from '@emailjs/browser'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const Contatti = () => {
+  const { language } = useLanguage()
+
+  const translations = {
+    it: {
+      title: 'Contatti - Ville Pisciotta | Prenota la Tua Vacanza in Sicilia',
+      pageTitle: 'Contatti',
+      contactInfo: 'Informazioni di Contatto',
+      email: 'Email',
+      phone: 'Telefono',
+      sendMessage: 'Invia un Messaggio',
+      name: 'Nome',
+      message: 'Messaggio',
+      sending: 'Invio in corso...',
+      send: 'Invia Messaggio',
+      success: '✓ Messaggio inviato con successo! Ti risponderemo al più presto.',
+      error: '✗ Errore nell\'invio del messaggio. Riprova più tardi o contattaci direttamente via email/telefono.',
+      whatsappUgo: 'Contatta Ugo su WhatsApp',
+      whatsappVincenzo: 'Contatta Vincenzo su WhatsApp'
+    },
+    en: {
+      title: 'Contact - Ville Pisciotta | Book Your Vacation in Sicily',
+      pageTitle: 'Contact',
+      contactInfo: 'Contact Information',
+      email: 'Email',
+      phone: 'Phone',
+      sendMessage: 'Send a Message',
+      name: 'Name',
+      message: 'Message',
+      sending: 'Sending...',
+      send: 'Send Message',
+      success: '✓ Message sent successfully! We will reply as soon as possible.',
+      error: '✗ Error sending message. Please try again later or contact us directly by email/phone.',
+      whatsappUgo: 'Contact Ugo on WhatsApp',
+      whatsappVincenzo: 'Contact Vincenzo on WhatsApp'
+    }
+  }
+
+  const t = translations[language]
+
   // Imposta il titolo della pagina
   useEffect(() => {
-    document.title = 'Contatti - Ville Pisciotta | Prenota la Tua Vacanza in Sicilia'
-  }, [])
+    document.title = t.title
+  }, [language, t.title])
 
   // Configurazione EmailJS
   const EMAILJS_PUBLIC_KEY = 'BavXkDkgbZrizWYmm'
@@ -97,7 +137,7 @@ const Contatti = () => {
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="absolute inset-0 flex items-center justify-center">
           <h1 className="text-5xl md:text-6xl font-playfair font-bold text-white text-center px-4">
-            Contatti
+            {t.pageTitle}
           </h1>
         </div>
       </div>
@@ -108,15 +148,15 @@ const Contatti = () => {
             {/* Contact Info */}
             <div>
               <h2 className="text-3xl font-playfair font-semibold mb-6 text-primary">
-                Informazioni di Contatto
+                {t.contactInfo}
               </h2>
               <div className="space-y-6">
                 <div className="flex items-start">
                   <Mail className="text-accent mt-1 mr-4" size={24} />
                   <div>
-                    <h3 className="font-playfair font-semibold mb-1">Email</h3>
+                    <h3 className="font-playfair font-semibold mb-1">{t.email}</h3>
                     <a href="mailto:info@villepisciotta.it" className="font-questrial text-gray-700 hover:text-accent transition-colors duration-300">
-                      info@villepisciotta.it
+                      info@villepisciotta.com
                     </a>
                   </div>
                 </div>
@@ -124,7 +164,7 @@ const Contatti = () => {
                   <div className="flex items-start flex-1">
                     <Phone className="text-accent mt-1 mr-4" size={24} />
                     <div>
-                      <h3 className="font-playfair font-semibold mb-1">Telefono</h3>
+                      <h3 className="font-playfair font-semibold mb-1">{t.phone}</h3>
                       <a href="tel:+393384394380" className="font-questrial text-gray-700 hover:text-accent transition-colors duration-300">
                         +39 338 439 4380 - Ugo
                       </a>
@@ -135,7 +175,7 @@ const Contatti = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-[#25D366] hover:bg-[#20BA5A] rounded-full p-2 transition-colors duration-300 flex-shrink-0 ml-4"
-                    aria-label="Contatta Ugo su WhatsApp"
+                    aria-label={t.whatsappUgo}
                   >
                     <svg
                       width="20"
@@ -152,7 +192,7 @@ const Contatti = () => {
                   <div className="flex items-start flex-1">
                     <Phone className="text-accent mt-1 mr-4" size={24} />
                     <div>
-                      <h3 className="font-playfair font-semibold mb-1">Telefono</h3>
+                      <h3 className="font-playfair font-semibold mb-1">{t.phone}</h3>
                       <a href="tel:+393314706835" className="font-questrial text-gray-700 hover:text-accent transition-colors duration-300">
                         +39 331 470 6835 - Vincenzo
                       </a>
@@ -163,7 +203,7 @@ const Contatti = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-[#25D366] hover:bg-[#20BA5A] rounded-full p-2 transition-colors duration-300 flex-shrink-0 ml-4"
-                    aria-label="Contatta Vincenzo su WhatsApp"
+                    aria-label={t.whatsappVincenzo}
                   >
                     <svg
                       width="20"
@@ -182,12 +222,12 @@ const Contatti = () => {
             {/* Contact Form */}
             <div>
               <h2 className="text-3xl font-playfair font-semibold mb-6 text-primary">
-                Invia un Messaggio
+                {t.sendMessage}
               </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label htmlFor="name" className="block font-questrial text-gray-700 mb-2">
-                    Nome
+                    {t.name}
                   </label>
                   <input
                     type="text"
@@ -202,7 +242,7 @@ const Contatti = () => {
                 </div>
                 <div>
                   <label htmlFor="email" className="block font-questrial text-gray-700 mb-2">
-                    Email
+                    {t.email}
                   </label>
                   <input
                     type="email"
@@ -217,7 +257,7 @@ const Contatti = () => {
                 </div>
                 <div>
                   <label htmlFor="message" className="block font-questrial text-gray-700 mb-2">
-                    Messaggio
+                    {t.message}
                   </label>
                   <textarea
                     id="message"
@@ -234,12 +274,12 @@ const Contatti = () => {
                 {/* Messaggi di stato */}
                 {submitStatus === 'success' && (
                   <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-none font-questrial">
-                    ✓ Messaggio inviato con successo! Ti risponderemo al più presto.
+                    {t.success}
                   </div>
                 )}
                 {submitStatus === 'error' && (
                   <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-none font-questrial">
-                    ✗ Errore nell'invio del messaggio. Riprova più tardi o contattaci direttamente via email/telefono.
+                    {t.error}
                   </div>
                 )}
 
@@ -248,7 +288,7 @@ const Contatti = () => {
                   disabled={isSubmitting}
                   className="w-full bg-accent hover:bg-[rgb(170,120,40)] disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-6 py-3 rounded-none font-questrial font-semibold transition-all duration-300"
                 >
-                  {isSubmitting ? 'Invio in corso...' : 'Invia Messaggio'}
+                  {isSubmitting ? t.sending : t.send}
                 </button>
               </form>
             </div>

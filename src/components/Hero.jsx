@@ -1,7 +1,32 @@
 import { useState, useEffect } from 'react'
 import { ChevronLeft, ChevronRight, Waves, Bed, Sun } from 'lucide-react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const Hero = () => {
+  const { language } = useLanguage()
+
+  const translations = {
+    it: {
+      welcome: 'Benvenuti a',
+      subtitle: 'La tua vacanza in ville uniche, immerse nella tranquillità',
+      relax: 'Relax',
+      comfort: 'Comfort',
+      tranquility: 'Tranquillità',
+      explore: 'Esplora',
+      bookNow: 'Prenota ora'
+    },
+    en: {
+      welcome: 'Welcome to',
+      subtitle: 'Your vacation in unique villas, immersed in tranquility',
+      relax: 'Relax',
+      comfort: 'Comfort',
+      tranquility: 'Tranquility',
+      explore: 'Explore',
+      bookNow: 'Book now'
+    }
+  }
+
+  const t = translations[language]
   const images = [
     '/mirascopello/1.jpg',
     '/mirascopello/2.jpg',
@@ -68,27 +93,27 @@ const Hero = () => {
         <div className="text-center text-white px-4">
           <h1 className="mb-4">
             <div className="text-2xl md:text-2xl font-questrial font-normal mb-2 uppercase">
-              Benvenuti a
+              {t.welcome}
             </div>
             <div className="text-5xl md:text-8xl font-playfair font-bold">
               Ville Pisciotta
             </div>
           </h1>
           <p className="text-xl md:text-xl font-questrial mb-6 max-w-2xl mx-auto">
-            La tua vacanza in ville uniche, immerse nella tranquillità
+            {t.subtitle}
           </p>
           <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8 mb-8">
             <div className="flex items-center gap-2">
               <Waves size={20} className="text-white" strokeWidth={2} />
-              <span className="text-lg md:text-xl font-questrial text-white">Relax</span>
+              <span className="text-lg md:text-xl font-questrial text-white">{t.relax}</span>
             </div>
             <div className="flex items-center gap-2">
               <Bed size={20} className="text-white" strokeWidth={2} />
-              <span className="text-lg md:text-xl font-questrial text-white">Comfort</span>
+              <span className="text-lg md:text-xl font-questrial text-white">{t.comfort}</span>
             </div>
             <div className="flex items-center gap-2">
               <Sun size={20} className="text-white" strokeWidth={2} />
-              <span className="text-lg md:text-xl font-questrial text-white">Tranquillità</span>
+              <span className="text-lg md:text-xl font-questrial text-white">{t.tranquility}</span>
             </div>
           </div>
           <div className="flex flex-wrap justify-center items-center gap-4">
@@ -96,13 +121,13 @@ const Hero = () => {
               href="#villas"
               className="inline-block border border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-none font-questrial transition-all duration-300"
             >
-              Esplora
+              {t.explore}
             </a>
             <a
               href="tel:+393384394380"
               className="inline-block bg-accent/80 border border-accent hover:bg-[rgb(170,120,40)]/80 text-white px-8 py-3 rounded-none font-questrial transition-all duration-300"
             >
-              Prenota ora
+              {t.bookNow}
             </a>
           </div>
         </div>

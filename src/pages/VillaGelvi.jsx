@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useState, useEffect } from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 import { 
   Users, 
   Home as HomeIcon, 
@@ -26,10 +27,202 @@ import {
 } from 'lucide-react'
 
 const VillaGelvi = () => {
+  const { language } = useLanguage()
+
+  const translations = {
+    it: {
+      title: 'Villa Gelvi - Appartamenti in Sicilia | Ville Pisciotta',
+      appartamenti: 'Appartamenti',
+      descrizione: 'Descrizione',
+      servizi: 'Servizi',
+      prezzi: 'Prezzi',
+      recensioni: 'Recensioni',
+      contatti: 'Contatti',
+      posizione: 'Posizione',
+      camere: 'Camere',
+      bagni: 'Bagni',
+      ospiti: 'Ospiti',
+      mq: 'mq',
+      prezzoGiornaliero: 'Prezzo giornaliero',
+      dal: 'Dal',
+      al: 'Al',
+      nonIncluso: 'Non incluso',
+      deposito: 'Deposito cauzionale rimborsabile: € 100',
+      tassaSoggiorno: 'Tassa di soggiorno: € 1,50/persona',
+      pulizia: 'Pulizia finale: € 60',
+      prenotaVacanza: 'Prenota la tua vacanza',
+      prenotaVacanzaDesc: 'Contattaci per maggiori informazioni e disponibilità',
+      chiamaOra: 'Chiama ora',
+      contattiLink: 'Contatti',
+      recensionePrecedente: 'Recensione precedente',
+      recensioneSuccessiva: 'Recensione successiva',
+      // Servizi comuni
+      ariaCondizionata: 'Aria condizionata in tutti gli ambienti',
+      pianoCottura: 'Piano cottura',
+      fornoElettrico: 'Forno elettrico',
+      fornoMicroonde: 'Forno microonde',
+      lavatrice: 'Lavatrice',
+      asciugacapelli: 'Asciugacapelli',
+      ferroStiro: 'Ferro da stiro',
+      asseStiro: 'Asse da stiro',
+      moka: 'Moka',
+      tostapane: 'Tostapane',
+      bollitore: 'Bollitore',
+      culla: 'Culla',
+      seggiolone: 'Seggiolone',
+      tvSat: 'TV-SAT',
+      wifi: 'WI-FI internet',
+      rilevatore: 'Rilevatore di monossido di carbonio e gas',
+      lenzuola: 'Set di lenzuola e asciugamani da bagno cambiati settimanalmente per prenotazioni superiori ad una settimana',
+      // Descrizioni appartamenti
+      ericeDesc: 'cucina-soggiorno, 1 camera matrimoniale, 1 camera doppia, bagno, 3 balconi',
+      scopelloDesc: 'cucina-soggiorno, 1 camera matrimoniale, 1 camera doppia, bagno',
+      zingaroDesc: 'cucina-soggiorno, 1 camera matrimoniale e letto singolo, 1 camera doppia, bagno, lavanderia, balcone',
+      segestaDesc: 'cucina-soggiorno, letto matrimoniale e letto singolo, bagno, terrazza',
+      // Altri testi
+      descrizioneTitle: 'Descrizione',
+      descrizioneText: 'Villa Gelvi, che offre 4 appartamenti, dispone di un giardino e di una bellissima terrazza attrezzata con gazebo, 2 barbecue, tavoli, sedie, sdraio e giochi per bambini. A poche decine di metri si trovano 2 bar, un fornitissimo supermercato e un\'ottimo ristorante/pizzeria che pratica uno sconto del 15% agli ospiti. Nel giardino c\'è un punto acqua per sciacquarsi i piedi dal ritorno dalla spiaggia. Nessun problema di posteggio davanti casa. La famiglia Pisciotta che abita a piano terra (entrate indipendenti - max privacy) sarà pronta ad accogliervi con sincera ed infinita ospitalità per farvi trascorrere una serena vacanza e risolvere qualsiasi problema si possa verificare.',
+      daSapere: 'Da sapere',
+      daSapere1: 'Le feste e gli eventi di gruppo sono vietati.',
+      daSapere2: 'Estintore antincendio.',
+      daSapere3: 'Tutti gli ospiti, minorenni inclusi, dovranno essere presenti al momento del check-in e mostrare il passaporto o un documento d\'identità rilasciato dal proprio governo.',
+      daSapere4: 'Numero di registrazione della struttura (CIN): IT081005C2HAE3IXSF',
+      nostriAppartamenti: 'I nostri appartamenti',
+      scegliAppartamento: 'Scegli l\'appartamento perfetto per la tua vacanza',
+      maxPersone: 'Max {max} persone • {sqm} mq',
+      aPartireDa: 'a partire da € {price}',
+      dettagli: 'Dettagli',
+      ariaCondizionata: 'Aria condizionata',
+      ariaCondizionataDesc: 'Aria condizionata in tutti gli ambienti',
+      servizi: 'Servizi',
+      per2Persone: 'Per 2 persone',
+      per3Persone: 'Per 3 persone',
+      chiudi: 'Chiudi',
+      immaginePrecedente: 'Immagine precedente',
+      immagineSuccessiva: 'Immagine successiva'
+    },
+    en: {
+      title: 'Villa Gelvi - Apartments in Sicily | Ville Pisciotta',
+      appartamenti: 'Apartments',
+      descrizione: 'Description',
+      servizi: 'Services',
+      prezzi: 'Prices',
+      recensioni: 'Reviews',
+      contatti: 'Contact',
+      posizione: 'Location',
+      camere: 'Rooms',
+      bagni: 'Bathrooms',
+      ospiti: 'Guests',
+      mq: 'sqm',
+      prezzoGiornaliero: 'Daily price',
+      dal: 'From',
+      al: 'To',
+      nonIncluso: 'Not included',
+      deposito: 'Refundable security deposit: € 100',
+      tassaSoggiorno: 'Tourist tax: € 1.50/person',
+      pulizia: 'Final cleaning: € 60',
+      prenotaVacanza: 'Book your vacation',
+      prenotaVacanzaDesc: 'Contact us for more information and availability',
+      chiamaOra: 'Call now',
+      contattiLink: 'Contact',
+      recensionePrecedente: 'Previous review',
+      recensioneSuccessiva: 'Next review',
+      // Servizi comuni
+      ariaCondizionata: 'Air conditioning in all rooms',
+      pianoCottura: 'Stove',
+      fornoElettrico: 'Electric oven',
+      fornoMicroonde: 'Microwave oven',
+      lavatrice: 'Washing machine',
+      asciugacapelli: 'Hair dryer',
+      ferroStiro: 'Iron',
+      asseStiro: 'Ironing board',
+      moka: 'Moka',
+      tostapane: 'Toaster',
+      bollitore: 'Kettle',
+      culla: 'Crib',
+      seggiolone: 'High chair',
+      tvSat: 'TV-SAT',
+      wifi: 'WI-FI internet',
+      rilevatore: 'Carbon monoxide and gas detector',
+      lenzuola: 'Set of bed sheets and bath towels changed weekly for bookings longer than one week',
+      // Descrizioni appartamenti
+      ericeDesc: 'kitchen-living room, 1 double bedroom, 1 twin bedroom, bathroom, 3 balconies',
+      scopelloDesc: 'kitchen-living room, 1 double bedroom, 1 twin bedroom, bathroom',
+      zingaroDesc: 'kitchen-living room, 1 double bedroom and single bed, 1 twin bedroom, bathroom, laundry, balcony',
+      segestaDesc: 'kitchen-living room, double bed and single bed, bathroom, terrace',
+      // Altri testi
+      descrizioneTitle: 'Description',
+      descrizioneText: 'Villa Gelvi, which offers 4 apartments, has a garden and a beautiful equipped terrace with gazebo, 2 barbecues, tables, chairs, sun loungers and children\'s games. A few tens of meters away there are 2 bars, a well-stocked supermarket and an excellent restaurant/pizzeria that offers a 15% discount to guests. In the garden there is a water point to rinse your feet when returning from the beach. No parking problems in front of the house. The Pisciotta family who lives on the ground floor (independent entrances - max privacy) will be ready to welcome you with sincere and infinite hospitality to make you spend a peaceful vacation and solve any problem that may arise.',
+      daSapere: 'Things to know',
+      daSapere1: 'Parties and group events are prohibited.',
+      daSapere2: 'Fire extinguisher.',
+      daSapere3: 'All guests, including minors, must be present at check-in and show a passport or identity document issued by their government.',
+      daSapere4: 'Structure registration number (CIN): IT081005C2HAE3IXSF',
+      nostriAppartamenti: 'Our apartments',
+      scegliAppartamento: 'Choose the perfect apartment for your vacation',
+      maxPersone: 'Max {max} people • {sqm} sqm',
+      aPartireDa: 'from € {price}',
+      dettagli: 'Details',
+      ariaCondizionata: 'Air conditioning',
+      ariaCondizionataDesc: 'Air conditioning in all rooms',
+      servizi: 'Services',
+      per2Persone: 'For 2 people',
+      per3Persone: 'For 3 people',
+      chiudi: 'Close',
+      immaginePrecedente: 'Previous image',
+      immagineSuccessiva: 'Next image'
+    }
+  }
+
+  const t = translations[language]
+
+  // Funzione per tradurre i servizi
+  const translateService = (service) => {
+    const serviceMap = {
+      'Aria condizionata in tutti gli ambienti': t.ariaCondizionata,
+      'Piano cottura': t.pianoCottura,
+      'Forno elettrico': t.fornoElettrico,
+      'Forno microonde': t.fornoMicroonde,
+      'Lavatrice': t.lavatrice,
+      'Asciugacapelli': t.asciugacapelli,
+      'Ferro da stiro': t.ferroStiro,
+      'Asse da stiro': t.asseStiro,
+      'Moka': t.moka,
+      'Tostapane': t.tostapane,
+      'Bollitore': t.bollitore,
+      'Culla': t.culla,
+      'Seggiolone': t.seggiolone,
+      'TV-SAT': t.tvSat,
+      'WI-FI internet': t.wifi,
+      'Rilevatore di monossido di carbonio e gas': t.rilevatore,
+      'Set di lenzuola e asciugamani da bagno cambiati settimanalmente per prenotazioni superiori ad una settimana': t.lenzuola
+    }
+    return serviceMap[service] || service
+  }
+
+  // Funzione per tradurre le descrizioni degli appartamenti
+  const translateApartmentDescription = (apartmentId) => {
+    const descMap = {
+      'erice': t.ericeDesc,
+      'scopello': t.scopelloDesc,
+      'zingaro': t.zingaroDesc,
+      'segesta': t.segestaDesc
+    }
+    return descMap[apartmentId] || ''
+  }
+
+  // Funzione per tradurre notIncluded
+  const translateNotIncluded = (item) => {
+    if (item.includes('Deposito')) return t.deposito
+    if (item.includes('Tassa')) return t.tassaSoggiorno
+    if (item.includes('Pulizia')) return t.pulizia
+    return item
+  }
+
   // Imposta il titolo della pagina
   useEffect(() => {
-    document.title = 'Villa Gelvi - Appartamenti in Sicilia | Ville Pisciotta'
-  }, [])
+    document.title = t.title
+  }, [language, t.title])
 
   // Animazione fade-in per il titolo hero
   useEffect(() => {
@@ -110,10 +303,10 @@ const VillaGelvi = () => {
   const apartments = [
     {
       id: 'erice',
-      name: 'Appartamento Erice',
+      name: language === 'it' ? 'Appartamento Erice' : 'Erice Apartment',
       maxPersons: 4,
       sqm: 55,
-      description: 'cucina-soggiorno, 1 camera matrimoniale, 1 camera doppia, bagno, 3 balconi',
+      description: t.ericeDesc,
       images: [
         '/gelvi/A erice/270-a1044ded.webp',
         '/gelvi/A erice/307a22b3.jpg',
@@ -163,10 +356,10 @@ const VillaGelvi = () => {
     },
     {
       id: 'scopello',
-      name: 'Appartamento Scopello',
+      name: language === 'it' ? 'Appartamento Scopello' : 'Scopello Apartment',
       maxPersons: 4,
       sqm: 60,
-      description: 'cucina-soggiorno, 1 camera matrimoniale, 1 camera doppia, bagno',
+      description: t.scopelloDesc,
       images: [
         '/gelvi/B scopello/1dcbd96f.jpg',
         '/gelvi/B scopello/25568e96.jpg',
@@ -217,10 +410,10 @@ const VillaGelvi = () => {
     },
     {
       id: 'zingaro',
-      name: 'Appartamento Zingaro',
+      name: language === 'it' ? 'Appartamento Zingaro' : 'Zingaro Apartment',
       maxPersons: 5,
       sqm: 65,
-      description: 'cucina-soggiorno, 1 camera matrimoniale e letto singolo, 1 camera doppia, bagno, lavanderia, balcone',
+      description: t.zingaroDesc,
       images: [
         '/gelvi/D zingaro/1cc79d3c.jpg',
         '/gelvi/D zingaro/2e0cb1b5.jpg',
@@ -269,10 +462,10 @@ const VillaGelvi = () => {
     },
     {
       id: 'segesta',
-      name: 'Monolocale Segesta',
+      name: language === 'it' ? 'Monolocale Segesta' : 'Segesta Studio',
       maxPersons: 3,
       sqm: 45,
-      description: 'cucina-soggiorno, letto matrimoniale e letto singolo, bagno, terrazza',
+      description: t.segestaDesc,
       images: [
         '/gelvi/C segesta/07991ae6.webp',
         '/gelvi/C segesta/2.jpg',
@@ -331,33 +524,64 @@ const VillaGelvi = () => {
     }
   ]
 
-  const reviews = [
-    {
-      author: "Maria R.",
-      role: "Turista",
-      text: "Villa incredibile con vista mozzafiato sui faraglioni di Scopello. La piscina infinity è spettacolare, soprattutto al tramonto. Ugo e Deborah sono stati gentilissimi, sempre disponibili. Torneremo sicuramente!"
-    },
-    {
-      author: "Giovanni P.",
-      role: "Viaggiatore",
-      text: "Settimana indimenticabile! La villa è ancora più bella delle foto. Spazi ampi, pulizia perfetta, ogni dettaglio curato. La posizione è ideale per visitare Scopello, Castellammare e le riserve naturali. Consigliatissima!"
-    },
-    {
-      author: "Sophie L.",
-      role: "Famiglia",
-      text: "Perfetta per famiglie! I bambini hanno adorato la piscina e il giardino. La cucina è attrezzatissima, abbiamo cucinato ogni sera. La vista dalla terrazza è qualcosa di unico. Servizio impeccabile e accoglienza calorosa."
-    },
-    {
-      author: "Marco T.",
-      role: "Coppia",
-      text: "Villa di lusso in posizione strategica. A pochi minuti dalle migliori spiagge della zona. L'idromassaggio è stato il tocco finale per un soggiorno perfetto. Ugo e Deborah ci hanno dato consigli preziosi sui posti da visitare."
-    },
-    {
-      author: "Anna e Luca B.",
-      role: "Coppia",
-      text: "Vacanza da sogno! La villa è bellissima, curata in ogni dettaglio. La vista sui faraglioni è spettacolare, soprattutto al tramonto. La piscina riscaldata ci ha permesso di nuotare anche la sera. I proprietari sono stati fantastici, sempre pronti ad aiutarci. Ci torniamo sicuramente l'anno prossimo!"
-    }
-  ]
+  const reviews = {
+    it: [
+      {
+        author: "Maria R.",
+        role: "Turista",
+        text: "Villa incredibile con vista mozzafiato sui faraglioni di Scopello. La piscina infinity è spettacolare, soprattutto al tramonto. Ugo e Deborah sono stati gentilissimi, sempre disponibili. Torneremo sicuramente!"
+      },
+      {
+        author: "Giovanni P.",
+        role: "Viaggiatore",
+        text: "Settimana indimenticabile! La villa è ancora più bella delle foto. Spazi ampi, pulizia perfetta, ogni dettaglio curato. La posizione è ideale per visitare Scopello, Castellammare e le riserve naturali. Consigliatissima!"
+      },
+      {
+        author: "Sophie L.",
+        role: "Famiglia",
+        text: "Perfetta per famiglie! I bambini hanno adorato la piscina e il giardino. La cucina è attrezzatissima, abbiamo cucinato ogni sera. La vista dalla terrazza è qualcosa di unico. Servizio impeccabile e accoglienza calorosa."
+      },
+      {
+        author: "Marco T.",
+        role: "Coppia",
+        text: "Villa di lusso in posizione strategica. A pochi minuti dalle migliori spiagge della zona. L'idromassaggio è stato il tocco finale per un soggiorno perfetto. Ugo e Deborah ci hanno dato consigli preziosi sui posti da visitare."
+      },
+      {
+        author: "Anna e Luca B.",
+        role: "Coppia",
+        text: "Vacanza da sogno! La villa è bellissima, curata in ogni dettaglio. La vista sui faraglioni è spettacolare, soprattutto al tramonto. La piscina riscaldata ci ha permesso di nuotare anche la sera. I proprietari sono stati fantastici, sempre pronti ad aiutarci. Ci torniamo sicuramente l'anno prossimo!"
+      }
+    ],
+    en: [
+      {
+        author: "Maria R.",
+        role: "Tourist",
+        text: "Incredible villa with breathtaking views of the faraglioni of Scopello. The infinity pool is spectacular, especially at sunset. Ugo and Deborah were very kind, always available. We will definitely return!"
+      },
+      {
+        author: "Giovanni P.",
+        role: "Traveler",
+        text: "Unforgettable week! The villa is even more beautiful than the photos. Spacious spaces, perfect cleanliness, every detail cared for. The location is ideal for visiting Scopello, Castellammare and the nature reserves. Highly recommended!"
+      },
+      {
+        author: "Sophie L.",
+        role: "Family",
+        text: "Perfect for families! The children loved the pool and garden. The kitchen is very well equipped, we cooked every evening. The view from the terrace is something unique. Impeccable service and warm welcome."
+      },
+      {
+        author: "Marco T.",
+        role: "Couple",
+        text: "Luxury villa in a strategic location. A few minutes from the best beaches in the area. The jacuzzi was the finishing touch for a perfect stay. Ugo and Deborah gave us valuable advice on places to visit."
+      },
+      {
+        author: "Anna and Luca B.",
+        role: "Couple",
+        text: "Dream vacation! The villa is beautiful, cared for in every detail. The view of the faraglioni is spectacular, especially at sunset. The heated pool allowed us to swim even in the evening. The owners were fantastic, always ready to help us. We will definitely return next year!"
+      }
+    ]
+  }
+
+  const currentReviews = reviews[language]
 
   const getInitials = (name) => {
     const cleanName = name.replace(/\./g, '')
@@ -370,11 +594,11 @@ const VillaGelvi = () => {
   }
 
   const goToPreviousReview = () => {
-    setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length)
+    setCurrentReview((prev) => (prev - 1 + currentReviews.length) % currentReviews.length)
   }
 
   const goToNextReview = () => {
-    setCurrentReview((prev) => (prev + 1) % reviews.length)
+    setCurrentReview((prev) => (prev + 1) % currentReviews.length)
   }
 
   const scrollToSection = (id) => {
@@ -565,37 +789,31 @@ const VillaGelvi = () => {
               onClick={() => scrollToSection('descrizione')}
               className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
             >
-              Descrizione
-            </button>
-            <button
-              onClick={() => scrollToSection('da-sapere')}
-              className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
-            >
-              Da sapere
+              {t.descrizione}
             </button>
             <button
               onClick={() => scrollToSection('appartamenti')}
               className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
             >
-              Appartamenti
+              {t.appartamenti}
             </button>
             <button
               onClick={() => scrollToSection('recensioni')}
               className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
             >
-              Recensioni
+              {t.recensioni}
             </button>
             <button
               onClick={() => scrollToSection('contatti')}
               className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
             >
-              Contatti
+              {t.contatti}
             </button>
             <button
               onClick={() => scrollToSection('posizione')}
               className="text-white hover:text-white font-questrial transition-all pb-1 border-b border-transparent hover:border-white"
             >
-              Posizione
+              {t.posizione}
             </button>
           </div>
         </div>
@@ -605,11 +823,11 @@ const VillaGelvi = () => {
         {/* Descrizione */}
         <div id="descrizione" className="mb-16 scroll-mt-20">
           <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-primary mb-6 text-center">
-            Descrizione
+            {t.descrizioneTitle}
           </h2>
           <div className="space-y-4 text-base font-questrial text-gray-700 text-justify">
             <p>
-              Villa Gelvi, che offre 4 appartamenti, dispone di un giardino e di una bellissima terrazza attrezzata con gazebo, 2 barbecue, tavoli, sedie, sdraio e giochi per bambini. A poche decine di metri si trovano 2 bar, un fornitissimo supermercato e un'ottimo ristorante/pizzeria che pratica uno sconto del 15% agli ospiti. Nel giardino c'è un punto acqua per sciacquarsi i piedi dal ritorno dalla spiaggia. Nessun problema di posteggio davanti casa. La famiglia Pisciotta che abita a piano terra (entrate indipendenti - max privacy) sarà pronta ad accogliervi con sincera ed infinita ospitalità per farvi trascorrere una serena vacanza e risolvere qualsiasi problema si possa verificare.
+              {t.descrizioneText}
             </p>
           </div>
         </div>
@@ -617,25 +835,25 @@ const VillaGelvi = () => {
         {/* Sezione Da Sapere */}
         <section id="da-sapere" className="mb-16 scroll-mt-20">
           <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-primary mb-8 text-center">
-            Da sapere
+            {t.daSapere}
           </h2>
           <div className="bg-gray-50 p-8 rounded-lg">
             <ul className="space-y-3 text-base font-questrial text-gray-700">
               <li className="flex items-start">
                 <ArrowRight className="text-accent mr-3 mt-1 flex-shrink-0" size={20} />
-                <span>Le feste e gli eventi di gruppo sono vietati.</span>
+                <span>{t.daSapere1}</span>
               </li>
               <li className="flex items-start">
                 <ArrowRight className="text-accent mr-3 mt-1 flex-shrink-0" size={20} />
-                <span>Estintore antincendio.</span>
+                <span>{t.daSapere2}</span>
               </li>
               <li className="flex items-start">
                 <ArrowRight className="text-accent mr-3 mt-1 flex-shrink-0" size={20} />
-                <span>Tutti gli ospiti, minorenni inclusi, dovranno essere presenti al momento del check-in e mostrare il passaporto o un documento d'identità rilasciato dal proprio governo.</span>
+                <span>{t.daSapere3}</span>
               </li>
               <li className="flex items-start">
                 <ArrowRight className="text-accent mr-3 mt-1 flex-shrink-0" size={20} />
-                <span>Numero di registrazione della struttura (CIN): IT081005C2HAE3IXSF</span>
+                <span>{t.daSapere4}</span>
               </li>
             </ul>
           </div>
@@ -644,10 +862,10 @@ const VillaGelvi = () => {
         {/* Sezione I nostri appartamenti */}
         <section id="appartamenti" className="mb-16 scroll-mt-20">
           <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-primary mb-4 text-center">
-            I nostri appartamenti
+            {t.nostriAppartamenti}
           </h2>
           <p className="text-base font-questrial text-gray-600 text-center mb-12">
-            Scegli l'appartamento perfetto per la tua vacanza
+            {t.scegliAppartamento}
           </p>
           
           <div className="grid md:grid-cols-2 gap-8">
@@ -679,19 +897,19 @@ const VillaGelvi = () => {
                     {apartment.name}
                   </h3>
                   <p className="text-sm font-questrial text-gray-600 mb-1">
-                    Max {apartment.maxPersons} persone • {apartment.sqm} mq
+                    {t.maxPersone.replace('{max}', apartment.maxPersons).replace('{sqm}', apartment.sqm)}
                   </p>
                   <p className="text-sm font-questrial text-gray-700 mb-2">
                     {apartment.description}
                   </p>
                   <p className="text-base font-questrial text-primary font-semibold mb-4">
-                    a partire da € {getMinPrice(apartment)}
+                    {t.aPartireDa.replace('{price}', getMinPrice(apartment))}
                   </p>
                   <button
                     onClick={() => openApartmentModal(apartment)}
                     className="w-full bg-accent border border-accent hover:bg-[rgb(170,120,40)] text-white px-8 py-3 rounded-none font-questrial transition-all duration-300"
                   >
-                    Dettagli
+                    {t.dettagli}
                   </button>
                 </div>
               </div>
@@ -703,20 +921,20 @@ const VillaGelvi = () => {
         <section id="recensioni" className="mb-16 scroll-mt-20">
           <div className="relative mb-12">
             <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-primary text-center">
-              Recensioni
+              {t.recensioni}
             </h2>
             <div className="absolute right-0 top-1/2 -translate-y-1/2 flex gap-2">
               <button
                 onClick={goToPreviousReview}
                 className="border-2 border-accent/30 text-accent p-2 rounded-full transition-all duration-300 hover:border-accent"
-                aria-label="Recensione precedente"
+                aria-label={t.recensionePrecedente}
               >
                 <ChevronLeft size={20} />
               </button>
               <button
                 onClick={goToNextReview}
                 className="border-2 border-accent/30 text-accent p-2 rounded-full transition-all duration-300 hover:border-accent"
-                aria-label="Recensione successiva"
+                aria-label={t.recensioneSuccessiva}
               >
                 <ChevronRight size={20} />
               </button>
@@ -731,18 +949,18 @@ const VillaGelvi = () => {
                     <div className="flex justify-center mb-3">
                       <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center">
                         <span className="text-accent font-playfair font-semibold text-lg">
-                          {getInitials(reviews[(currentReview - 1 + reviews.length) % reviews.length].author)}
+                          {getInitials(currentReviews[(currentReview - 1 + currentReviews.length) % currentReviews.length].author)}
                         </span>
                       </div>
                     </div>
                     <h3 className="text-lg font-playfair font-semibold text-primary mb-1">
-                      {reviews[(currentReview - 1 + reviews.length) % reviews.length].author}
+                      {currentReviews[(currentReview - 1 + currentReviews.length) % currentReviews.length].author}
                     </h3>
                     <p className="text-sm font-questrial text-gray-500 mb-3">
-                      {reviews[(currentReview - 1 + reviews.length) % reviews.length].role}
+                      {currentReviews[(currentReview - 1 + currentReviews.length) % currentReviews.length].role}
                     </p>
                     <p className="text-sm font-questrial text-gray-600 leading-relaxed line-clamp-4">
-                      &ldquo;{reviews[(currentReview - 1 + reviews.length) % reviews.length].text}&rdquo;
+                      &ldquo;{currentReviews[(currentReview - 1 + currentReviews.length) % currentReviews.length].text}&rdquo;
                     </p>
                   </div>
                 </div>
@@ -755,18 +973,18 @@ const VillaGelvi = () => {
                     <div className="flex justify-center mb-4">
                       <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-accent/20 flex items-center justify-center border-4 border-accent/30">
                         <span className="text-accent font-playfair font-semibold text-2xl md:text-3xl">
-                          {getInitials(reviews[currentReview].author)}
+                          {getInitials(currentReviews[currentReview].author)}
                         </span>
                       </div>
                     </div>
                     <h3 className="text-lg md:text-xl font-playfair font-semibold text-primary mb-1">
-                      {reviews[currentReview].author}
+                      {currentReviews[currentReview].author}
                     </h3>
                     <p className="text-sm md:text-base font-questrial text-gray-500 mb-4">
-                      {reviews[currentReview].role}
+                      {currentReviews[currentReview].role}
                     </p>
                     <p className="text-sm md:text-base font-questrial text-gray-700 leading-relaxed">
-                      &ldquo;{reviews[currentReview].text}&rdquo;
+                      &ldquo;{currentReviews[currentReview].text}&rdquo;
                     </p>
                   </div>
                 </div>
@@ -779,18 +997,18 @@ const VillaGelvi = () => {
                     <div className="flex justify-center mb-3">
                       <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center">
                         <span className="text-accent font-playfair font-semibold text-lg">
-                          {getInitials(reviews[(currentReview + 1) % reviews.length].author)}
+                          {getInitials(currentReviews[(currentReview + 1) % currentReviews.length].author)}
                         </span>
                       </div>
                     </div>
                     <h3 className="text-lg font-playfair font-semibold text-primary mb-1">
-                      {reviews[(currentReview + 1) % reviews.length].author}
+                      {currentReviews[(currentReview + 1) % currentReviews.length].author}
                     </h3>
                     <p className="text-sm font-questrial text-gray-500 mb-3">
-                      {reviews[(currentReview + 1) % reviews.length].role}
+                      {currentReviews[(currentReview + 1) % currentReviews.length].role}
                     </p>
                     <p className="text-sm font-questrial text-gray-600 leading-relaxed line-clamp-4">
-                      &ldquo;{reviews[(currentReview + 1) % reviews.length].text}&rdquo;
+                      &ldquo;{currentReviews[(currentReview + 1) % currentReviews.length].text}&rdquo;
                     </p>
                   </div>
                 </div>
@@ -799,7 +1017,7 @@ const VillaGelvi = () => {
 
             {/* Dots Indicator */}
             <div className="flex justify-center mt-8 gap-2">
-              {reviews.map((_, index) => (
+              {currentReviews.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentReview(index)}
@@ -808,7 +1026,7 @@ const VillaGelvi = () => {
                       ? 'bg-accent w-8'
                       : 'bg-gray-300 w-2 hover:bg-gray-400'
                   }`}
-                  aria-label={`Vai alla recensione ${index + 1}`}
+                  aria-label={language === 'it' ? `Vai alla recensione ${index + 1}` : `Go to review ${index + 1}`}
                 />
               ))}
             </div>
@@ -828,10 +1046,10 @@ const VillaGelvi = () => {
         <div className="relative max-w-7xl mx-auto text-center z-10">
           <div className="mb-12">
             <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-white mb-4 text-center">
-              Prenota la tua vacanza
+              {t.prenotaVacanza}
             </h2>
             <p className="text-base text-white/90 font-questrial max-w-2xl mx-auto">
-              Contattaci per maggiori informazioni e disponibilità
+              {t.prenotaVacanzaDesc}
             </p>
           </div>
           
@@ -840,13 +1058,13 @@ const VillaGelvi = () => {
               href="tel:+393384394380"
               className="inline-block bg-accent/80 border border-accent hover:bg-[rgb(170,120,40)]/80 text-white px-8 py-3 rounded-none font-questrial transition-all duration-300"
             >
-              Chiama ora
+              {t.chiamaOra}
             </a>
             <a
               href="/contatti"
               className="inline-block border border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-none font-questrial transition-all duration-300"
             >
-              Contatti
+              {t.contattiLink}
             </a>
           </div>
         </div>
@@ -879,7 +1097,7 @@ const VillaGelvi = () => {
             <button
               onClick={closeApartmentModal}
               className="absolute top-4 right-4 text-gray-700 hover:text-gray-900 transition-colors z-10 bg-white rounded-full p-2 shadow-lg"
-              aria-label="Chiudi"
+              aria-label={t.chiudi}
             >
               <X size={24} />
             </button>
@@ -891,7 +1109,7 @@ const VillaGelvi = () => {
                 <div className="relative h-96 md:h-[500px] bg-gray-200 rounded-lg overflow-hidden">
                   <img
                     src={selectedApartment.images[apartmentImageIndex]}
-                    alt={apartmentImageAltTexts[selectedApartment.images[apartmentImageIndex]] || `${selectedApartment.name} - Foto ${apartmentImageIndex + 1}`}
+                    alt={apartmentImageAltTexts[selectedApartment.images[apartmentImageIndex]] || `${selectedApartment.name} - ${language === 'it' ? 'Foto' : 'Photo'} ${apartmentImageIndex + 1}`}
                     className="w-full h-full object-cover"
                   />
                   
@@ -903,7 +1121,7 @@ const VillaGelvi = () => {
                           prevApartmentImage()
                         }}
                         className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full transition-all duration-300 shadow-lg"
-                        aria-label="Immagine precedente"
+                        aria-label={t.immaginePrecedente}
                       >
                         <ChevronLeft size={24} />
                       </button>
@@ -913,7 +1131,7 @@ const VillaGelvi = () => {
                           nextApartmentImage()
                         }}
                         className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full transition-all duration-300 shadow-lg"
-                        aria-label="Immagine successiva"
+                        aria-label={t.immagineSuccessiva}
                       >
                         <ChevronRight size={24} />
                       </button>
@@ -950,7 +1168,7 @@ const VillaGelvi = () => {
                   {selectedApartment.name}
                 </h2>
                 <p className="text-base font-questrial text-gray-600 mb-1">
-                  Max {selectedApartment.maxPersons} persone • {selectedApartment.sqm} mq
+                  {t.maxPersone.replace('{max}', selectedApartment.maxPersons).replace('{sqm}', selectedApartment.sqm)}
                 </p>
                 <p className="text-base font-questrial text-gray-700">
                   {selectedApartment.description}
@@ -959,12 +1177,12 @@ const VillaGelvi = () => {
 
               {/* Servizi */}
               <div className="mb-8">
-                <h3 className="text-xl font-playfair font-bold text-primary mb-4">Servizi</h3>
+                <h3 className="text-xl font-playfair font-bold text-primary mb-4">{t.servizi}</h3>
                 <div className="grid md:grid-cols-2 gap-3">
                   {selectedApartment.services.map((service, idx) => (
                     <div key={idx} className="flex items-start">
                       <Check className="text-accent mr-2 mt-1 flex-shrink-0" size={18} />
-                      <span className="text-base font-questrial text-gray-700">{service}</span>
+                      <span className="text-base font-questrial text-gray-700">{translateService(service)}</span>
                     </div>
                   ))}
                 </div>
@@ -972,18 +1190,18 @@ const VillaGelvi = () => {
 
               {/* Prezzi */}
               <div className="mb-8">
-                <h3 className="text-xl font-playfair font-bold text-primary mb-4">Prezzi giornalieri</h3>
+                <h3 className="text-xl font-playfair font-bold text-primary mb-4">{t.prezzoGiornaliero}</h3>
                 {selectedApartment.id === 'segesta' ? (
                   <div className="space-y-6">
                     <div>
-                      <h4 className="text-lg font-playfair font-semibold text-primary mb-3">Per 2 persone</h4>
+                      <h4 className="text-lg font-playfair font-semibold text-primary mb-3">{t.per2Persone}</h4>
                       <div className="overflow-x-auto">
                         <table className="w-full border-collapse">
                           <thead>
                             <tr className="bg-gray-100">
-                              <th className="border border-gray-300 px-4 py-3 text-left font-playfair font-semibold text-primary text-sm">Dal</th>
-                              <th className="border border-gray-300 px-4 py-3 text-left font-playfair font-semibold text-primary text-sm">Al</th>
-                              <th className="border border-gray-300 px-4 py-3 text-left font-playfair font-semibold text-primary text-sm">Prezzo giornaliero</th>
+                              <th className="border border-gray-300 px-4 py-3 text-left font-playfair font-semibold text-primary text-sm">{t.dal}</th>
+                              <th className="border border-gray-300 px-4 py-3 text-left font-playfair font-semibold text-primary text-sm">{t.al}</th>
+                              <th className="border border-gray-300 px-4 py-3 text-left font-playfair font-semibold text-primary text-sm">{t.prezzoGiornaliero}</th>
                             </tr>
                           </thead>
                           <tbody className="font-questrial text-sm">
@@ -999,14 +1217,14 @@ const VillaGelvi = () => {
                       </div>
                     </div>
                     <div>
-                      <h4 className="text-lg font-playfair font-semibold text-primary mb-3">Per 3 persone</h4>
+                      <h4 className="text-lg font-playfair font-semibold text-primary mb-3">{t.per3Persone}</h4>
                       <div className="overflow-x-auto">
                         <table className="w-full border-collapse">
                           <thead>
                             <tr className="bg-gray-100">
-                              <th className="border border-gray-300 px-4 py-3 text-left font-playfair font-semibold text-primary text-sm">Dal</th>
-                              <th className="border border-gray-300 px-4 py-3 text-left font-playfair font-semibold text-primary text-sm">Al</th>
-                              <th className="border border-gray-300 px-4 py-3 text-left font-playfair font-semibold text-primary text-sm">Prezzo giornaliero</th>
+                              <th className="border border-gray-300 px-4 py-3 text-left font-playfair font-semibold text-primary text-sm">{t.dal}</th>
+                              <th className="border border-gray-300 px-4 py-3 text-left font-playfair font-semibold text-primary text-sm">{t.al}</th>
+                              <th className="border border-gray-300 px-4 py-3 text-left font-playfair font-semibold text-primary text-sm">{t.prezzoGiornaliero}</th>
                             </tr>
                           </thead>
                           <tbody className="font-questrial text-sm">
@@ -1027,9 +1245,9 @@ const VillaGelvi = () => {
                     <table className="w-full border-collapse">
                       <thead>
                         <tr className="bg-gray-100">
-                          <th className="border border-gray-300 px-4 py-3 text-left font-playfair font-semibold text-primary text-sm">Dal</th>
-                          <th className="border border-gray-300 px-4 py-3 text-left font-playfair font-semibold text-primary text-sm">Al</th>
-                          <th className="border border-gray-300 px-4 py-3 text-left font-playfair font-semibold text-primary text-sm">Prezzo giornaliero</th>
+                          <th className="border border-gray-300 px-4 py-3 text-left font-playfair font-semibold text-primary text-sm">{t.dal}</th>
+                          <th className="border border-gray-300 px-4 py-3 text-left font-playfair font-semibold text-primary text-sm">{t.al}</th>
+                          <th className="border border-gray-300 px-4 py-3 text-left font-playfair font-semibold text-primary text-sm">{t.prezzoGiornaliero}</th>
                         </tr>
                       </thead>
                       <tbody className="font-questrial text-sm">
@@ -1048,12 +1266,12 @@ const VillaGelvi = () => {
 
               {/* Non incluso */}
               <div className="bg-amber-50 p-6 rounded-lg">
-                <h3 className="text-lg font-playfair font-bold text-primary mb-4">Non incluso</h3>
+                <h3 className="text-lg font-playfair font-bold text-primary mb-4">{t.nonIncluso}</h3>
                 <ul className="space-y-2">
                   {selectedApartment.notIncluded.map((item, idx) => (
                     <li key={idx} className="flex items-start">
                       <X className="text-red-500 mr-2 mt-1 flex-shrink-0" size={18} />
-                      <span className="text-base font-questrial text-gray-700">{item}</span>
+                      <span className="text-base font-questrial text-gray-700">{translateNotIncluded(item)}</span>
                     </li>
                   ))}
                 </ul>
