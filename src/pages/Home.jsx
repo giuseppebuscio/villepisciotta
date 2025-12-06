@@ -212,42 +212,42 @@ const Home = () => {
           <div className="grid md:grid-cols-3 gap-6">
             <div className="overflow-hidden rounded-lg shadow-lg">
               <img
-                src="public\mirascopello\b51e6dd5.webp"
+                src="/mirascopello/b51e6dd5.webp"
                 alt="Interno villa MiraScopello"
                 className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
               />
             </div>
             <div className="overflow-hidden rounded-lg shadow-lg">
               <img
-                src="public\mirascopello\4ee47fdf.jpg"
+                src="/mirascopello/4ee47fdf.jpg"
                 alt="Interno villa MiraScopello"
                 className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
               />
             </div>
             <div className="overflow-hidden rounded-lg shadow-lg">
               <img
-                src="public\gelvi\A erice\7149db8d.jpg"
+                src="/gelvi/A erice/7149db8d.jpg"
                 alt="Interno villa Gelvi"
                 className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
               />
             </div>
             <div className="overflow-hidden rounded-lg shadow-lg">
               <img
-                src="public\gelvi\C segesta\07991ae6.webp"
+                src="/gelvi/C segesta/07991ae6.webp"
                 alt="Interno villa Gelvi"
                 className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
               />
             </div>
             <div className="overflow-hidden rounded-lg shadow-lg">
               <img
-                src="public\mirascopello\06aff529.jpg"
+                src="/mirascopello/06aff529.jpg"
                 alt="Interno villa MiraScopello"
                 className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
               />
             </div>
             <div className="overflow-hidden rounded-lg shadow-lg">
               <img
-                src="public\mirascopello\763795c4.webp"
+                src="/mirascopello/763795c4.webp"
                 alt="Interno villa MiraScopello"
                 className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
               />
