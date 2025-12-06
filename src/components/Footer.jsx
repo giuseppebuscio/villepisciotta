@@ -84,7 +84,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-accent transition-colors">
+                <a href="/sitemap.xml" className="hover:text-accent transition-colors">
                   Mappa del sito
                 </a>
               </li>
