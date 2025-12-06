@@ -8,6 +8,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
+  const [languageMenuTimeout, setLanguageMenuTimeout] = useState(null)
 
   const translations = {
     it: {
@@ -33,8 +34,14 @@ const Navbar = () => {
     }
 
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      // Pulisci il timeout quando il componente viene smontato
+      if (languageMenuTimeout) {
+        clearTimeout(languageMenuTimeout)
+      }
+    }
+  }, [languageMenuTimeout])
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300 ${isScrolled ? 'backdrop-blur-md bg-white/10' : ''}`}>
@@ -87,43 +94,80 @@ const Navbar = () => {
             {/* Language Selector */}
             <div 
               className="relative"
-              onMouseEnter={() => setIsLanguageMenuOpen(true)}
-              onMouseLeave={() => setIsLanguageMenuOpen(false)}
+              onMouseEnter={() => {
+                // Cancella qualsiasi timeout in corso
+                if (languageMenuTimeout) {
+                  clearTimeout(languageMenuTimeout)
+                  setLanguageMenuTimeout(null)
+                }
+                setIsLanguageMenuOpen(true)
+              }}
+              onMouseLeave={() => {
+                // Aggiungi un delay prima di chiudere il menu
+                const timeout = setTimeout(() => {
+                  setIsLanguageMenuOpen(false)
+                }, 200) // 200ms di delay
+                setLanguageMenuTimeout(timeout)
+              }}
             >
               <button className="flex items-center space-x-1 text-white hover:text-accent transition-colors">
-                <span className="text-xl">
-                  {language === 'it' ? '🇮🇹' : '🇬🇧'}
-                </span>
+                <span className={`fi ${language === 'it' ? 'fi-it' : 'fi-gb'}`} style={{ fontSize: '1.25rem' }}></span>
               </button>
               
               {isLanguageMenuOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl overflow-hidden z-50">
-                  <button
-                    onClick={() => {
-                      changeLanguage('it')
+                <div 
+                  className="absolute right-0 pt-2 w-48 bg-transparent z-50"
+                  onMouseEnter={() => {
+                    // Quando il mouse entra nel menu, cancella il timeout
+                    if (languageMenuTimeout) {
+                      clearTimeout(languageMenuTimeout)
+                      setLanguageMenuTimeout(null)
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    // Quando il mouse esce dal menu, chiudi dopo un delay
+                    const timeout = setTimeout(() => {
                       setIsLanguageMenuOpen(false)
-                    }}
-                    className={`w-full px-4 py-3 flex items-center space-x-3 hover:bg-gray-100 transition-colors ${
-                      language === 'it' ? 'bg-accent/10' : ''
-                    }`}
-                  >
-                    <span className="text-xl">🇮🇹</span>
-                    <span className="font-questrial text-gray-700">Italiano</span>
-                    {language === 'it' && <span className="ml-auto text-accent">✓</span>}
-                  </button>
-                  <button
-                    onClick={() => {
-                      changeLanguage('en')
-                      setIsLanguageMenuOpen(false)
-                    }}
-                    className={`w-full px-4 py-3 flex items-center space-x-3 hover:bg-gray-100 transition-colors ${
-                      language === 'en' ? 'bg-accent/10' : ''
-                    }`}
-                  >
-                    <span className="text-xl">🇬🇧</span>
-                    <span className="font-questrial text-gray-700">English</span>
-                    {language === 'en' && <span className="ml-auto text-accent">✓</span>}
-                  </button>
+                    }, 200)
+                    setLanguageMenuTimeout(timeout)
+                  }}
+                >
+                  <div className="bg-white rounded-lg shadow-xl overflow-hidden">
+                    <button
+                      onClick={() => {
+                        changeLanguage('it')
+                        setIsLanguageMenuOpen(false)
+                        if (languageMenuTimeout) {
+                          clearTimeout(languageMenuTimeout)
+                          setLanguageMenuTimeout(null)
+                        }
+                      }}
+                      className={`w-full px-4 py-3 flex items-center space-x-3 hover:bg-gray-100 transition-colors ${
+                        language === 'it' ? 'bg-accent/10' : ''
+                      }`}
+                    >
+                      <span className="fi fi-it" style={{ fontSize: '1.25rem' }}></span>
+                      <span className="font-questrial text-gray-700">Italiano</span>
+                      {language === 'it' && <span className="ml-auto text-accent">✓</span>}
+                    </button>
+                    <button
+                      onClick={() => {
+                        changeLanguage('en')
+                        setIsLanguageMenuOpen(false)
+                        if (languageMenuTimeout) {
+                          clearTimeout(languageMenuTimeout)
+                          setLanguageMenuTimeout(null)
+                        }
+                      }}
+                      className={`w-full px-4 py-3 flex items-center space-x-3 hover:bg-gray-100 transition-colors ${
+                        language === 'en' ? 'bg-accent/10' : ''
+                      }`}
+                    >
+                      <span className="fi fi-gb" style={{ fontSize: '1.25rem' }}></span>
+                      <span className="font-questrial text-gray-700">English</span>
+                      {language === 'en' && <span className="ml-auto text-accent">✓</span>}
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
@@ -180,7 +224,7 @@ const Navbar = () => {
                     language === 'it' ? 'bg-accent/20 text-accent' : 'text-white'
                   }`}
                 >
-                  <span className="text-xl">🇮🇹</span>
+                  <span className="fi fi-it" style={{ fontSize: '1.25rem' }}></span>
                   <span className="font-questrial">Italiano</span>
                 </button>
                 <button
@@ -192,7 +236,7 @@ const Navbar = () => {
                     language === 'en' ? 'bg-accent/20 text-accent' : 'text-white'
                   }`}
                 >
-                  <span className="text-xl">🇬🇧</span>
+                  <span className="fi fi-gb" style={{ fontSize: '1.25rem' }}></span>
                   <span className="font-questrial">English</span>
                 </button>
               </div>
