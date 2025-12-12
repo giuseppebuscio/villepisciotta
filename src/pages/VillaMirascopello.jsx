@@ -111,7 +111,12 @@ const VillaMirascopello = () => {
       turista: 'Turista',
       viaggiatore: 'Viaggiatore',
       famiglia: 'Famiglia',
-      coppia: 'Coppia'
+      coppia: 'Coppia',
+      // CTA
+      prenotaVacanza: 'Prenota la tua vacanza',
+      prenotaVacanzaDesc: 'Contattaci per maggiori informazioni e disponibilità',
+      chiamaOra: 'Chiama ora',
+      contattiLink: 'Contatti'
     },
     en: {
       title: 'Villa MiraScopello - Villa in Scopello, Sicily | Ville Pisciotta',
