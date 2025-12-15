@@ -41,7 +41,7 @@ const VillaMirascopello = () => {
       title: 'Villa MiraScopello - Villa a Scopello, Sicilia | Ville Pisciotta',
       descrizione: 'Descrizione',
       daSapere: 'Da sapere',
-      servizi: 'Servizi',
+      servizi: 'Servizi inclusi',
       foto: 'Foto',
       prezzi: 'Prezzi',
       recensioni: 'Recensioni',
@@ -70,7 +70,7 @@ const VillaMirascopello = () => {
       daSapere1: 'Le feste e gli eventi di gruppo sono vietati.',
       daSapere2: 'Rilevatore di monossido di carbonio e gas.',
       daSapere3: 'Estintore antincendio.',
-      daSapere4: 'La temperatura dell\'acqua della piscina è di circa 25 gradi.',
+      daSapere4: 'La temperatura dell\'acqua della piscina è di circa 25 °C (senza costi aggiuntivi).',
       daSapere5: 'Tutti gli ospiti, minorenni inclusi, dovranno essere presenti al momento del check-in e mostrare il passaporto o un documento d\'identità rilasciato dal proprio governo.',
       daSapere6: 'Lenzuola e asciugamani da bagno per l\'intera settimana, cambio completo per prenotazioni superiori ad una settimana.',
       daSapere7: 'Numero di registrazione della struttura (CIN): IT081005C2USCYFWIQ',
@@ -93,7 +93,7 @@ const VillaMirascopello = () => {
       terrazza: 'Terrazza',
       veranda: 'Veranda',
       tostapane: 'Tostapane',
-      macchinaCapsule: 'Macchina da caffè a capsules',
+      macchinaCapsule: 'Macchina da caffè a capsule',
       macchinaAmericano: 'Macchina da caffè americano',
       moka: 'Moka',
       bollitore: 'Bollitore',
@@ -102,11 +102,14 @@ const VillaMirascopello = () => {
       tvSat: 'TV-SAT',
       wifi: 'WI-FI internet',
       solarium: 'Solarium attrezzato (mq 120)',
+      serviziSpaziEsterni: 'Spazi esterni & comfort',
+      serviziComfortInterni: 'Comfort interni & tecnologia',
+      serviziCucinaFamiglie: 'Cucina & servizi per famiglie',
       // Non incluso
       deposito: 'Deposito cauzionale rimborsabile: € 300.',
       tassaSoggiorno: 'Tassa di soggiorno: € 1,50/persona.',
       pulizia: 'Pulizia finale: € 150',
-      riscaldamento: 'Riscaldamento: € 3/ora',
+      riscaldamento: 'Riscaldamento ambiente: € 3/ora (se richiesto)',
       // Recensioni
       turista: 'Turista',
       viaggiatore: 'Viaggiatore',
@@ -122,7 +125,7 @@ const VillaMirascopello = () => {
       title: 'Villa MiraScopello - Villa in Scopello, Sicily | Ville Pisciotta',
       descrizione: 'Description',
       daSapere: 'Things to know',
-      servizi: 'Services',
+      servizi: 'Included services',
       foto: 'Photos',
       prezzi: 'Prices',
       recensioni: 'Reviews',
@@ -151,7 +154,7 @@ const VillaMirascopello = () => {
       daSapere1: 'Parties and group events are prohibited.',
       daSapere2: 'Carbon monoxide and gas detector.',
       daSapere3: 'Fire extinguisher.',
-      daSapere4: 'The pool water temperature is approximately 25 degrees.',
+      daSapere4: 'The pool water temperature is approximately 25 °C (without additional costs).',
       daSapere5: 'All guests, including minors, must be present at check-in and show a passport or identity document issued by their government.',
       daSapere6: 'Bed sheets and bath towels for the entire week, complete change for bookings longer than one week.',
       daSapere7: 'Structure registration number (CIN): IT081005C2USCYFWIQ',
@@ -183,11 +186,14 @@ const VillaMirascopello = () => {
       tvSat: 'TV-SAT',
       wifi: 'WI-FI internet',
       solarium: 'Equipped solarium (120 sqm)',
+      serviziSpaziEsterni: 'Outdoor spaces & comfort',
+      serviziComfortInterni: 'Indoor comfort & technology',
+      serviziCucinaFamiglie: 'Kitchen & family services',
       // Non incluso
       deposito: 'Refundable security deposit: € 300.',
       tassaSoggiorno: 'Tourist tax: € 1.50/person.',
       pulizia: 'Final cleaning: € 150',
-      riscaldamento: 'Heating: € 3/hour',
+      riscaldamento: 'Rooms Heating: € 3/hour (if requested)',
       // Recensioni
       turista: 'Tourist',
       viaggiatore: 'Traveler',
@@ -785,117 +791,135 @@ const VillaMirascopello = () => {
       {/* Sezione Servizi */}
       <section id="servizi" className="scroll-mt-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 py-20">
-          <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-white mb-8 text-center">
+          <h2 className="text-[1.875rem] md:text-[2.5rem] font-playfair font-bold text-white mb-10 text-center">
             {t.servizi}
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="flex items-center space-x-3">
-              <Waves className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.vistaMare}</span>
+
+          <div className="grid lg:grid-cols-3 gap-10">
+            {/* Colonna 1: Spazi esterni & comfort */}
+            <div>
+              <div className="space-y-3">
+                <div className="flex items-center space-x-3">
+                  <Waves className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.vistaMare}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <HomeIcon className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.terrazza}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <HomeIcon className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.veranda}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Check className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.arrediEsterno}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Sun className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.solarium}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Beef className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.barbecue}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Bath className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.docciaEsterna}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Car className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.parcheggio}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <DoorOpen className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.cancello}</span>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center space-x-3">
-              <Wind className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.ariaCondizionata}</span>
+
+            {/* Colonna 2: Comfort interni & tecnologia */}
+            <div>
+              <div className="space-y-3">
+                <div className="flex items-center space-x-3">
+                  <Wind className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.ariaCondizionata}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Tv className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.tvSat}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Wifi className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.wifi}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Droplets className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.lavatrice}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Shirt className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.lavastoviglie}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Wind className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.asciugacapelli}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Zap className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.ferroStiro}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Zap className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.asseStiro}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Layers2 className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.asciugamaniPiscina}</span>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center space-x-3">
-              <Check className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.arrediEsterno}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Beef className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.barbecue}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <DoorOpen className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.cancello}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Bath className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.docciaEsterna}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Layers2 className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.asciugamaniPiscina}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <ChefHat className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.fornoElettrico}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <ChefHat className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.fornoMicroonde}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Shirt className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.lavastoviglie}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Droplets className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.lavatrice}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Wind className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.asciugacapelli}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Zap className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.ferroStiro}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Zap className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.asseStiro}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Car className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.parcheggio}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <HomeIcon className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.terrazza}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <HomeIcon className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.veranda}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Utensils className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.tostapane}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Coffee className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.macchinaCapsule}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Coffee className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.macchinaAmericano}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Coffee className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.moka}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Check className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.bollitore}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Baby className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.culla}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Baby className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.seggiolone}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Tv className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.tvSat}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Wifi className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.wifi}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Sun className="text-accent" size={20} />
-              <span className="font-questrial text-white">{t.solarium}</span>
+
+            {/* Colonna 3: Cucina & servizi per famiglie */}
+            <div>
+              <div className="space-y-3">
+                <div className="flex items-center space-x-3">
+                  <ChefHat className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.fornoElettrico}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <ChefHat className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.fornoMicroonde}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Utensils className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.tostapane}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Coffee className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.macchinaCapsule}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Coffee className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.macchinaAmericano}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Coffee className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.moka}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Check className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.bollitore}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Baby className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.culla}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Baby className="text-accent" size={20} />
+                  <span className="font-questrial text-white">{t.seggiolone}</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

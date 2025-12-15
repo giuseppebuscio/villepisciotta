@@ -10,14 +10,18 @@ const VillaSelection = () => {
       chooseVilla: 'Scegli la tua villa',
       subtitle: 'Due esperienze uniche per vivere la Sicilia nel lusso e nel comfort',
       mirascopelloDesc: "Un'oasi di eleganza con vista panoramica sul mare",
+      mirascopelloType: 'Villa indipendente',
       gelviDesc: 'Raffinatezza e comfort in un ambiente esclusivo',
+      gelviType: 'Villa con 4 appartamenti',
       discoverMore: 'Scopri di più'
     },
     en: {
       chooseVilla: 'Choose your villa',
       subtitle: 'Two unique experiences to live Sicily in luxury and comfort',
       mirascopelloDesc: 'An oasis of elegance with panoramic sea view',
+      mirascopelloType: 'Independent villa',
       gelviDesc: 'Refinement and comfort in an exclusive environment',
+      gelviType: 'Villa with 4 apartments',
       discoverMore: 'Discover more'
     }
   }
@@ -42,12 +46,17 @@ const VillaSelection = () => {
             to="/villa-mirascopello"
             className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
           >
-            <div className="aspect-[4/3] overflow-hidden">
+            <div className="aspect-[4/3] overflow-hidden relative">
               <img
                 src="/mirascopello/2.jpg"
                 alt="Esterno della villa MiraScopello"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
+              <div className="absolute top-4 left-4 bg-white px-4 py-2 rounded">
+                <p className="font-questrial text-black font-semibold">
+                  {t.mirascopelloType}
+                </p>
+              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
             </div>
             <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
@@ -69,12 +78,17 @@ const VillaSelection = () => {
             to="/villa-gelvi"
             className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
           >
-            <div className="aspect-[4/3] overflow-hidden">
+            <div className="aspect-[4/3] overflow-hidden relative">
               <img
                 src="/gelvi/C segesta/2.jpg"
                 alt="Interno appartamento Segesta Villa Gelvi"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
+              <div className="absolute top-4 left-4 bg-white px-4 py-2 rounded">
+                <p className="font-questrial text-black font-semibold">
+                  {t.gelviType}
+                </p>
+              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
             </div>
             <div className="absolute bottom-0 left-0 right-0 p-6 text-white">

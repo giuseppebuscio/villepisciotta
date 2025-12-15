@@ -44,6 +44,7 @@ const VillaGelvi = () => {
       ospiti: 'Ospiti',
       mq: 'mq',
       prezzoGiornaliero: 'Prezzo giornaliero',
+      prezziGiornalieri: 'Prezzi giornalieri',
       dal: 'Dal',
       al: 'Al',
       nonIncluso: 'Non incluso',
@@ -115,6 +116,7 @@ const VillaGelvi = () => {
       ospiti: 'Guests',
       mq: 'sqm',
       prezzoGiornaliero: 'Daily price',
+      prezziGiornalieri: 'Daily prices',
       dal: 'From',
       al: 'To',
       nonIncluso: 'Not included',
@@ -477,7 +479,7 @@ const VillaGelvi = () => {
         '/gelvi/C segesta/c324472c.jpg',
         '/gelvi/C segesta/d7375b86.jpg'
       ],
-      rooms: 1,
+      rooms: 2,
       bathrooms: 1,
       services: [
         'Aria condizionata',
@@ -1190,7 +1192,7 @@ const VillaGelvi = () => {
 
               {/* Prezzi */}
               <div className="mb-8">
-                <h3 className="text-xl font-playfair font-bold text-primary mb-4">{t.prezzoGiornaliero}</h3>
+                <h3 className="text-xl font-playfair font-bold text-primary mb-4">{t.prezziGiornalieri}</h3>
                 {selectedApartment.id === 'segesta' ? (
                   <div className="space-y-6">
                     <div>

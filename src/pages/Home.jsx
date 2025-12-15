@@ -2,7 +2,7 @@ import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import VillaSelection from '../components/VillaSelection'
 import Footer from '../components/Footer'
-import { MapPin, Users, Home as HomeIcon, Waves } from 'lucide-react'
+import { MapPin, Users, Home as HomeIcon, Heart } from 'lucide-react'
 import { useEffect } from 'react'
 import { useLanguage } from '../contexts/LanguageContext'
 
@@ -18,10 +18,12 @@ const Home = () => {
       comfortDesc: 'Spazi ampi e arredati con cura per il massimo comfort',
       location: 'Posizioni strategiche',
       locationDesc: 'Vicino a spiagge, borghi storici e attrazioni turistiche',
-      view: 'Vista panoramica',
-      viewDesc: 'Viste mozzafiato sul mare e sul paesaggio siciliano',
+      view: 'Accoglienza autentica',
+      viewDesc: 'Ospitalità calorosa e attenzione costante per farti sentire a casa',
       ourSpaces: 'I nostri ambienti',
       ourSpacesDesc: 'Scopri gli spazi e gli ambienti delle nostre ville di lusso',
+      villaMiraScopello: 'Villa MiraScopello',
+      villaGelvi: 'Villa Gelvi',
       bookVacation: 'Prenota la tua vacanza',
       bookVacationDesc: 'Contattaci per maggiori informazioni e disponibilità',
       callNow: 'Chiama ora',
@@ -35,10 +37,12 @@ const Home = () => {
       comfortDesc: 'Spacious spaces carefully furnished for maximum comfort',
       location: 'Strategic locations',
       locationDesc: 'Close to beaches, historic villages and tourist attractions',
-      view: 'Panoramic view',
-      viewDesc: 'Breathtaking views of the sea and Sicilian landscape',
+      view: 'Authentic hospitality',
+      viewDesc: 'Warm hospitality and constant attention to make you feel at home',
       ourSpaces: 'Our spaces',
       ourSpacesDesc: 'Discover the spaces and environments of our luxury villas',
+      villaMiraScopello: 'Villa MiraScopello',
+      villaGelvi: 'Villa Gelvi',
       bookVacation: 'Book your vacation',
       bookVacationDesc: 'Contact us for more information and availability',
       callNow: 'Call now',
@@ -245,7 +249,7 @@ const Home = () => {
 
             <div className="text-center">
               <div className="bg-white/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
-                <Waves className="text-white" size={32} />
+                <Heart className="text-white" size={32} />
               </div>
               <h3 className="text-xl font-playfair font-semibold mb-2 text-white">{t.view}</h3>
               <p className="font-questrial text-white/90">
@@ -269,47 +273,124 @@ const Home = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="overflow-hidden rounded-lg shadow-lg">
+            <div className="relative overflow-hidden rounded-lg shadow-lg group">
               <img
                 src="/mirascopello/b51e6dd5.webp"
                 alt="Interno della villa MiraScopello"
-                className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h3 className="text-white font-playfair font-semibold text-lg">{t.villaMiraScopello}</h3>
+              </div>
             </div>
-            <div className="overflow-hidden rounded-lg shadow-lg">
+            <div className="relative overflow-hidden rounded-lg shadow-lg group">
               <img
                 src="/mirascopello/4ee47fdf.jpg"
                 alt="Camera da letto villa MiraScopello"
-                className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h3 className="text-white font-playfair font-semibold text-lg">{t.villaMiraScopello}</h3>
+              </div>
             </div>
-            <div className="overflow-hidden rounded-lg shadow-lg">
+            <div className="relative overflow-hidden rounded-lg shadow-lg group">
               <img
                 src="/gelvi/A erice/7149db8d.jpg"
                 alt="Camera da letto appartamento Erice Villa Gelvi"
-                className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h3 className="text-white font-playfair font-semibold text-lg">
+                  Villa Gelvi
+                </h3>
+                <p className="text-white/80 font-questrial text-sm mt-1">
+                  Appartamento Erice
+                </p>
+              </div>
             </div>
-            <div className="overflow-hidden rounded-lg shadow-lg">
+            <div className="relative overflow-hidden rounded-lg shadow-lg group">
               <img
                 src="/gelvi/C segesta/07991ae6.webp"
                 alt="Open Space appartamento Segesta"
-                className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h3 className="text-white font-playfair font-semibold text-lg">
+                  Villa Gelvi
+                </h3>
+                <p className="text-white/80 font-questrial text-sm mt-1">
+                  Appartamento Segesta
+                </p>
+              </div>
             </div>
-            <div className="overflow-hidden rounded-lg shadow-lg">
+            <div className="relative overflow-hidden rounded-lg shadow-lg group">
               <img
                 src="/mirascopello/06aff529.jpg"
                 alt="Cucina villa MiraScopello"
-                className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h3 className="text-white font-playfair font-semibold text-lg">{t.villaMiraScopello}</h3>
+              </div>
             </div>
-            <div className="overflow-hidden rounded-lg shadow-lg">
+            <div className="relative overflow-hidden rounded-lg shadow-lg group">
               <img
                 src="/mirascopello/763795c4.webp"
                 alt="Camera da letto villa MiraScopello"
-                className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h3 className="text-white font-playfair font-semibold text-lg">{t.villaMiraScopello}</h3>
+              </div>
+            </div>
+            <div className="relative overflow-hidden rounded-lg shadow-lg group">
+              <img
+                src="/gelvi/B scopello/1dcbd96f.jpg"
+                alt="Appartamento Scopello Villa Gelvi"
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h3 className="text-white font-playfair font-semibold text-lg">
+                  Villa Gelvi
+                </h3>
+                <p className="text-white/80 font-questrial text-sm mt-1">
+                  Appartamento Scopello
+                </p>
+              </div>
+            </div>
+            <div className="relative overflow-hidden rounded-lg shadow-lg group">
+              <img
+                src="/mirascopello/842a7dc8.jpg"
+                alt="Vista esterna villa MiraScopello"
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h3 className="text-white font-playfair font-semibold text-lg">{t.villaMiraScopello}</h3>
+              </div>
+            </div>
+            <div className="relative overflow-hidden rounded-lg shadow-lg group">
+              <img
+                src="/gelvi/D zingaro/1cc79d3c.jpg"
+                alt="Appartamento Zingaro Villa Gelvi"
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h3 className="text-white font-playfair font-semibold text-lg">
+                  Villa Gelvi
+                </h3>
+                <p className="text-white/80 font-questrial text-sm mt-1">
+                  Appartamento Zingaro
+                </p>
+              </div>
             </div>
           </div>
         </div>
