@@ -67,10 +67,10 @@ const VillaMirascopello = () => {
       descrizioneText4: 'La villa si sviluppa su due livelli: al piano terra si viene accolti da un grande salone, affiancato da una spaziosa cucina con soggiorno. La zona notte comprende tre camere da letto, tutte ben illuminate, servite complessivamente da quattro bagni, che garantiscono il massimo comfort e funzionalità. Completa il piano una comoda lavanderia, pratica e discreta.',
       descrizioneText5: 'Il piano primo è dedicato a un\'ulteriore zona notte, composta da tre camere da letto e da tre bagni, offrendo spazi ideali per la famiglia o per eventuali ospiti, con un\'ottima distribuzione tra privacy e comodità.',
       // Da sapere
-      daSapere1: 'Le feste e gli eventi di gruppo sono vietati.',
-      daSapere2: 'Rilevatore di monossido di carbonio e gas.',
-      daSapere3: 'Estintore antincendio.',
-      daSapere4: 'La temperatura dell\'acqua della piscina è di circa 25 °C (senza costi aggiuntivi).',
+      daSapere1: 'La temperatura dell\'acqua della piscina è di circa 25 °C (senza costi aggiuntivi).',
+      daSapere2: 'Le feste e gli eventi di gruppo sono vietati.',
+      daSapere3: 'Rilevatore di monossido di carbonio e gas.',
+      daSapere4: 'Estintore antincendio.',
       daSapere5: 'Tutti gli ospiti, minorenni inclusi, dovranno essere presenti al momento del check-in e mostrare il passaporto o un documento d\'identità rilasciato dal proprio governo.',
       daSapere6: 'Lenzuola e asciugamani da bagno per l\'intera settimana, cambio completo per prenotazioni superiori ad una settimana.',
       daSapere7: 'Numero di registrazione della struttura (CIN): IT081005C2USCYFWIQ',
@@ -151,10 +151,10 @@ const VillaMirascopello = () => {
       descrizioneText4: 'The villa develops on two levels: on the ground floor you are welcomed by a large living room, flanked by a spacious kitchen with living area. The night area includes three bedrooms, all well lit, served by four bathrooms in total, which guarantee maximum comfort and functionality. A comfortable laundry room, practical and discreet, completes the floor.',
       descrizioneText5: 'The first floor is dedicated to a further night area, consisting of three bedrooms and three bathrooms, offering ideal spaces for the family or for any guests, with an excellent distribution between privacy and comfort.',
       // Da sapere
-      daSapere1: 'Parties and group events are prohibited.',
-      daSapere2: 'Carbon monoxide and gas detector.',
-      daSapere3: 'Fire extinguisher.',
-      daSapere4: 'The pool water temperature is approximately 25 °C (without additional costs).',
+      daSapere1: 'The pool water temperature is approximately 25 °C (without additional costs).',
+      daSapere2: 'Parties and group events are prohibited.',
+      daSapere3: 'Carbon monoxide and gas detector.',
+      daSapere4: 'Fire extinguisher.',
       daSapere5: 'All guests, including minors, must be present at check-in and show a passport or identity document issued by their government.',
       daSapere6: 'Bed sheets and bath towels for the entire week, complete change for bookings longer than one week.',
       daSapere7: 'Structure registration number (CIN): IT081005C2USCYFWIQ',
@@ -400,64 +400,46 @@ const VillaMirascopello = () => {
     setSelectedImage((prev) => (prev - 1 + allGalleryImages.length) % allGalleryImages.length)
   }
 
-  const reviews = {
-    it: [
-      {
-        author: "Maria R.",
-        role: "Turista",
-        text: "Villa incredibile con vista mozzafiato sui faraglioni di Scopello. La piscina infinity è spettacolare, soprattutto al tramonto. Ugo e Deborah sono stati gentilissimi, sempre disponibili. Torneremo sicuramente!"
-      },
-      {
-        author: "Giovanni P.",
-        role: "Viaggiatore",
-        text: "Settimana indimenticabile! La villa è ancora più bella delle foto. Spazi ampi, pulizia perfetta, ogni dettaglio curato. La posizione è ideale per visitare Scopello, Castellammare e le riserve naturali. Consigliatissima!"
-      },
-      {
-        author: "Sophie L.",
-        role: "Famiglia",
-        text: "Perfetta per famiglie! I bambini hanno adorato la piscina e il giardino. La cucina è attrezzatissima, abbiamo cucinato ogni sera. La vista dalla terrazza è qualcosa di unico. Servizio impeccabile e accoglienza calorosa."
-      },
-      {
-        author: "Marco T.",
-        role: "Coppia",
-        text: "Villa di lusso in posizione strategica. A pochi minuti dalle migliori spiagge della zona. L'idromassaggio è stato il tocco finale per un soggiorno perfetto. Ugo e Deborah ci hanno dato consigli preziosi sui posti da visitare."
-      },
-      {
-        author: "Anna e Luca B.",
-        role: "Coppia",
-        text: "Vacanza da sogno! La villa è bellissima, curata in ogni dettaglio. La vista sui faraglioni è spettacolare, soprattutto al tramonto. La piscina riscaldata ci ha permesso di nuotare anche la sera. I proprietari sono stati fantastici, sempre pronti ad aiutarci. Ci torniamo sicuramente l'anno prossimo!"
-      }
-    ],
-    en: [
-      {
-        author: "Maria R.",
-        role: "Tourist",
-        text: "Incredible villa with breathtaking views of the faraglioni of Scopello. The infinity pool is spectacular, especially at sunset. Ugo and Deborah were very kind, always available. We will definitely return!"
-      },
-      {
-        author: "Giovanni P.",
-        role: "Traveler",
-        text: "Unforgettable week! The villa is even more beautiful than the photos. Spacious spaces, perfect cleanliness, every detail cared for. The location is ideal for visiting Scopello, Castellammare and the nature reserves. Highly recommended!"
-      },
-      {
-        author: "Sophie L.",
-        role: "Family",
-        text: "Perfect for families! The children loved the pool and garden. The kitchen is very well equipped, we cooked every evening. The view from the terrace is something unique. Impeccable service and warm welcome."
-      },
-      {
-        author: "Marco T.",
-        role: "Couple",
-        text: "Luxury villa in a strategic location. A few minutes from the best beaches in the area. The jacuzzi was the finishing touch for a perfect stay. Ugo and Deborah gave us valuable advice on places to visit."
-      },
-      {
-        author: "Anna and Luca B.",
-        role: "Couple",
-        text: "Dream vacation! The villa is beautiful, cared for in every detail. The view of the faraglioni is spectacular, especially at sunset. The heated pool allowed us to swim even in the evening. The owners were fantastic, always ready to help us. We will definitely return next year!"
-      }
-    ]
-  }
+  const reviews = [
+    {
+      author: "Famiglia",
+      role: "Famiglia",
+      logo: "/Resources/booking.png",
+      text: "La cornice perfetta per festeggiare con tutta la famiglia il nostro 50° ANNIVERSARIO DI MATRIMONIO ! Villa molto bella con una posizione panoramica unica , piscina a sfioro con idromassaggio splendida . Le parti esterne molto spaziose e fornite di arredamento comodissimo ( un apprezzamento particolare per la zona GRILL !! ) . Camere molto accoglienti ognuna con servizio igienico annesso. Grande cortesia e disponibilità dei proprietari ."
+    },
+    {
+      author: "Famiglia",
+      role: "Famiglia",
+      logo: "/Resources/airbnb.png",
+      text: "Questa villa che si affaccia sulla baia di Scopello è stata una magica e fantastica prima settimana del nostro viaggio nella bellissima Sicilia. Abbiamo incontrato i nostri cugini di Palermo e abbiamo trascorso una settimana insieme (in totale 11 persone) in questa villa. Ognuno aveva la propria camera da letto e il proprio bagno. I letti erano molto confortevoli e l'intero alloggio sembrava casa. Il soggiorno è dotato di un caminetto per le visite invernali. Ciò che ci ha attratto di più è stata la splendida vista sulla baia di Scopello, i due grandi tavoli, uno sotto il patio coperto e l'altro all'interno nella zona pranzo, che consente a un grande gruppo di riunirsi per i pasti. L'altra è la bellissima piscina a sfioro riscaldata con sezione idromassaggio, che è assolutamente il fulcro del \"divertimento al sole\" per grandi e piccini. Ultimo ma non meno importante, i nostri meravigliosi padroni di casa Ugo e sua moglie. Ci hanno aspettato a causa di ritardi con il nostro noleggio auto e sono stati estremamente gentili a mostrarci personalmente la casa."
+    },
+    {
+      author: "Turista",
+      role: "Turista",
+      logo: "/Resources/vrbo.png",
+      text: "Che dire! Tutto perfetto, a partire dal gentilissimo proprietario! Le foto non rendono giustizia alla bellezza della villa! Ogni camera ha il suo bagno interno, la casa è pulitissima e arredata con un buon gusto. La cosa più bella è sicuramente l''enorme veranda che guarda sul panorama dei faraglioni della Riserva dello Zingaro! Speriamo proprio di ritornare in questo paradiso!"
+    },
+    {
+      author: "Tourist",
+      role: "Tourist",
+      logo: "/Resources/booking.png",
+      text: "Fantastic!!! The villa,location and the view is fantastic! Short distance to everything and the owners are very friendly and helpful! We spent a lovely week there. Highly recommended!"
+    },
+    {
+      author: "Traveler",
+      role: "Traveler",
+      logo: "/Resources/airbnb.png",
+      text: "The photos don't do this place justice. Breathtaking panoramic views of the Med Sea, open air living spaces, balconies off several bedrooms, washer, koi pond, viewing ledge near the infinity pool - I could go on and on. The location was perfect, just outside of Castellemarre so we didn't have to deal with every day traffic, but very close to town, restaurants and all amenities. Ugo was incredibly gracious, responsive and friendly. We would stay here again."
+    },
+    {
+      author: "Family",
+      role: "Family",
+      logo: "/Resources/vrbo.png",
+      text: "This villa offers a spectacular view of mountains and sea and is breathtaking at any time of the day. The villa is very spacious and catered for all my families needs. There is an amazing BBQ area and plenty of room to lie in the sun. There is also a lovely shaded area with lots of seating. The swimming pool is fabulous with the added bonus of a spa and we spent hours cooling down in the water. There are steps down into the pool which was great for anyone with mobility issues. The aircon in the bedrooms is also a bonus after a hot day in the sun. Ugo and Deborah are lovely hosts and kept in touch throughout our stay to make sure we had the best holiday. The villa is well equipped with cutlery, plates, cups, glasses and pots and pans. Beds were comfy and it was great to have so many bedrooms with en suite facilities. We would most certainly stay here again."
+    }
+  ]
 
-  const currentReviews = reviews[language]
+  const currentReviews = reviews
 
   const getInitials = (name) => {
     // Rimuove i punti e divide per spazi
@@ -1087,18 +1069,17 @@ const VillaMirascopello = () => {
                 <div className="bg-white rounded-lg shadow-lg p-6 h-full">
                   <div className="text-center">
                     <div className="flex justify-center mb-3">
-                      <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center">
-                        <span className="text-accent font-playfair font-semibold text-lg">
-                          {getInitials(currentReviews[(currentReview - 1 + currentReviews.length) % currentReviews.length].author)}
-                        </span>
+                      <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center p-2 shadow-md">
+                        <img 
+                          src={currentReviews[(currentReview - 1 + currentReviews.length) % currentReviews.length].logo}
+                          alt="Logo"
+                          className="w-full h-full object-contain"
+                        />
                       </div>
                     </div>
-                    <h3 className="text-lg font-playfair font-semibold text-primary mb-1">
-                      {currentReviews[(currentReview - 1 + currentReviews.length) % currentReviews.length].author}
-                    </h3>
-                    <p className="text-sm font-questrial text-gray-500 mb-3">
+                    {/* <p className="text-sm font-questrial text-gray-500 mb-3">
                       {currentReviews[(currentReview - 1 + currentReviews.length) % currentReviews.length].role}
-                    </p>
+                    </p> */}
                     <p className="text-sm font-questrial text-gray-600 leading-relaxed line-clamp-4">
                       &ldquo;{currentReviews[(currentReview - 1 + currentReviews.length) % currentReviews.length].text}&rdquo;
                     </p>
@@ -1111,18 +1092,17 @@ const VillaMirascopello = () => {
                 <div className="bg-white rounded-lg shadow-xl p-6 md:p-8 h-full">
                   <div className="text-center">
                     <div className="flex justify-center mb-4">
-                      <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-accent/20 flex items-center justify-center border-4 border-accent/30">
-                        <span className="text-accent font-playfair font-semibold text-2xl md:text-3xl">
-                          {getInitials(currentReviews[currentReview].author)}
-                        </span>
+                      <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-white flex items-center justify-center p-3 shadow-lg border-4 border-accent/30">
+                        <img 
+                          src={currentReviews[currentReview].logo}
+                          alt="Logo"
+                          className="w-full h-full object-contain"
+                        />
                       </div>
                     </div>
-                    <h3 className="text-lg md:text-xl font-playfair font-semibold text-primary mb-1">
-                      {currentReviews[currentReview].author}
-                    </h3>
-                    <p className="text-sm md:text-base font-questrial text-gray-500 mb-4">
+                    {/* <p className="text-sm md:text-base font-questrial text-gray-500 mb-4">
                       {currentReviews[currentReview].role}
-                    </p>
+                    </p> */}
                     <p className="text-sm md:text-base font-questrial text-gray-700 leading-relaxed">
                       &ldquo;{currentReviews[currentReview].text}&rdquo;
                     </p>
@@ -1135,18 +1115,17 @@ const VillaMirascopello = () => {
                 <div className="bg-white rounded-lg shadow-lg p-6 h-full">
                   <div className="text-center">
                     <div className="flex justify-center mb-3">
-                      <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center">
-                        <span className="text-accent font-playfair font-semibold text-lg">
-                          {getInitials(currentReviews[(currentReview + 1) % currentReviews.length].author)}
-                        </span>
+                      <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center p-2 shadow-md">
+                        <img 
+                          src={currentReviews[(currentReview + 1) % currentReviews.length].logo}
+                          alt="Logo"
+                          className="w-full h-full object-contain"
+                        />
                       </div>
                     </div>
-                    <h3 className="text-lg font-playfair font-semibold text-primary mb-1">
-                      {currentReviews[(currentReview + 1) % currentReviews.length].author}
-                    </h3>
-                    <p className="text-sm font-questrial text-gray-500 mb-3">
+                    {/* <p className="text-sm font-questrial text-gray-500 mb-3">
                       {currentReviews[(currentReview + 1) % currentReviews.length].role}
-                    </p>
+                    </p> */}
                     <p className="text-sm font-questrial text-gray-600 leading-relaxed line-clamp-4">
                       &ldquo;{currentReviews[(currentReview + 1) % currentReviews.length].text}&rdquo;
                     </p>

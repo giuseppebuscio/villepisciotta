@@ -34,7 +34,7 @@ const VillaGelvi = () => {
       title: 'Villa Gelvi - Appartamenti in Sicilia | Ville Pisciotta',
       appartamenti: 'Appartamenti',
       descrizione: 'Descrizione',
-      servizi: 'Servizi',
+      servizi: 'Servizi inclusi',
       prezzi: 'Prezzi',
       recensioni: 'Recensioni',
       contatti: 'Contatti',
@@ -93,9 +93,9 @@ const VillaGelvi = () => {
       maxPersone: 'Max {max} persone • {sqm} mq',
       aPartireDa: 'a partire da € {price}',
       dettagli: 'Dettagli',
-      ariaCondizionata: 'Aria condizionata',
+      ariaCondizionata: 'Aria condizionata in tutti gli ambienti',
       ariaCondizionataDesc: 'Aria condizionata in tutti gli ambienti',
-      servizi: 'Servizi',
+      servizi: 'Servizi inclusi',
       per2Persone: 'Per 2 persone',
       per3Persone: 'Per 3 persone',
       chiudi: 'Chiudi',
@@ -106,7 +106,7 @@ const VillaGelvi = () => {
       title: 'Villa Gelvi - Apartments in Sicily | Ville Pisciotta',
       appartamenti: 'Apartments',
       descrizione: 'Description',
-      servizi: 'Services',
+      servizi: 'Included services',
       prezzi: 'Prices',
       recensioni: 'Reviews',
       contatti: 'Contact',
@@ -165,9 +165,9 @@ const VillaGelvi = () => {
       maxPersone: 'Max {max} people • {sqm} sqm',
       aPartireDa: 'from € {price}',
       dettagli: 'Details',
-      ariaCondizionata: 'Air conditioning',
+      ariaCondizionata: 'Air conditioning in all rooms',
       ariaCondizionataDesc: 'Air conditioning in all rooms',
-      servizi: 'Services',
+      servizi: 'Included services',
       per2Persone: 'For 2 people',
       per3Persone: 'For 3 people',
       chiudi: 'Close',
@@ -482,7 +482,7 @@ const VillaGelvi = () => {
       rooms: 2,
       bathrooms: 1,
       services: [
-        'Aria condizionata',
+        'Aria condizionata in tutti gli ambienti',
         'Piano cottura',
         'Forno elettrico',
         'Forno microonde',
@@ -526,64 +526,46 @@ const VillaGelvi = () => {
     }
   ]
 
-  const reviews = {
-    it: [
-      {
-        author: "Maria R.",
-        role: "Turista",
-        text: "Villa incredibile con vista mozzafiato sui faraglioni di Scopello. La piscina infinity è spettacolare, soprattutto al tramonto. Ugo e Deborah sono stati gentilissimi, sempre disponibili. Torneremo sicuramente!"
-      },
-      {
-        author: "Giovanni P.",
-        role: "Viaggiatore",
-        text: "Settimana indimenticabile! La villa è ancora più bella delle foto. Spazi ampi, pulizia perfetta, ogni dettaglio curato. La posizione è ideale per visitare Scopello, Castellammare e le riserve naturali. Consigliatissima!"
-      },
-      {
-        author: "Sophie L.",
-        role: "Famiglia",
-        text: "Perfetta per famiglie! I bambini hanno adorato la piscina e il giardino. La cucina è attrezzatissima, abbiamo cucinato ogni sera. La vista dalla terrazza è qualcosa di unico. Servizio impeccabile e accoglienza calorosa."
-      },
-      {
-        author: "Marco T.",
-        role: "Coppia",
-        text: "Villa di lusso in posizione strategica. A pochi minuti dalle migliori spiagge della zona. L'idromassaggio è stato il tocco finale per un soggiorno perfetto. Ugo e Deborah ci hanno dato consigli preziosi sui posti da visitare."
-      },
-      {
-        author: "Anna e Luca B.",
-        role: "Coppia",
-        text: "Vacanza da sogno! La villa è bellissima, curata in ogni dettaglio. La vista sui faraglioni è spettacolare, soprattutto al tramonto. La piscina riscaldata ci ha permesso di nuotare anche la sera. I proprietari sono stati fantastici, sempre pronti ad aiutarci. Ci torniamo sicuramente l'anno prossimo!"
-      }
-    ],
-    en: [
-      {
-        author: "Maria R.",
-        role: "Tourist",
-        text: "Incredible villa with breathtaking views of the faraglioni of Scopello. The infinity pool is spectacular, especially at sunset. Ugo and Deborah were very kind, always available. We will definitely return!"
-      },
-      {
-        author: "Giovanni P.",
-        role: "Traveler",
-        text: "Unforgettable week! The villa is even more beautiful than the photos. Spacious spaces, perfect cleanliness, every detail cared for. The location is ideal for visiting Scopello, Castellammare and the nature reserves. Highly recommended!"
-      },
-      {
-        author: "Sophie L.",
-        role: "Family",
-        text: "Perfect for families! The children loved the pool and garden. The kitchen is very well equipped, we cooked every evening. The view from the terrace is something unique. Impeccable service and warm welcome."
-      },
-      {
-        author: "Marco T.",
-        role: "Couple",
-        text: "Luxury villa in a strategic location. A few minutes from the best beaches in the area. The jacuzzi was the finishing touch for a perfect stay. Ugo and Deborah gave us valuable advice on places to visit."
-      },
-      {
-        author: "Anna and Luca B.",
-        role: "Couple",
-        text: "Dream vacation! The villa is beautiful, cared for in every detail. The view of the faraglioni is spectacular, especially at sunset. The heated pool allowed us to swim even in the evening. The owners were fantastic, always ready to help us. We will definitely return next year!"
-      }
-    ]
-  }
+  const reviews = [
+    {
+      author: "Maria R.",
+      role: "Turista",
+      logo: "/Resources/booking.png",
+      text: "Villa Gelvi ci è piaciuta molto perché è in una posizione strategica.. a 10 minuti a piedi dal centro, ma in un posto comodo per uscire con la macchina e zero problemi a parcheggiare. Il nostro bimbo di due anni ha apprezzato molto la terrazza che aveva vari giochi (altalena, bici, macchinina, ecc.) I proprietari molto gentili!"
+    },
+    {
+      author: "Giovanni P.",
+      role: "Viaggiatore",
+      logo: "/Resources/airbnb.png",
+      text: "La casa si trova in un'ottima posizione a poca distanza dal centro volendo raggiungerlo a piedi , centro città che in estate è molto movimentato, a due passi c'è un grande supermercato per fare la spesa e inoltre si trova a pochissimi kilometri da Scopello, la riserva dello Zingaro o dalla spiaggia di Guidaloca. La casa rispecchia le foto messe sul sito, spaziosa, climatizzata e pulita , con ampia terrazza in cui rilassarsi , magari bevendo un bella birra Messina Ghiacchiata. Ugo inoltre è stato un host gentile e disponibilissimo a qualsiasi nostra richiesta. Consigliata!"
+    },
+    {
+      author: "Sophie L.",
+      role: "Famiglia",
+      logo: "/Resources/vrbo.png",
+      text: "L'appartamento corrisponde perfettamente alla descrizione, è molto confortevole, completo di forno, microonde, frigorifero, la cucina è completa di tutto. C'è una grande terrazza con sdraio, sedie, tavoli, barbecue. La posizione dell'alloggio è strategica sia per visitare i luoghi naturalistici ed archeologici della splendida Sicilia occidentale ( da non perdere riserva dello zingaro, Scopello, Erice, Trapani, Segesta, Selinunte, le saline, Favignana, San Vito, Marsala...) che per accedere alle spiagge, necessaria è l'automobile, nessuna difficoltà di parcheggio vicino all'abitazione. A pochi passi si trovano negozi, bar,ristoranti. Castellammare è un paese molto carino ed ottimo punto di partenza. I proprietari sono eccezionali, disponibilissimi consigliamo a tutti l'appartamento, noi torneremo sicuramente."
+    },
+    {
+      author: "Maria R.",
+      role: "Tourist",
+      logo: "/Resources/booking.png",
+      text: "This property is amazing for a long stay. You have everything you need from the washing machine to the grill on the rooftop terrace and fully equipped kitchen. This apartment has two separate bedrooms and one kitchen with a living room. It's very spacious and in each of the rooms there is air-conditioning. The host is amazing, they are living on the ground floor of the building and are here to help with everything. Our flight was delayed so we changed our arrival time throughout the day and it wasn't a problem. The host even welcomed us with a bottle of Sicilian wine. The location is also convenient for travelling around as it is close to the main roads leading to Palermo, Trapani, or Scopello. Furthermore, parking in front of the property is free and there's definitely enough spaces. Overall the stay was amazing and perfect for a long relaxing holiday."
+    },
+    {
+      author: "Giovanni P.",
+      role: "Traveler",
+      logo: "/Resources/airbnb.png",
+      text: "Very nice Appartement in a beautiful Villa, close to the City with nice Restaurants we suggest Gusto with good Pizza and nice Atmosphäre. In the Appartement you find everything you need. Ugo is a very nice and sympathic Person. He was always reachable."
+    },
+    {
+      author: "Sophie L.",
+      role: "Family",
+      logo: "/Resources/vrbo.png",
+      text: "We spent more than 2 weeks of marvelous holiday in this beautiful place. The apartment was clean and cosy, equipped with everything you need. Pictures on the site is true to life. Our daughter especially liked playground on the roof and we enjoyed spending evenings eating delicious fish fried on the barbecue there. We didn't like the town beach as it's rocky and inconvenient for a little child, we went to the sandy beach that is 2 km away. We didn't rent a car from the beginning, but we had to because it was very difficult to walk twice a day such a long distance with a child. Thanks Ugo, he helped us to find a good car for a reasonable price. When arrived, we asked Ugo thousand of questions and he patiently answered them all. He has a special map where, if you ask, he can show all good places in this town. Without any hesitation I can recommend this place to stay in Castellammare del Golfo."
+    }
+  ]
 
-  const currentReviews = reviews[language]
+  const currentReviews = reviews
 
   const getInitials = (name) => {
     const cleanName = name.replace(/\./g, '')
@@ -949,18 +931,20 @@ const VillaGelvi = () => {
                 <div className="bg-white rounded-lg shadow-lg p-6 h-full">
                   <div className="text-center">
                     <div className="flex justify-center mb-3">
-                      <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center">
-                        <span className="text-accent font-playfair font-semibold text-lg">
-                          {getInitials(currentReviews[(currentReview - 1 + currentReviews.length) % currentReviews.length].author)}
-                        </span>
+                      <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center p-2 shadow-md">
+                        <img 
+                          src={currentReviews[(currentReview - 1 + currentReviews.length) % currentReviews.length].logo}
+                          alt="Logo"
+                          className="w-full h-full object-contain"
+                        />
                       </div>
                     </div>
-                    <h3 className="text-lg font-playfair font-semibold text-primary mb-1">
+                    {/* <h3 className="text-lg font-playfair font-semibold text-primary mb-1">
                       {currentReviews[(currentReview - 1 + currentReviews.length) % currentReviews.length].author}
                     </h3>
                     <p className="text-sm font-questrial text-gray-500 mb-3">
                       {currentReviews[(currentReview - 1 + currentReviews.length) % currentReviews.length].role}
-                    </p>
+                    </p> */}
                     <p className="text-sm font-questrial text-gray-600 leading-relaxed line-clamp-4">
                       &ldquo;{currentReviews[(currentReview - 1 + currentReviews.length) % currentReviews.length].text}&rdquo;
                     </p>
@@ -973,18 +957,20 @@ const VillaGelvi = () => {
                 <div className="bg-white rounded-lg shadow-xl p-6 md:p-8 h-full">
                   <div className="text-center">
                     <div className="flex justify-center mb-4">
-                      <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-accent/20 flex items-center justify-center border-4 border-accent/30">
-                        <span className="text-accent font-playfair font-semibold text-2xl md:text-3xl">
-                          {getInitials(currentReviews[currentReview].author)}
-                        </span>
+                      <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-white flex items-center justify-center p-3 shadow-lg border-4 border-accent/30">
+                        <img 
+                          src={currentReviews[currentReview].logo}
+                          alt="Logo"
+                          className="w-full h-full object-contain"
+                        />
                       </div>
                     </div>
-                    <h3 className="text-lg md:text-xl font-playfair font-semibold text-primary mb-1">
+                    {/* <h3 className="text-lg md:text-xl font-playfair font-semibold text-primary mb-1">
                       {currentReviews[currentReview].author}
                     </h3>
                     <p className="text-sm md:text-base font-questrial text-gray-500 mb-4">
                       {currentReviews[currentReview].role}
-                    </p>
+                    </p> */}
                     <p className="text-sm md:text-base font-questrial text-gray-700 leading-relaxed">
                       &ldquo;{currentReviews[currentReview].text}&rdquo;
                     </p>
@@ -997,18 +983,20 @@ const VillaGelvi = () => {
                 <div className="bg-white rounded-lg shadow-lg p-6 h-full">
                   <div className="text-center">
                     <div className="flex justify-center mb-3">
-                      <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center">
-                        <span className="text-accent font-playfair font-semibold text-lg">
-                          {getInitials(currentReviews[(currentReview + 1) % currentReviews.length].author)}
-                        </span>
+                      <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center p-2 shadow-md">
+                        <img 
+                          src={currentReviews[(currentReview + 1) % currentReviews.length].logo}
+                          alt="Logo"
+                          className="w-full h-full object-contain"
+                        />
                       </div>
                     </div>
-                    <h3 className="text-lg font-playfair font-semibold text-primary mb-1">
+                    {/* <h3 className="text-lg font-playfair font-semibold text-primary mb-1">
                       {currentReviews[(currentReview + 1) % currentReviews.length].author}
                     </h3>
                     <p className="text-sm font-questrial text-gray-500 mb-3">
                       {currentReviews[(currentReview + 1) % currentReviews.length].role}
-                    </p>
+                    </p> */}
                     <p className="text-sm font-questrial text-gray-600 leading-relaxed line-clamp-4">
                       &ldquo;{currentReviews[(currentReview + 1) % currentReviews.length].text}&rdquo;
                     </p>
@@ -1076,7 +1064,7 @@ const VillaGelvi = () => {
       <section id="posizione" className="w-full scroll-mt-20">
         <div className="w-full">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3142.3929139279635!2d12.850023077543886!3d38.037930196954896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x131983d2c38dd7e7%3A0x732b1726381b61fe!2sVilla%20Mirascopello!5e0!3m2!1sit!2sit!4v1764980643346!5m2!1sit!2sit"
+            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d785.7836573843645!2d12.886576369646875!3d38.02064075475287!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzjCsDAxJzE0LjMiTiAxMsKwNTMnMTQuMCJF!5e0!3m2!1sit!2sit!4v1766088918305!5m2!1sit!2sit"
             width="100%"
             height="450"
             style={{ border: 0 }}
