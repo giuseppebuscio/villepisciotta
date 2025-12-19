@@ -253,6 +253,11 @@ const VillaMirascopello = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [showAllPhotos, setShowAllPhotos] = useState(false)
 
+  // Reset currentReview quando cambia la lingua
+  useEffect(() => {
+    setCurrentReview(0)
+  }, [language])
+
   const initialGalleryImages = [
     "/mirascopello/1.jpg",
     "/mirascopello/2.jpg",
@@ -400,7 +405,7 @@ const VillaMirascopello = () => {
     setSelectedImage((prev) => (prev - 1 + allGalleryImages.length) % allGalleryImages.length)
   }
 
-  const reviews = [
+  const reviewsItalian = [
     {
       author: "Famiglia",
       role: "Famiglia",
@@ -418,7 +423,10 @@ const VillaMirascopello = () => {
       role: "Turista",
       logo: "/Resources/vrbo.png",
       text: "Che dire! Tutto perfetto, a partire dal gentilissimo proprietario! Le foto non rendono giustizia alla bellezza della villa! Ogni camera ha il suo bagno interno, la casa è pulitissima e arredata con un buon gusto. La cosa più bella è sicuramente l''enorme veranda che guarda sul panorama dei faraglioni della Riserva dello Zingaro! Speriamo proprio di ritornare in questo paradiso!"
-    },
+    }
+  ]
+
+  const reviewsEnglish = [
     {
       author: "Tourist",
       role: "Tourist",
@@ -439,7 +447,7 @@ const VillaMirascopello = () => {
     }
   ]
 
-  const currentReviews = reviews
+  const currentReviews = language === 'it' ? reviewsItalian : reviewsEnglish
 
   const getInitials = (name) => {
     // Rimuove i punti e divide per spazi

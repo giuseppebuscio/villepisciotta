@@ -262,6 +262,11 @@ const VillaGelvi = () => {
   const [selectedApartment, setSelectedApartment] = useState(null)
   const [apartmentImageIndex, setApartmentImageIndex] = useState(0)
 
+  // Reset currentReview quando cambia la lingua
+  useEffect(() => {
+    setCurrentReview(0)
+  }, [language])
+
   // Mappa degli alt text per le immagini degli appartamenti
   const apartmentImageAltTexts = {
     '/gelvi/A erice/270-a1044ded.webp': 'Interno appartamento Erice Villa Gelvi',
@@ -526,7 +531,7 @@ const VillaGelvi = () => {
     }
   ]
 
-  const reviews = [
+  const reviewsItalian = [
     {
       author: "Maria R.",
       role: "Turista",
@@ -544,7 +549,10 @@ const VillaGelvi = () => {
       role: "Famiglia",
       logo: "/Resources/vrbo.png",
       text: "L'appartamento corrisponde perfettamente alla descrizione, è molto confortevole, completo di forno, microonde, frigorifero, la cucina è completa di tutto. C'è una grande terrazza con sdraio, sedie, tavoli, barbecue. La posizione dell'alloggio è strategica sia per visitare i luoghi naturalistici ed archeologici della splendida Sicilia occidentale ( da non perdere riserva dello zingaro, Scopello, Erice, Trapani, Segesta, Selinunte, le saline, Favignana, San Vito, Marsala...) che per accedere alle spiagge, necessaria è l'automobile, nessuna difficoltà di parcheggio vicino all'abitazione. A pochi passi si trovano negozi, bar,ristoranti. Castellammare è un paese molto carino ed ottimo punto di partenza. I proprietari sono eccezionali, disponibilissimi consigliamo a tutti l'appartamento, noi torneremo sicuramente."
-    },
+    }
+  ]
+
+  const reviewsEnglish = [
     {
       author: "Maria R.",
       role: "Tourist",
@@ -565,7 +573,7 @@ const VillaGelvi = () => {
     }
   ]
 
-  const currentReviews = reviews
+  const currentReviews = language === 'it' ? reviewsItalian : reviewsEnglish
 
   const getInitials = (name) => {
     const cleanName = name.replace(/\./g, '')
@@ -1064,7 +1072,7 @@ const VillaGelvi = () => {
       <section id="posizione" className="w-full scroll-mt-20">
         <div className="w-full">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d785.7836573843645!2d12.886576369646875!3d38.02064075475287!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzjCsDAxJzE0LjMiTiAxMsKwNTMnMTQuMCJF!5e0!3m2!1sit!2sit!4v1766088918305!5m2!1sit!2sit"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d330.38180812770236!2d12.886898667726564!3d38.0205347757924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x131981574bfc2d93%3A0x720f00c2aebd0b4b!2sVia%20Enrico%20Fermi%2C%209%2C%2091014%20Castellammare%20del%20Golfo%20TP!5e0!3m2!1sit!2sit!4v1766155882745!5m2!1sit!2sit"
             width="100%"
             height="450"
             style={{ border: 0 }}
